@@ -1,4 +1,41 @@
-.App {
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a{
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a, 
+a:hover, 
+a:focus, 
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.div-padding-verysmall{
+  padding: .3rem;
+}
+.div-padding-1{
+  padding: 1rem;
+}
+
+.input-size{
+  font-size: 18px;
+}
+
+.margin-top{
+  margin-top: 2rem;
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +72,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

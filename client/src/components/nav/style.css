@@ -1,0 +1,21 @@
+
+
+.hold-everything-navbar{
+    margin: 2rem;
+}
+
+.header-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.climbinglogo{
+    width: 8rem;
+}
+
+
+.holds-page-options{
+    display: flex;
+}
