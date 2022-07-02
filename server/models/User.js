@@ -47,6 +47,19 @@ const userSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    // Might be needed for a user to have sends and projects to his name
+    sends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'send',
+      },
+    ],
+    projects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'project',
+      },
+    ],
   },
   {
     toJSON: {
