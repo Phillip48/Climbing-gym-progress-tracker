@@ -1,6 +1,4 @@
-
-
-h1,
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300&display=swap');h1,
 h2,
 h3,
 h4,
@@ -33,6 +31,10 @@ a:active {
 
 .margin-top{
   margin-top: 2rem;
+}
+
+.margin-top2{
+  margin-top: 3.5rem;
 }
 
 /* .App {

@@ -2,7 +2,7 @@ import React from "react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../footer/style.css'
 
-const Nav = () => {
+const Footer = () => {
     
 
     return (
@@ -14,4 +14,4 @@ const Nav = () => {
     )
 }
 
-export default Nav;
+export default Footer;
