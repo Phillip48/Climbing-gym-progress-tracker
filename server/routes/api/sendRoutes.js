@@ -1,13 +1,12 @@
 const router = require('express').Router();
 
-// const {
-//   getStudents,
-//   getSingleStudent,
-//   createStudent,
-//   deleteStudent,
-//   addAssignment,
-//   removeAssignment,
-// } = require('../../controllers/studentController');
+const {
+    getSends,
+    getSingleSend,
+    createSend,
+    updateSend,
+    deleteSend
+} = require('../../controllers/sendController');
 
 // /api/students
 // router.route('/').get(getStudents).post(createStudent);

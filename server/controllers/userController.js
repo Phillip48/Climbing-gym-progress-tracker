@@ -1,5 +1,7 @@
 const { ObjectId } = require('mongoose').Types;
-const { User } = require('../models');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const { User } = require('../models/');
 
 module.exports = {
     // Get all Users
@@ -7,6 +9,7 @@ module.exports = {
         User.find()
             .then((users) => res.json(users))
             .catch((err) => res.status(500).json(err));
+
     },
     // Get a single User
     getSingleUser(req, res) {
@@ -19,15 +22,16 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    // create a new user
-    createUser(req, res) {
-        User.create(req.body)
-            .then((user) => res.json(user))
-            .catch((err) => {
-                console.log(err);
-                return res.status(500).json(err);
-            });
-    },
+    // // create a new user
+    // createUser(req, res) {
+    //     let newUser = User.create(req.body)
+    //         .then((user) => res.json(user))
+    //         .catch((err) => {
+    //             console.log(err);
+    //             return res.status(500).json(err);
+    //         });
+    //     newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+    // },
     // createUser(req, res) {
     //     User.create(req.body)
     //         .then((dbUserData) => res.json(dbUserData))
@@ -53,4 +57,51 @@ module.exports = {
             .then(() => res.json({ message: 'User deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
+    //  sign in
+    signIn(req, res) {
+        User.findOne({
+            email: req.body.email
+        }, function (err, user) {
+            console.log('This is the console log', user)
+            if (err) throw err;
+            if (!user || !bcrypt.compare(user.password, req.body.password)) {
+                return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
+            }
+            return res.json({
+                token: jwt.sign(
+                    { email: user.email, firstName: user.firstName, lastName: user.lastName, _id: user._id, sends: user.sends, projects: user.projects }, 'RESTFULAPIs')
+            });
+        });
+    },
+    loginRequired(req, res, next) {
+        if (req.user) {
+            next();
+        } else {
+
+            return res.status(401).json({ message: 'Unauthorized user!!' });
+        }
+    },
+    profile(req, res, next) {
+        if (req.user) {
+            res.send(req.user);
+            next();
+        }
+        else {
+            return res.status(401).json({ message: 'Invalid token' });
+        }
+    },
+    register(req, res) {
+        let newUser = new User(req.body);
+        newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
+        newUser.save(function (err, user) {
+            if (err) {
+                return res.status(400).send({
+                    message: err
+                });
+            } else {
+                user.hash_password = undefined;
+                return res.json(user);
+            }
+        });
+    }
 };

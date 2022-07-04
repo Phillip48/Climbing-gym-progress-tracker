@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 // Schema to create Project model
 // Project is something that takes multiple sessions to send
-const sendSchema = new Schema(
+const projectSchema = new Schema(
     {
         actualGrade: {
             type: String,
@@ -37,6 +37,6 @@ const sendSchema = new Schema(
     }
 );
 
-const User = model('send', sendSchema);
+const User = model('project', projectSchema);
 
 module.exports = User;
