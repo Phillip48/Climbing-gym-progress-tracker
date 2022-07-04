@@ -14,7 +14,9 @@ import Nav from '../src/components/nav/index.js';
 import Footer from '../src/components/footer/index.js';
 
 // Page imports
-import Home from '../src/pages/Home';
+import HomePage from '../src/pages/Home';
+import SignupPage from '../src/pages/Signup';
+import LoginPage from '../src/pages/Login';
 
 function App() {
   return (
@@ -26,7 +28,19 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home />}
+            element={<HomePage />}
+          />
+        </Routes>
+        <Routes>
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+        </Routes>
+        <Routes>
+          <Route
+            path="/signup"
+            element={<SignupPage />}
           />
         </Routes>
         {/* Renders the footer to the bottom of each page */}
