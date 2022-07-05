@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300&display=swap');h1,
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300&display=swap");
+h1,
 /* h2,
 h3,
 h4,
@@ -14,27 +15,27 @@ a,
 a:hover, 
 a:focus, 
 a:active {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-.div-padding-verysmall{
-  padding: .3rem;
+.div-padding-verysmall {
+  padding: 0.3rem;
 }
 
-.div-padding-1{
+.div-padding-1 {
   padding: 1rem;
 }
 
-.input-size{
+.input-size {
   font-size: 18px;
 }
 
-.margin-top{
+.margin-top {
   margin-top: 2rem;
 }
 
-.margin-top2{
+.margin-top2 {
   margin-top: 3.5rem;
 }
 

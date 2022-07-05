@@ -41,12 +41,15 @@ const Home = () => {
                 </section>
 
                 <section className="">
-                    <div>
-                        
+                    <div className="home-holds-moreinfo">
+                        <p className="part3-subtext">We've all been there. Wanting to get better and trying your hardest to do that. 
+                        One big and important step to getting better is logging your sends and projects. As you train and improve you can see your strengths and weaknesses.
+                         Along with what does and doesn't work for you.
+                        </p>
                     </div>
 
-                    <div>
-                        
+                    <div className="home-holds-moreinfo">
+                        <p className="part3-subtext">By also logging your progress you'll also get to see your most recent and oldest sends. </p>
                     </div>
                 </section>
             </section>

@@ -1,0 +1,52 @@
+.hold-everything-footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #342e37;
+}
+
+.holds-contact-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  width: 10rem;
+}
+
+.holds-logo-footer{
+    margin-left: 5rem;
+}
+
+.footer-contact {
+  margin: 1rem 5rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-subtext {
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1em;
+  margin: 0.5rem;
+  color: white;
+}
+
+.footer-smallsubtext {
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8em;
+  margin: 0.5rem;
+  color: white;
+}
+.footer-smallersubtext {
+    margin-top: -.7rem;
+  text-align: center;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.5em;
+  color: white;
+}
