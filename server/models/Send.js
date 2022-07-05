@@ -12,7 +12,7 @@ const sendSchema = new Schema(
             type: String,
             required: true,
         },
-        Notes: {
+        notes: {
             type: String,
             required: true,
         },
@@ -20,10 +20,6 @@ const sendSchema = new Schema(
             type: Boolean,
             required: true,
         },
-        // sendProject: {
-        //     type: Boolean,
-        //     required: true,
-        // },
         totalSessions: {
             type: Number,
             required: true,
@@ -40,6 +36,6 @@ const sendSchema = new Schema(
     }
 );
 
-const User = model('send', sendSchema);
+const Send = model('send', sendSchema);
 
-module.exports = User;
+module.exports = Send;

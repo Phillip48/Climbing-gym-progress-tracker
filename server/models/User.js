@@ -12,17 +12,17 @@ const userSchema = new Schema(
     firstName: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 20,
     },
     lastName: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 20,
     },
     email: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 20,
       unique: true,
     },
     phoneNumber: {
@@ -32,7 +32,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      max_length: 50,
+      max_length: 20,
     },
     maxGrade: {
       type: String,
@@ -52,6 +52,18 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: 'send',
+      },
+    ],
+    climbingSessions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'climbingSession',
+      },
+    ],
+    trainingSessions: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'trainingSession',
       },
     ],
     projects: [

@@ -12,7 +12,7 @@ const projectSchema = new Schema(
             type: String,
             required: true,
         },
-        Notes: {
+        notes: {
             type: String,
             required: true,
         },
@@ -37,6 +37,6 @@ const projectSchema = new Schema(
     }
 );
 
-const User = model('project', projectSchema);
+const Project = model('project', projectSchema);
 
-module.exports = User;
+module.exports = Project;

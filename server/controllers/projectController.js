@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { Project } = require('../models');
+const { Project, User } = require('../models');
 
 module.exports = {
     // Get all projects
