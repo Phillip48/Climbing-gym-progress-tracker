@@ -40,26 +40,42 @@
 }
 
 .login-info-text {
-    margin: 1rem;
-    font-family: "Bebas Neue", cursive;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.3em;
-    color: white;
+  margin: 1rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3em;
+  color: white;
 }
 
 .login-form-text {
-    margin: 1rem;
-    font-family: "Bebas Neue", cursive;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.3em;
-    color: black;
+  margin: 1rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3em;
+  color: black;
 }
 
 .login-info-subtext {
-    text-align: center;
-    margin: 1rem;
+  text-align: center;
+  margin: 1rem;
   font-family: "Bebas Neue", cursive;
   font-family: "Montserrat", sans-serif;
   font-size: 1em;
   color: white;
+}
+
+.actual-login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-labels-login{
+  margin-top: .5rem;
+  background: transparent;
+}
+
+.login-button{
+  margin-top: 1rem;
+  background: transparent;
+  font-size: 1.3em;
 }
