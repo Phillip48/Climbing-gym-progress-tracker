@@ -1,0 +1,22 @@
+
+
+
+.signup-holds-form{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+/* .holds-signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
+.actual-signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

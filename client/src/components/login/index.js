@@ -1,4 +1,5 @@
 import React from "react";
+import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 // import Auth from '../../utils/auth';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../login/style.css'
@@ -45,31 +46,46 @@ const Login = () => {
                 <section className="holds-login-interaction">
                     <div className="login-form">
                         <h1 className="login-form-text">Login:</h1>
-
-                        <form className="actual-login-form">
-                            <label className="form-labels-login" for="exampleEmail">
-                                Email
-                            </label>
-                            <input
-                                id="exampleEmail"
-                                name="email"
-                                placeholder="Email Address"
-                                type="email"
-                                // onChange={handleChange}
-                            />
-
-                            <label className="form-labels-login" for="examplePassword">
-                                Password
-                            </label>
-                            <input
-                                id="examplePassword"
-                                name="password"
-                                placeholder="Password"
-                                type="password"
-                                // onChange={handleChange}
-                            />
-                            <button className="login-button">Submit</button>
-                        </form>
+                        <div className="formBody">
+                            <CardTitle tag="h3" id="login">
+                                Login
+                            </CardTitle>
+                            <Form className="actual-login-form">
+                                <Row>
+                                    <div className="inputRow">
+                                        <Col md={12}>
+                                            <FormGroup >
+                                                <Label className="labels" for="exampleEmail">
+                                                    Email
+                                                </Label>
+                                                <Input
+                                                    id="exampleEmail"
+                                                    name="email"
+                                                    placeholder="Email Address"
+                                                    type="email"
+                                                // onChange={handleChange}
+                                                />
+                                            </FormGroup>
+                                        </Col>
+                                        <Col md={12}>
+                                            <FormGroup>
+                                                <Label className="labels" for="examplePassword">
+                                                    Password
+                                                </Label>
+                                                <Input
+                                                    id="examplePassword"
+                                                    name="password"
+                                                    placeholder="Password"
+                                                    type="password"
+                                                // onChange={handleChange}
+                                                />
+                                            </FormGroup>
+                                        </Col>
+                                    </div>
+                                </Row>
+                                <button className="login-button" type="submit">Login</button>
+                            </Form>
+                        </div>
                     </div>
 
                     <div className="login-info">
@@ -78,6 +94,9 @@ const Login = () => {
                             No worries! You can signup for free! It's quick and easy. When you do signup you'll be on the track to
                             logging your climbing progress!
                         </p>
+                        <div className="loginLink"><p className="login-info-subtext">Don't have an account?
+                            <a href={'signup'} className="loginButton"> Click here!</a></p>
+                        </div>
                     </div>
                 </section>
             </section>
