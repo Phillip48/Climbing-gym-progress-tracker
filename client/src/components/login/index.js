@@ -31,7 +31,8 @@ const Login = () => {
             axios.post('http://localhost:3000/api/user/signin', user)
             .then(res => console.log(res.data));
             // redirect to profile
-            window.location.assign('/profile')
+            // window.location.assign('/profile')
+            // window.location.assign(`/profile/${Auth.getProfile()}`)
         } catch (e) {
             console.error(e);
         }
