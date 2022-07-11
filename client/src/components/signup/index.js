@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import axios from 'axios';
 import Auth from '../../utils/auth';
@@ -32,15 +32,15 @@ const Signup = () => {
         event.preventDefault();
         console.log('This is from the form state and is the user info:', formState);
 
-        try {
-            const { data } = await addUser({
-                variables: { ...formState },
-            });
+        // try {
+        //     const { data } = await addUser({
+        //         variables: { ...formState },
+        //     });
 
-            Auth.login(data.addUser.token);
-        } catch (e) {
-            console.error(e);
-        }
+        //     Auth.login(data.addUser.token);
+        // } catch (e) {
+        //     console.error(e);
+        // }
         const user = formState;
 
         axios.post('http://localhost:5000/api/user/register', user)

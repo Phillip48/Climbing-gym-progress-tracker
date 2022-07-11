@@ -64,7 +64,11 @@
   color: black;
 }
 
-
-.home-holds-moreinfo{
-  margin: 1rem;
+.holds-whats-different-info{
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 3rem 0 3rem;
 }
+/* .home-holds-moreinfo{
+  margin: 1rem;
+} */
