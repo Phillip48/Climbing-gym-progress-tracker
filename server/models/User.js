@@ -34,7 +34,12 @@ const userSchema = new Schema(
       required: true,
       max_length: 20,
     },
-    maxGrade: {
+    maxBoulderingGrade: {
+      type: String,
+      required: true,
+      max_length: 5,
+    },
+    maxTopRopingGrade: {
       type: String,
       required: true,
       max_length: 5,

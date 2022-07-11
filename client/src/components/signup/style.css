@@ -20,3 +20,14 @@
     align-items: center;
     justify-content: center;
 }
+
+.signup-grade-option{
+    margin-left: .5rem;
+}
+
+.user-grades-inputs{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center
+}
