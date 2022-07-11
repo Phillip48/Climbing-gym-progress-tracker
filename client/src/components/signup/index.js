@@ -13,7 +13,7 @@ const Signup = () => {
         userName: '',
         email: '',
         phoneNumber: '',
-        // maxGrade: '',
+        maxGrade: '',
         password: '',
         aboutMe: ''
     });
@@ -49,7 +49,7 @@ const Signup = () => {
             userName: '',
             email: '',
             phoneNumber: '',
-            // maxGrade: '',
+            maxGrade: '',
             password: '',
             aboutMe: ''
         })
