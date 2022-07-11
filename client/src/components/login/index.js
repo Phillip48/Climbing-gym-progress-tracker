@@ -25,20 +25,16 @@ const Login = () => {
         event.preventDefault();
         console.log('This is from the form state and is the user info:', formState);
 
-        try {
-            const { data } = await Login({
-                variables: { ...formState },
-            });
+        // const user = formState;
+        const user = {
+            email: formState.email,
+            password: formState.password
+        };
 
-            Auth.login(data.login.token);
-        } catch (e) {
-            console.error(e);
-        }
-        const user = formState;
-
-        axios.post('http://localhost:5000/api/user/login', user)
+        axios.post('http://localhost:3000/api/user/signin', user)
             .then(res => console.log(res.data));
 
+        // redirect to profile
         // clear form values
         setFormState({
             email: '',

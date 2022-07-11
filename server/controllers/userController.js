@@ -62,14 +62,13 @@ module.exports = {
         User.findOne({
             email: req.body.email
         }, function (err, user) {
-            console.log('This is the console log', user)
+            console.log('This is the console log at line 65', user)
             if (err) throw err;
             if (!user || !bcrypt.compare(user.password, req.body.password)) {
                 return res.status(401).json({ message: 'Authentication failed. Invalid user or password.' });
             }
             return res.json({
-                token: jwt.sign(
-                    { email: user.email, firstName: user.firstName, lastName: user.lastName, _id: user._id, sends: user.sends, projects: user.projects }, 'RESTFULAPIs')
+                token: jwt.sign({ email: user.email, firstName: user.firstName, lastName: user.lastName, _id: user._id, sends: user.sends, projects: user.projects }, 'RESTFULAPIs')
             });
         });
     },
@@ -103,5 +102,10 @@ module.exports = {
                 return res.json(user);
             }
         });
+        // Send to profile
+        // if (req.user) {
+        //     res.send(req.user);
+        //     next();
+        // }
     }
 };

@@ -8,8 +8,9 @@ import '../signup/style.css'
 
 const Signup = () => {
     const [formState, setFormState] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
+        userName: '',
         email: '',
         phoneNumber: '',
         // maxGrade: '',
@@ -32,24 +33,20 @@ const Signup = () => {
         event.preventDefault();
         console.log('This is from the form state and is the user info:', formState);
 
-        // try {
-        //     const { data } = await addUser({
-        //         variables: { ...formState },
-        //     });
-
-        //     Auth.login(data.addUser.token);
-        // } catch (e) {
-        //     console.error(e);
-        // }
         const user = formState;
 
-        axios.post('http://localhost:5000/api/user/register', user)
+        console.log('This is the user object', user)
+
+        axios.post('http://localhost:3000/api/user/register', user)
             .then(res => console.log(res.data));
+
+        // redirect to profile and login
 
         // clear form values
         setFormState({
-            firstname: '',
-            lastname: '',
+            firstName: '',
+            lastName: '',
+            userName: '',
             email: '',
             phoneNumber: '',
             // maxGrade: '',
@@ -78,7 +75,7 @@ const Signup = () => {
                                                 name="firstName"
                                                 placeholder="First Name"
                                                 type="text"
-                                                value={formState.firstname}
+                                                value={formState.firstName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
@@ -94,13 +91,28 @@ const Signup = () => {
                                                 name="lastName"
                                                 placeholder="Last Name"
                                                 type="text"
-                                                value={formState.lastname}
+                                                value={formState.lastName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
                                     </Col>
                                 </Row>
                                 {/* Email Input */}
+                                <Col md={12}>
+                                    <FormGroup >
+                                        <Label className="labels" for="exampleuserName">
+                                            UserName
+                                        </Label>
+                                        <Input
+                                            id="exampleUserName"
+                                            name="userName"
+                                            placeholder="User123"
+                                            type="text"
+                                            value={formState.userName}
+                                            onChange={handleChange}
+                                        />
+                                    </FormGroup>
+                                </Col>
                                 <Col md={12}>
                                     <FormGroup >
                                         <Label className="labels" for="exampleEmail">
