@@ -11,7 +11,7 @@ import {
 
 // Component imports
 import Nav from '../src/components/nav/index.js';
-import Footer from '../src/components/footer/index.js';
+// import Footer from '../src/components/footer/index.js';
 
 // Page imports
 import HomePage from '../src/pages/Home';
@@ -45,7 +45,7 @@ function App() {
           />
         </Routes>
         {/* Renders the footer to the bottom of each page */}
-        <Footer />
+        {/* <Footer /> */}
       </main>
 
     </BrowserRouter>

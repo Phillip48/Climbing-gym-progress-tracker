@@ -33,11 +33,11 @@ const Nav = () => {
                     )}
                 </section>
             </header>
-            <section className="nav-undernav-holds-banner">
+            {/* <section className="nav-undernav-holds-banner">
                 <div className="nav-undernav-banner">
                     <p className="undernav-text"><b>The Climbing Wall</b> is free to use for all ages. Track your progress and see how you have improved while climbing!</p>
                 </div>
-            </section>
+            </section> */}
         </>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import axios from 'axios';
 import Auth from '../../utils/auth';
-
+import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../signup/style.css'
 
@@ -60,6 +60,7 @@ const Signup = () => {
 
     return (
         <>
+            <Banner />
             <section className="hold-everything-Signup">
                 <section className="signup-holds-form">
                     <div className="holds-signup">

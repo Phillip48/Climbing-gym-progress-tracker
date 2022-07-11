@@ -2,12 +2,14 @@ import React from "react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../home/style.css'
 // import ClimbingImage from '../../assets/logo/The Climbing Wall-logos_transparent.png';
+import Banner from '../banner/index';
 
 const Home = () => {
 
 
     return (
         <>
+            <Banner />
             <section className="home-holds-all">
                 <div className="home-background-pic-text">
                     <div className=" banner-h-width">
@@ -34,10 +36,13 @@ const Home = () => {
 
                     <div className="home-holds-moreinfo">
                         <p className="part3-subtext" style={{ textAlign: 'center' }}>
-                            Other apps only "track" sessions and attempts and not individual sends. <b>Thats where we come in!</b> Our app allows the user
+                            Other apps only "track" sessions and attempts and not individual sends. <b>That's where we come in!</b> Our app allows the user
                             to track not only sessions but also indiviudal sends so you can truly keep a close eye on all those hard sends!  </p>
                     </div>
                 </section>
+
+
+                <button className="home-signup-button">Sign Up!</button>
 
                 <section className="home-holds-3part-page-info">
                     <div className="home-info-part margin-top2">

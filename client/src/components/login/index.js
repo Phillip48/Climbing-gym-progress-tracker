@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import axios from 'axios';
 import Auth from '../../utils/auth';
-
+import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../login/style.css'
 
@@ -45,6 +45,7 @@ const Login = () => {
 
     return (
         <>
+            <Banner />
             <section className="hold-everything-login">
                 <section className="holds-login-interaction">
                     <div className="login-form">
