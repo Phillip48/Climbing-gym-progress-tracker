@@ -1,6 +1,6 @@
 import React from "react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import '../nav/style.css'
+import '../banner/style.css'
 // import ClimbingLogo from '../../assets/logo/The Climbing Wall-logos_transparent.png';
 
 const HeaderBanner = () => {
