@@ -196,7 +196,7 @@ const Signup = () => {
                             <button className="login-button" type="submit">Get Started</button>
                         </Form>
                         <div className="loginLink">
-                            <p>Already have an account? <a href={'login'} className="loginButton">Click here!</a></p>
+                            <p>Already have an account? <a href={'login'}>Click here!</a></p>
                         </div>
                     </div>
                 </section>
