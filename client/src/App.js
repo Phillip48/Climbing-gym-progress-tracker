@@ -18,6 +18,7 @@ import HomePage from '../src/pages/Home';
 import SignupPage from '../src/pages/Signup';
 import LoginPage from '../src/pages/Login';
 import ProfilePage from '../src/pages/Profile';
+import NotFound from '../src/pages/404Page';
 
 function App() {
   return (
@@ -40,14 +41,15 @@ function App() {
             element={<LoginPage />}
           />
           <Route
-            path="/profile"
+            path="/profile/:userId"
             element={<ProfilePage />}
           />
+          <Route
+            path="*"
+            element={<NotFound />}
+          />
         </Routes>
-        {/* Renders the footer to the bottom of each page */}
-        {/* <Footer /> */}
       </main>
-
     </BrowserRouter>
   );
 }

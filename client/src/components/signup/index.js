@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import axios from 'axios';
-import Auth from '../../utils/auth';
+// import Auth from '../../utils/auth';
 import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../signup/style.css'
@@ -42,6 +42,7 @@ const Signup = () => {
             .then(res => console.log(res.data));
 
         // redirect to profile and login
+        window.location.assign('/');
 
         // clear form values
         setFormState({

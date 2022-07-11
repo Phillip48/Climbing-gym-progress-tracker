@@ -4,7 +4,7 @@ import React from "react";
 import { Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../profile/style.css'
-import tempPic from '../../assets/other/blank-profile-picture-973460__340.webp';
+// import tempPic from '../../assets/other/blank-profile-picture-973460__340.webp';
 
 const Profile = () => {
 

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import axios from 'axios';
-import Auth from '../../utils/auth';
+// import Auth from '../../utils/auth';
 import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../login/style.css'
@@ -25,16 +25,18 @@ const Login = () => {
         event.preventDefault();
         console.log('This is from the form state and is the user info:', formState);
 
-        // const user = formState;
-        const user = {
-            email: formState.email,
-            password: formState.password
-        };
+        try{
+            const user = formState;
 
-        axios.post('http://localhost:3000/api/user/signin', user)
+            axios.post('http://localhost:3000/api/user/signin', user)
             .then(res => console.log(res.data));
-
-        // redirect to profile
+            // redirect to profile
+            window.location.assign('/profile')
+        } catch (e) {
+            console.error(e);
+        }
+        
+        // window.location.assign(`/profile/${Auth.getProfile}`)
         // clear form values
         setFormState({
             email: '',
