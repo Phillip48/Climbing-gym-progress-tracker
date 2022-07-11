@@ -17,6 +17,7 @@ import Footer from '../src/components/footer/index.js';
 import HomePage from '../src/pages/Home';
 import SignupPage from '../src/pages/Signup';
 import LoginPage from '../src/pages/Login';
+import ProfilePage from '../src/pages/Profile';
 
 function App() {
   return (
@@ -30,17 +31,17 @@ function App() {
             path="/"
             element={<HomePage />}
           />
-        </Routes>
-        <Routes>
+          <Route
+            path="/signup"
+            element={<SignupPage />}
+          />
           <Route
             path="/login"
             element={<LoginPage />}
           />
-        </Routes>
-        <Routes>
           <Route
-            path="/signup"
-            element={<SignupPage />}
+            path="/profile"
+            element={<ProfilePage />}
           />
         </Routes>
         {/* Renders the footer to the bottom of each page */}
