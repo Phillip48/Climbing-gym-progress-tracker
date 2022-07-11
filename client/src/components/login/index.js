@@ -1,65 +1,50 @@
 import React from "react";
 import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
-// import Auth from '../../utils/auth';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import Auth from '../../utils/auth';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../login/style.css'
 
 const Login = () => {
-    // // state for login
-    // const [formState, setFormState] = useState({ email: '', password: '' });
-    // //   const [login, { error, data }] = useMutation(LOGIN);
+    // state for login
+    const [formState, setFormState] = useState({ email: '', password: '' });
 
-    // // update state based on form input changes
-    // const handleChange = (event) => {
-    //     const { name, value } = event.target;
+    // update state based on form input changes
+    const handleChange = (event) => {
+        const { name, value } = event.target;
 
-    //     setFormState({
-    //         ...formState,
-    //         [name]: value,
-    //     });
-    // };
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
 
-    // // submit form
-    // const handleFormSubmit = async (event) => {
-    //     event.preventDefault();
-    //     console.log(formState);
-    //     try {
-    //         const { data } = await Login({
-    //             variables: { ...formState },
-    //         });
-
-    //         Auth.login(data.login.token);
-    //     } catch (e) {
-    //         console.error(e);
-    //     }
-
-    //     // clear form values
-    //     setFormState({
-    //         email: '',
-    //         password: '',
-    //     });
-    // };
-    // refractor and use state
-    const loginFormHandler = async (event) => {
+    // submit form
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("Testing")
+        console.log('This is from the form state and is the user info:', formState);
 
-        const email = document.querySelector('#email-login').value.trim();
-        const password = document.querySelector('#password-login').value.trim();
-
-        if (email && password) {
-            const response = await fetch('/api/users/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' },
+        try {
+            const { data } = await Login({
+                variables: { ...formState },
             });
 
-            if (response.ok) {
-                document.location.replace('/');
-            } else {
-                alert('Failed to log in.');
-            }
+            Auth.login(data.login.token);
+        } catch (e) {
+            console.error(e);
         }
+        const user = formState;
+
+        axios.post('http://localhost:5000/api/user/login', user)
+            .then(res => console.log(res.data));
+
+        // clear form values
+        setFormState({
+            email: '',
+            password: '',
+        });
+
     };
 
     return (
@@ -72,7 +57,7 @@ const Login = () => {
                             <CardTitle tag="h3" id="login">
                                 Login
                             </CardTitle>
-                            <Form className="actual-login-form">
+                            <Form className="actual-login-form" onSubmit={handleFormSubmit}>
                                 <Row>
                                     <div className="inputRow">
                                         <Col md={12}>
@@ -85,7 +70,7 @@ const Login = () => {
                                                     name="email"
                                                     placeholder="Email Address"
                                                     type="email"
-                                                // onChange={handleChange}
+                                                onChange={handleChange}
                                                 />
                                             </FormGroup>
                                         </Col>
@@ -99,7 +84,7 @@ const Login = () => {
                                                     name="password"
                                                     placeholder="Password"
                                                     type="password"
-                                                // onChange={handleChange}
+                                                onChange={handleChange}
                                                 />
                                             </FormGroup>
                                         </Col>

@@ -1,59 +1,71 @@
 import React from "react";
 import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
+import axios from 'axios';
+import Auth from '../../utils/auth';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../signup/style.css'
 
 const Signup = () => {
-    // refractor and use state
-    const signupFormHandler = async (event) => {
+    const [formState, setFormState] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        phoneNumber: '',
+        // maxGrade: '',
+        password: '',
+        aboutMe: ''
+    });
+
+    // update state based on form input changes
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        setFormState({
+            ...formState,
+            [name]: value
+        });
+    };
+
+    // submit form
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log('This is from the form state and is the user info:', formState);
 
-        const username = document.querySelector('#username-signup').value.trim();
-        const email = document.querySelector('#email-signup').value.trim();
-        const password = document.querySelector('#password-signup').value.trim();
-
-        if (username && email && password) {
-            const response = await fetch('/api/users', {
-                method: 'POST',
-                body: JSON.stringify({ username, email, password }),
-                headers: { 'Content-Type': 'application/json' },
+        try {
+            const { data } = await addUser({
+                variables: { ...formState },
             });
 
-            if (response.ok) {
-                document.location.replace('/');
-            } else {
-                alert('Failed to sign up.');
-            }
+            Auth.login(data.addUser.token);
+        } catch (e) {
+            console.error(e);
         }
+        const user = formState;
+
+        axios.post('http://localhost:5000/api/user/register', user)
+            .then(res => console.log(res.data));
+
+        // clear form values
+        setFormState({
+            firstname: '',
+            lastname: '',
+            email: '',
+            phoneNumber: '',
+            // maxGrade: '',
+            password: '',
+            aboutMe: ''
+        })
+
     };
-    const loginFormHandler = async (event) => {
-        event.preventDefault();
-        console.log("Testing")
 
-        const email = document.querySelector('#email-login').value.trim();
-        const password = document.querySelector('#password-login').value.trim();
-
-        if (email && password) {
-            const response = await fetch('/api/users/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' },
-            });
-
-            if (response.ok) {
-                document.location.replace('/');
-            } else {
-                alert('Failed to log in.');
-            }
-        }
-    };
     return (
         <>
             <section className="hold-everything-Signup">
                 <section className="signup-holds-form">
                     <div className="holds-signup">
                         <h1 className="login-form-text" style={{ textAlign: 'center' }}>Sign Up:</h1>
-                        <Form className="actual-signup-form">
+                        <Form className="actual-signup-form" onSubmit={handleFormSubmit}>
                             <div>
                                 <Row>
                                     <Col md={6}>
@@ -66,8 +78,8 @@ const Signup = () => {
                                                 name="firstName"
                                                 placeholder="First Name"
                                                 type="text"
-                                            // value={formState.firstname}
-                                            // onChange={handleChange}
+                                                value={formState.firstname}
+                                                onChange={handleChange}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -82,8 +94,8 @@ const Signup = () => {
                                                 name="lastName"
                                                 placeholder="Last Name"
                                                 type="text"
-                                            // value={formState.lastname}
-                                            // onChange={handleChange}
+                                                value={formState.lastname}
+                                                onChange={handleChange}
                                             />
                                         </FormGroup>
                                     </Col>
@@ -99,8 +111,8 @@ const Signup = () => {
                                             name="email"
                                             placeholder="Email Address"
                                             type="email"
-                                        // value={formState.email}
-                                        // onChange={handleChange}
+                                            value={formState.email}
+                                            onChange={handleChange}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -115,11 +127,12 @@ const Signup = () => {
                                             name="password"
                                             placeholder="******"
                                             type="password"
-                                        // value={formState.password}
-                                        // onChange={handleChange}
+                                            value={formState.password}
+                                            onChange={handleChange}
                                         />
                                     </FormGroup>
                                 </Col>
+                                {/* Phone Number Input */}
                                 <Col md={12}>
                                     <FormGroup >
                                         <Label className="labels" for="phoneNumber">
@@ -130,11 +143,12 @@ const Signup = () => {
                                             name="phoneNumber"
                                             placeholder="123-456-7890"
                                             type="tel"
-                                        // value={formState.email}
-                                        // onChange={handleChange}
+                                            value={formState.phoneNumber}
+                                            onChange={handleChange}
                                         />
                                     </FormGroup>
                                 </Col>
+                                {/* Max Grade Input */}
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label className="labels" for="exampleMaxGrade">
@@ -145,8 +159,8 @@ const Signup = () => {
                                             name="maxGrade"
                                             placeholder="V5"
                                             type="text"
-                                        // value={formState.password}
-                                        // onChange={handleChange}
+                                            value={formState.maxGrade}
+                                            onChange={handleChange}
                                         />
                                     </FormGroup>
                                 </Col>
@@ -161,8 +175,8 @@ const Signup = () => {
                                             name="aboutMe"
                                             placeholder="Type Here..."
                                             type="textarea"
-                                        // value={formState.aboutMe}
-                                        // onChange={handleChange}
+                                            value={formState.aboutMe}
+                                            onChange={handleChange}
                                         />
                                     </FormGroup>
                                 </Col>
