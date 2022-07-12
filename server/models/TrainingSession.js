@@ -15,8 +15,17 @@ const TrainingSessionSchema = new Schema(
             default: false,
         },
         // True or false to see what the user did
-        // Spray board, moon board etc...
-        trainBoard: {
+        sprayBoard: {
+            type: Boolean,
+            required: true,
+            default: false,
+        },
+        moonBoard: {
+            type: Boolean,
+            required: true,
+            default: false,
+        },
+        kelterBoard: {
             type: Boolean,
             required: true,
             default: false,
@@ -31,10 +40,10 @@ const TrainingSessionSchema = new Schema(
             type: String,
             max_length: 800,
         },
-        notes: {
-            type: String,
-            max_length: 800,
-        },
+        // notes: {
+        //     type: String,
+        //     max_length: 800,
+        // },
         rating: {
             // Out of 10
             type: String,
@@ -42,18 +51,6 @@ const TrainingSessionSchema = new Schema(
             min: 1,
             max: 10,
         },
-        sends: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'send',
-            },
-        ],
-        projects: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'project',
-            },
-        ],
         createdAt: {
             type: Date,
             default: Date.now,

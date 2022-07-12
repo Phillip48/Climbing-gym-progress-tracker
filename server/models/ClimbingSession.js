@@ -12,6 +12,11 @@ const ClimbingSessionSchema = new Schema(
             type: Number,
             required: true,
         },
+        indoorOutdoor: {
+            type: String,
+            min_length: 6,
+            max_length: 7,
+        },
         numberOfTries: {
             // Not required, Tries in total session
             type: Number,
@@ -21,10 +26,10 @@ const ClimbingSessionSchema = new Schema(
             type: String,
             max_length: 800,
         },
-        notes: {
-            type: String,
-            max_length: 800,
-        },
+        // notes: {
+        //     type: String,
+        //     max_length: 800,
+        // },
         rating: {
             // Out of 10
             type: String,
