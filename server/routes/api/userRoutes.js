@@ -23,8 +23,8 @@ router.route('/signin').post(signIn);
 
 router.route('/profile', protect, getMe);
 
-router.route('/profile', protect, getMe);
+router.route('/profile/:id').put(protect, updateUser)
 
-router.route('/profile/:id').put(updateUser)
+router.route('/delete/:id').delete(protect, deleteUser)
 
 module.exports = router;

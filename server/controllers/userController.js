@@ -25,21 +25,7 @@ require('dotenv').config();
 //         .catch((err) => res.status(500).json(err));
 // }
 
-
-// update a User
-// const updateUser = (req, res) => {
-//     User.findOneAndUpdate(
-//         { _id: req.params.userId },
-//         { $set: req.body },
-//         { runValidators: true, new: true }
-//     )
-//         .then((user) =>
-//             !user
-//                 ? res.status(404).json({ message: 'No user with this id!' })
-//                 : res.json(user)
-//         )
-//         .catch((err) => res.status(500).json(err));
-// }
+// Update a user (works)
 const updateUser = asyncHandler(async (req, res) => {
     
     const user = await User.findById(req.params.id)
@@ -50,13 +36,15 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 
     // Check for user
-    // if (!req.user) {
-    //     res.status(401)
-    //     throw new Error('User not found')
-    // }
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
 
     // Make sure the logged in user matches the user user
-    if (user.user.toString() !== req.user.id) {
+    // console.log(user._id.toString())
+    // console.log(req.user.id)
+    if (user._id.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -68,14 +56,29 @@ const updateUser = asyncHandler(async (req, res) => {
     res.status(200).json(updatedUser)
 })
 
-// Delete a User
-const deleteUser = (req, res) => {
-    User.findOneAndDelete({ _id: req.params.userId })
-        .then(() => res.json({ message: 'User deleted!' }))
-        .catch((err) => res.status(500).json(err));
-}
+// Delete a User (works)
+const deleteUser = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.params.id)
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (user._id.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
 
-//  sign in
+    await user.remove()
+
+    res.status(200).json({ id: req.params.id })
+    // User.findOneAndDelete({ _id: req.params.userId })
+    //     .then(() => res.json({ message: 'User deleted!' }))
+    //     .catch((err) => res.status(500).json(err));
+})
+
+//  sign in (works)
 const signIn = asyncHandler(async (req, res) => {
     const { email, password } = req.body
 
@@ -93,23 +96,7 @@ const signIn = asyncHandler(async (req, res) => {
         throw new Error('Invalid credentials')
     }
 })
-// const loginRequired = (req, res, next) => {
-//     if (req.user) {
-//         next();
-//     } else {
-
-//         return res.status(401).json({ message: 'Unauthorized user!!' });
-//     }
-// }
-// const profile = (req, res, next) => {
-//     if (req.user) {
-//         res.send(req.user);
-//         next();
-//     }
-//     else {
-//         return res.status(401).json({ message: 'Invalid token' });
-//     }
-// }
+// Register a user (works)
 const register = asyncHandler(async (req, res) => {
     const { userName, firstName, lastName, email, phoneNumber, password, maxBoulderingGrade,
         maxTopRopingGrade, bio } = req.body
@@ -152,12 +139,13 @@ const register = asyncHandler(async (req, res) => {
     }
 })
 
+// 
 const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
 })
 
 
-// Generate JWT
+// Generate JWT (works)
 const generateToken = (id) => {
     // process.env.JWT_SECRET needs to replace JWTSECRETKEY123 BUT ENV NOT WORKING
     return jwt.sign({ id }, 'JWTSECRETKEY123', {
