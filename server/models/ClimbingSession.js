@@ -3,6 +3,11 @@ const { Schema, model } = require('mongoose');
 // Schema to create session model
 const ClimbingSessionSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
         numberOfSends: {
             type: Number,
             required: true,

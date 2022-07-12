@@ -53,30 +53,30 @@ const userSchema = new Schema(
       default: Date.now,
     },
     // Might be needed for a user to have sends and projects to his name
-    sends: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'send',
-      },
-    ],
-    climbingSessions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'climbingSession',
-      },
-    ],
-    trainingSessions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'trainingSession',
-      },
-    ],
-    projects: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'project',
-      },
-    ],
+    // sends: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'send',
+    //   },
+    // ],
+    // climbingSessions: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'climbingSession',
+    //   },
+    // ],
+    // trainingSessions: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'trainingSession',
+    //   },
+    // ],
+    // projects: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'project',
+    //   },
+    // ],
   },
   {
     toJSON: {

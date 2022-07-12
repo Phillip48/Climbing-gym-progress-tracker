@@ -4,6 +4,11 @@ const { Schema, model } = require('mongoose');
 // Project is something that takes multiple sessions to send
 const projectSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
         actualGrade: {
             type: String,
             required: true,

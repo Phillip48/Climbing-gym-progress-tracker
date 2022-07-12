@@ -4,6 +4,11 @@ const { Schema, model } = require('mongoose');
 // A probelm you sent
 const sendSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
         actualGrade: {
             type: String,
             required: true,

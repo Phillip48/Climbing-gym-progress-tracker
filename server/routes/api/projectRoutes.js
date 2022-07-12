@@ -9,10 +9,10 @@ const {
     createProject
 } = require('../../controllers/projectController');
 
-// /api/sends
+// /api/projects
 router.route('/').get(protect, getProjects).post(protect, createProject);
 
-// /api/sends
+// /api/projects
 router.route('/:id').get(protect, getSingleProject).delete(protect, deleteProject).put(protect, updateProject)
 
 module.exports = router;

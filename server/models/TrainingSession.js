@@ -3,6 +3,11 @@ const { Schema, model } = require('mongoose');
 // Schema to create session model
 const TrainingSessionSchema = new Schema(
     {
+        user: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'User',
+        },
         // True or false to see what the user did
         hangBoard: {
             type: Boolean,
