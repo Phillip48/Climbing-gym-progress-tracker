@@ -21,7 +21,18 @@ const getSingleProject = asyncHandler(async (req, res) => {
 })
 // create a new projects
 const createProject = asyncHandler(async (req, res) => {
-    if (!req.body.actualGrade || !req.body.feltGrade || !req.body.notes || !req.body.sendProject || !req.body.totalSessions) {
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (req.user.id !== req.params.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.notes || !req.body.sendProject || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
@@ -31,32 +42,23 @@ const createProject = asyncHandler(async (req, res) => {
         notes: req.body.notes,
         sendProject: req.body.sendProject,
         totalSessions: req.body.totalSessions,
+        totalAttempts: req.body.totalAttempts,
         user: req.params.id,
     })
     res.status(200).json(project)
-    // Project.create(req.body)
-    //     .then((send) => {
-    //         return User.findOneAndUpdate(
-    //             { _id: req.body.userId },
-    //             { $addToSet: { projects: project._id } },
-    //             { new: true }
-    //         );
-    //     })
-    //     .then((user) =>
-    //         !user
-    //             ? res
-    //                 .status(404)
-    //                 // Should not happen 
-    //                 .json({ message: 'Project created, but found no user with that ID' })
-    //             : res.json('Created the Project 🎉')
-    //     )
-    //     .catch((err) => {
-    //         console.log(err);
-    //         res.status(500).json(err);
-    //     });
 })
 // update a projects
 const updateProject = asyncHandler(async (req, res) => {
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (req.user.id !== req.params.userId) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Project.findOneAndUpdate(
         { _id: req.params.id },
         { $set: req.body },
@@ -71,6 +73,16 @@ const updateProject = asyncHandler(async (req, res) => {
 })
 // Delete a projects
 const deleteProject = asyncHandler(async (req, res) => {
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (req.user.id !== req.params.userId) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Project.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Project deleted!' }))
         .catch((err) => res.status(500).json(err));

@@ -45,22 +45,22 @@ router.route('/signin').post(signIn);
 
 router.route('/profile', protect, getMe);
 
-router.route('/profile/:id').put(protect, updateUser)
+router.route('/profile/:id').put(protect, updateUser);
 
-router.route('/delete/:id').delete(protect, deleteUser)
+router.route('/delete/:id').delete(protect, deleteUser);
 //  ====================================================== //
 // Sends Routes from user (all work)
 router.route('/send').get(protect, getSends);
 router.route('/:id/send').post(protect, createSend);
 
-router.route('/send/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend)
+router.route('/:userId/send/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend);
 //  ====================================================== //
 // Project Routes from user (all work)
 router.route('/projects').get(protect, getProjects);
 
 router.route('/:id/projects').post(protect, createProject);
 
-router.route('/projects/:id').get(protect, getSingleProject).delete(protect, deleteProject).put(protect, updateProject)
+router.route('/:userId/projects/:id').get(protect, getSingleProject).delete(protect, deleteProject).put(protect, updateProject);
 //  ====================================================== //
 // Climbing sessions from user
 

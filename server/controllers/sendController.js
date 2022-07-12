@@ -21,34 +21,48 @@ const getSingleSend = asyncHandler(async (req, res) => {
 })
 // creates a send
 const createSend = asyncHandler(async (req, res) => {
-    if (!req.body.actualGrade
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    // console.log('userid', req.user.id)
+    // console.log('params id', req.params.id)
+    if (req.user.id !== req.params.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    if (!req.body.actualGrade || !req.body.totalAttempts
         || !req.body.feltGrade || !req.body.notes || !req.body.sent || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
+
     const send = await Send.create({
         actualGrade: req.body.actualGrade,
         feltGrade: req.body.feltGrade,
         notes: req.body.notes,
         sent: req.body.sent,
+        totalAttempts: req.body.totalAttempts,
         totalSessions: req.body.totalSessions,
         user: req.params.id,
     })
-    // const user = await User.findById(req.params.id)
-
-    // if (!user) {
-    //     res.status(400)
-    //     throw new Error('user not found')
-    // }
-    // const updatedUser = await User.findByIdAndUpdate(req.params.id, send.id, {
-    //     new: true,
-    // })
-    // console.log(send.id)
-    // console.log(updatedUser)
     res.status(200).json(send)
 })
 // update a send
 const updateSend = asyncHandler(async (req, res) => {
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (req.user.id !== req.params.userId) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Send.findOneAndUpdate(
         { _id: req.params.id },
         { $set: req.body },
@@ -63,6 +77,16 @@ const updateSend = asyncHandler(async (req, res) => {
 })
 // Delete a send
 const deleteSend = asyncHandler(async (req, res) => {
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (req.user.id !== req.params.userId) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Send.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Send deleted!' }))
         .catch((err) => res.status(500).json(err));
