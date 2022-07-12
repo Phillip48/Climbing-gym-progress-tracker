@@ -17,7 +17,7 @@ const ClimbingSessionSchema = new Schema(
             min_length: 6,
             max_length: 7,
         },
-        numberOfTries: {
+        totalAttempts: {
             // Not required, Tries in total session
             type: Number,
             default: null,

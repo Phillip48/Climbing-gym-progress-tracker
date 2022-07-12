@@ -21,6 +21,10 @@ const projectSchema = new Schema(
             type: String,
             required: true,
         },
+        totalAttempts: {
+            type: Number,
+            required: true,
+        },
         totalSessions: {
             type: Number,
             required: true,

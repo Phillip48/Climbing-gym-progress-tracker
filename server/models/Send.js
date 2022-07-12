@@ -25,6 +25,10 @@ const sendSchema = new Schema(
             type: Boolean,
             required: true,
         },
+        totalAttempts: {
+            type: Number,
+            required: true,
+        },
         totalSessions: {
             type: Number,
             required: true,
