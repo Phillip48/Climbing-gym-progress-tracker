@@ -27,7 +27,7 @@ const createProject = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.id) {
+    if (req.user.id !== req.params.userId) {
         res.status(401)
         throw new Error('User not authorized')
     }

@@ -51,14 +51,14 @@ router.route('/delete/:id').delete(protect, deleteUser);
 //  ====================================================== //
 // Sends Routes from user (all work)
 router.route('/send').get(protect, getSends);
-router.route('/:id/send').post(protect, createSend);
+router.route('/:userId/send').post(protect, createSend);
 
 router.route('/:userId/send/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend);
 //  ====================================================== //
 // Project Routes from user (all work)
 router.route('/projects').get(protect, getProjects);
 
-router.route('/:id/projects').post(protect, createProject);
+router.route('/:userId/projects').post(protect, createProject);
 
 router.route('/:userId/projects/:id').get(protect, getSingleProject).delete(protect, deleteProject).put(protect, updateProject);
 //  ====================================================== //

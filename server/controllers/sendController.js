@@ -29,7 +29,7 @@ const createSend = asyncHandler(async (req, res) => {
     // Make sure the logged in user matches
     // console.log('userid', req.user.id)
     // console.log('params id', req.params.id)
-    if (req.user.id !== req.params.id) {
+    if (req.user.id !== req.params.userId) {
         res.status(401)
         throw new Error('User not authorized')
     }
