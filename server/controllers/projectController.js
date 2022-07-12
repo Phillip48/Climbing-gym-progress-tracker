@@ -10,7 +10,7 @@ const getProjects = asyncHandler(async (req, res) => {
 })
 // Get a single projects
 const getSingleProject = asyncHandler(async (req, res) => {
-    Project.findOne({ _id: req.params.projectId })
+    Project.findOne({ _id: req.params.id })
         .select('-__v')
         .then((project) =>
             !project
@@ -58,7 +58,7 @@ const createProject = asyncHandler(async (req, res) => {
 // update a projects
 const updateProject = asyncHandler(async (req, res) => {
     Project.findOneAndUpdate(
-        { _id: req.params.projectId },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
     )
@@ -71,7 +71,7 @@ const updateProject = asyncHandler(async (req, res) => {
 })
 // Delete a projects
 const deleteProject = asyncHandler(async (req, res) => {
-    Project.findOneAndDelete({ _id: req.params.projectId })
+    Project.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Project deleted!' }))
         .catch((err) => res.status(500).json(err));
 })

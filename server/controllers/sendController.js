@@ -10,7 +10,7 @@ const getSends = asyncHandler(async (req, res) => {
 })
 // Get a single send
 const getSingleSend = asyncHandler(async (req, res) => {
-    Send.findOne({ _id: req.params.sendId })
+    Send.findOne({ _id: req.params.id })
         .select('-__v')
         .then((send) =>
             !send
@@ -50,7 +50,7 @@ const createSend = asyncHandler(async (req, res) => {
 // update a send
 const updateSend = asyncHandler(async (req, res) => {
     Send.findOneAndUpdate(
-        { _id: req.params.sendId },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
     )
@@ -63,7 +63,7 @@ const updateSend = asyncHandler(async (req, res) => {
 })
 // Delete a send
 const deleteSend = asyncHandler(async (req, res) => {
-    Send.findOneAndDelete({ _id: req.params.sendId })
+    Send.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Send deleted!' }))
         .catch((err) => res.status(500).json(err));
 })
