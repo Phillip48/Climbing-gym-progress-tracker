@@ -1,50 +1,80 @@
-const { ObjectId } = require('mongoose').Types;
+// const { ObjectId } = require('mongoose').Types;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const asyncHandler = require('express-async-handler')
 const { User } = require('../models/');
-
-
+require('dotenv').config();
 
 
 // Get all Users
-const getUsers = (req, res) => {
-    User.find()
-        .then((users) => res.json(users))
-        .catch((err) => res.status(500).json(err));
+// const getUsers = (req, res) => {
+//     User.find()
+//         .then((users) => res.json(users))
+//         .catch((err) => res.status(500).json(err));
 
-}
-// Get a single User
-const getSingleUser = (req, res) => {
-    User.findOne({ _id: req.params.userId })
-        .select('-__v')
-        .then((user) =>
-            !user
-                ? res.status(404).json({ message: 'No user with that ID' })
-                : res.json(user)
-        )
-        .catch((err) => res.status(500).json(err));
-}
+// }
+// // Get a single User
+// const getSingleUser = (req, res) => {
+//     User.findOne({ _id: req.params.userId })
+//         .select('-__v')
+//         .then((user) =>
+//             !user
+//                 ? res.status(404).json({ message: 'No user with that ID' })
+//                 : res.json(user)
+//         )
+//         .catch((err) => res.status(500).json(err));
+// }
+
+
 // update a User
-const updateUser = (req, res) => {
-    User.findOneAndUpdate(
-        { _id: req.params.userId },
-        { $set: req.body },
-        { runValidators: true, new: true }
-    )
-        .then((user) =>
-            !user
-                ? res.status(404).json({ message: 'No user with this id!' })
-                : res.json(user)
-        )
-        .catch((err) => res.status(500).json(err));
-}
+// const updateUser = (req, res) => {
+//     User.findOneAndUpdate(
+//         { _id: req.params.userId },
+//         { $set: req.body },
+//         { runValidators: true, new: true }
+//     )
+//         .then((user) =>
+//             !user
+//                 ? res.status(404).json({ message: 'No user with this id!' })
+//                 : res.json(user)
+//         )
+//         .catch((err) => res.status(500).json(err));
+// }
+const updateUser = asyncHandler(async (req, res) => {
+    
+    const user = await User.findById(req.params.id)
+
+    if (!user) {
+        res.status(400)
+        throw new Error('user not found')
+    }
+
+    // Check for user
+    // if (!req.user) {
+    //     res.status(401)
+    //     throw new Error('User not found')
+    // }
+
+    // Make sure the logged in user matches the user user
+    if (user.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    })
+
+    res.status(200).json(updatedUser)
+})
+
 // Delete a User
 const deleteUser = (req, res) => {
     User.findOneAndDelete({ _id: req.params.userId })
         .then(() => res.json({ message: 'User deleted!' }))
         .catch((err) => res.status(500).json(err));
 }
+
 //  sign in
 const signIn = asyncHandler(async (req, res) => {
     const { email, password } = req.body
@@ -63,23 +93,23 @@ const signIn = asyncHandler(async (req, res) => {
         throw new Error('Invalid credentials')
     }
 })
-const loginRequired = (req, res, next) => {
-    if (req.user) {
-        next();
-    } else {
+// const loginRequired = (req, res, next) => {
+//     if (req.user) {
+//         next();
+//     } else {
 
-        return res.status(401).json({ message: 'Unauthorized user!!' });
-    }
-}
-const profile = (req, res, next) => {
-    if (req.user) {
-        res.send(req.user);
-        next();
-    }
-    else {
-        return res.status(401).json({ message: 'Invalid token' });
-    }
-}
+//         return res.status(401).json({ message: 'Unauthorized user!!' });
+//     }
+// }
+// const profile = (req, res, next) => {
+//     if (req.user) {
+//         res.send(req.user);
+//         next();
+//     }
+//     else {
+//         return res.status(401).json({ message: 'Invalid token' });
+//     }
+// }
 const register = asyncHandler(async (req, res) => {
     const { userName, firstName, lastName, email, phoneNumber, password, maxBoulderingGrade,
         maxTopRopingGrade, bio } = req.body
@@ -121,21 +151,6 @@ const register = asyncHandler(async (req, res) => {
         throw new Error('Invalid user data')
     }
 })
-// const register = (req, res) => {
-//     let newUser = new User(req.body);
-//     newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
-//     newUser.save(function (err, user) {
-//         if (err) {
-//             return res.status(400).send({
-//                 message: err
-//             });
-//         } else {
-//             user.hash_password = undefined;
-//             return res.json(user);
-//         }
-//     });
-// }
-
 
 const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
@@ -144,19 +159,23 @@ const getMe = asyncHandler(async (req, res) => {
 
 // Generate JWT
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, {
+    // process.env.JWT_SECRET needs to replace JWTSECRETKEY123 BUT ENV NOT WORKING
+    return jwt.sign({ id }, 'JWTSECRETKEY123', {
         expiresIn: '30d',
     })
 }
+console.log(process.env.JWT_SECRET)
+// console.log(process.env.NODE_ENV)
 
 module.exports = {
     getMe,
     register,
-    getSingleUser,
-    getUsers,
+    // getSingleUser,
+    // getUsers,
     deleteUser,
     updateUser,
     signIn,
-    loginRequired,
-    profile
+    getMe,
+    // loginRequired,
+    // profile
 }

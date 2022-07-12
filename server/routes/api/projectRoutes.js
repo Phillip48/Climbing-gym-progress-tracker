@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { protect } = require('../../middleware/authMiddleware');
 
 const {
     getProjects,
@@ -8,16 +9,10 @@ const {
     createProject
 } = require('../../controllers/projectController');
 
-// /api/students
-// router.route('/').get(getStudents).post(createStudent);
+// /api/sends
+router.route('/').get(protect, getProjects).post(protect, createProject);
 
-// // /api/students/:studentId
-// router.route('/:studentId').get(getSingleStudent).delete(deleteStudent);
-
-// // /api/students/:studentId/assignments
-// router.route('/:studentId/assignments').post(addAssignment);
-
-// // /api/students/:studentId/assignments/:assignmentId
-// router.route('/:studentId/assignments/:assignmentId').delete(removeAssignment);
+// /api/sends
+router.route('/:id').get(protect, getSingleProject).delete(protect, deleteProject).put(protect, updateProject)
 
 module.exports = router;
