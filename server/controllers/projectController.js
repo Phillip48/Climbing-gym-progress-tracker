@@ -43,9 +43,17 @@ const createProject = asyncHandler(async (req, res) => {
         sendProject: req.body.sendProject,
         totalSessions: req.body.totalSessions,
         totalAttempts: req.body.totalAttempts,
-        user: req.params.id,
+        user: req.params.userId,
     })
-    res.status(200).json(project)
+
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { projects: project } },
+        { runValidators: true, new: true }
+    );
+
+    res.status(200).json(updatedUser)
+    // res.status(200).json(project)
 })
 // update a projects
 const updateProject = asyncHandler(async (req, res) => {
@@ -86,15 +94,15 @@ const deleteProject = asyncHandler(async (req, res) => {
     Project.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Project deleted!' }))
         .catch((err) => res.status(500).json(err));
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { projects: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    // res.status(200).json(updatedUser)
 })
 
 
-// reference
-// getUsers(req, res) {
-//   User.find()
-//     .then((users) => res.json(users))
-//     .catch((err) => res.status(500).json(err));
-// },
 module.exports = {
     getProjects,
     getSingleProject,
