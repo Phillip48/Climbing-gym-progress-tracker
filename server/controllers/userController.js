@@ -28,7 +28,7 @@ require('dotenv').config();
 // Update a user (works)
 const updateUser = asyncHandler(async (req, res) => {
     
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.userId)
 
     if (!user) {
         res.status(400)
@@ -49,7 +49,7 @@ const updateUser = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
 
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedUser = await User.findByIdAndUpdate(req.params.userId, req.body, {
         new: true,
     })
 
@@ -58,7 +58,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
 // Delete a User (works)
 const deleteUser = asyncHandler(async (req, res) => {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.userId)
     // Check for user
     if (!req.user) {
         res.status(401)
@@ -72,10 +72,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
     await user.remove()
 
-    res.status(200).json({ id: req.params.id })
-    // User.findOneAndDelete({ _id: req.params.userId })
-    //     .then(() => res.json({ message: 'User deleted!' }))
-    //     .catch((err) => res.status(500).json(err));
+    res.status(200).json({ id: req.params.userId })
 })
 
 //  sign in (works)

@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const { ClimbingSession, User } = require('../models');
-
+const asyncHandler = require('express-async-handler')
 
 // Get all climbing Sessions
 const getClimbingSessions = asyncHandler(async (req, res) => {

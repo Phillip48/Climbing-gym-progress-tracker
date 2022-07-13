@@ -51,6 +51,7 @@ const createSend = asyncHandler(async (req, res) => {
     })
     res.status(200).json(send)
 })
+
 // update a send
 const updateSend = asyncHandler(async (req, res) => {
     // Check for user

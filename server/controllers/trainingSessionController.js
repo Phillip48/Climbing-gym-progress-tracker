@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongoose').Types;
 const { TrainingSession, User } = require('../models');
+const asyncHandler = require('express-async-handler')
 
 // Get all TrainingSession
 const getTrainingSessions = asyncHandler(async (req, res) => {

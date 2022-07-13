@@ -53,9 +53,9 @@ router.route('/signin').post(signIn);
 
 router.route('/profile', protect, getMe);
 
-router.route('/profile/:id').put(protect, updateUser);
+router.route('/profile/:userId').put(protect, updateUser);
 
-router.route('/delete/:id').delete(protect, deleteUser);
+router.route('/delete/:userId').delete(protect, deleteUser);
 //  ====================================================== //
 // Sends Routes from user (all work)
 router.route('/send').get(protect, getSends);
