@@ -47,9 +47,17 @@ const createSend = asyncHandler(async (req, res) => {
         sent: req.body.sent,
         totalAttempts: req.body.totalAttempts,
         totalSessions: req.body.totalSessions,
-        user: req.params.id,
+        user: req.params.userId,
     })
-    res.status(200).json(send)
+    // send._id.toString()
+    // sends: send._id.toString()
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { sends: send } },
+        { runValidators: true, new: true }
+    );
+
+    res.status(200).json(updatedUser)
 })
 
 // update a send
@@ -91,6 +99,13 @@ const deleteSend = asyncHandler(async (req, res) => {
     Send.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Send deleted!' }))
         .catch((err) => res.status(500).json(err));
+
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { sends: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    // res.status(200).json(updatedUser)
 })
 
 module.exports = {
