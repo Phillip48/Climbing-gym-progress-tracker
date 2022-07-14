@@ -15,6 +15,10 @@ const TrainingSessionSchema = new Schema(
             required: true,
             ref: 'User',
         },
+        durationMinutes: {
+            type: Number,
+            required: true,
+        },
         // True or false to see what the user did
         hangBoard: {
             type: Boolean,

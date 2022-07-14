@@ -41,12 +41,12 @@ const createTrainingSession = asyncHandler(async (req, res) => {
     }
 
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
-        res.status(401)
-        throw new Error('User not authorized')
-    }
+    // if (req.user.id !== req.params.userId) {
+    //     res.status(401)
+    //     throw new Error('User not authorized')
+    // }
 
-    if (!req.body.hangBoard || !req.body.sprayBoard || !req.body.rating
+    if (!req.body.hangBoard || !req.body.sprayBoard || !req.body.rating || !req.body.durationMinutes
         || !req.body.moonBoard || !req.body.kelterBoard || !req.body.liftWeights) {
         res.status(400)
         throw new Error('Please add the needed fields')
@@ -55,6 +55,7 @@ const createTrainingSession = asyncHandler(async (req, res) => {
     const trainingSession = await TrainingSession.create({
         hangBoard: req.body.hangBoard,
         hangBoardNotes: req.body.hangBoardNotes,
+        durationMinutes: req.body.durationMinutes,
         sprayBoard: req.body.sprayBoard,
         moonBoard: req.body.moonBoard,
         kelterBoard: req.body.kelterBoard,
@@ -65,10 +66,10 @@ const createTrainingSession = asyncHandler(async (req, res) => {
         weightLBS: req.body.weightLBS,
         trainingNotes: req.body.trainingNotes,
         rating: req.body.rating,
-        user: req.params.userId,
+        user: req.user.id,
     })
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $addToSet: { trainingSessions: trainingSession } },
         { runValidators: true, new: true }
     );

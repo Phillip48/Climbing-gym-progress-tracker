@@ -25,7 +25,8 @@ const projectSchema = new Schema(
         },
         notes: {
             type: String,
-            required: true,
+            default: "No notes were made",
+            max_length: 800,
         },
         totalAttempts: {
             type: Number,

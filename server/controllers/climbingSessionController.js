@@ -38,10 +38,10 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
-        res.status(401)
-        throw new Error('User not authorized')
-    }
+    // if (req.user.id !== req.params.userId) {
+    //     res.status(401)
+    //     throw new Error('User not authorized')
+    // }
     if (!req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
         res.status(400)
         throw new Error('Please add the needed fields')
@@ -53,13 +53,13 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         totalAttempts: req.body.totalAttempts,
         climbingNotes: req.body.climbingNotes,
         rating: req.body.rating,
-        user: req.params.userId,
+        user: req.user.id,
     })
 
     // send._id.toString()
     // sends: send._id.toString()
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $addToSet: { climbingSessions: climbingSession } },
         { runValidators: true, new: true }
     );

@@ -38,30 +38,32 @@ const createSend = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
-        res.status(401)
-        throw new Error('User not authorized')
-    }
+    // if (send.user.toString() !== req.user.id) {
+    //     res.status(401)
+    //     throw new Error('User not authorized')
+    // }
+    // if (req.user.id !== req.params.userId) {
+    //     res.status(401)
+    //     throw new Error('User not authorized')
+    // }
 
     if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
-
-    const send = await Send.create({
+    const sendObj = await Send.create({
         actualGrade: req.body.actualGrade,
         feltGrade: req.body.feltGrade,
         notes: req.body.notes,
         sent: req.body.sent,
         totalAttempts: req.body.totalAttempts,
         totalSessions: req.body.totalSessions,
-        user: req.params.userId,
+        user: req.user.id,
     })
-    // send._id.toString()
-    // sends: send._id.toString()
+
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
-        { $addToSet: { sends: send } },
+        { _id: req.user.id },
+        { $addToSet: { sends: sendObj } },
         { runValidators: true, new: true }
     );
 

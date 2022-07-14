@@ -32,12 +32,12 @@ const createProject = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
-        res.status(401)
-        throw new Error('User not authorized')
-    }
+    // if (req.user.id !== req.params.userId) {
+    //     res.status(401)
+    //     throw new Error('User not authorized')
+    // }
 
-    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.notes || !req.body.sendProject || !req.body.totalSessions) {
+    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sendProject || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
@@ -48,11 +48,11 @@ const createProject = asyncHandler(async (req, res) => {
         sendProject: req.body.sendProject,
         totalSessions: req.body.totalSessions,
         totalAttempts: req.body.totalAttempts,
-        user: req.params.userId,
+        user: req.user.id,
     })
 
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $addToSet: { projects: project } },
         { runValidators: true, new: true }
     );
