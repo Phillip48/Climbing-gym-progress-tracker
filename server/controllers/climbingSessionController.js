@@ -19,6 +19,17 @@ const getSingleClimbingSession = asyncHandler(async (req, res) => {
         )
         .catch((err) => res.status(500).json(err));
 })
+// Get a single climbing Session
+const getClimbingSessionDate = asyncHandler(async (req, res) => {
+    ClimbingSession.findOne({ createdAt: req.body.createdAt })
+        .select('-__v')
+        .then((climbingSession) =>
+            !climbingSession
+                ? res.status(404).json({ message: 'No climbing session with that date' })
+                : res.json(climbingSession)
+        )
+        .catch((err) => res.status(500).json(err));
+})
 // create a new climbingSession
 const createClimbingSession = asyncHandler(async (req, res) => {
     // Check for user
@@ -106,6 +117,7 @@ module.exports = {
     getClimbingSessions,
     getSingleClimbingSession,
     updateClimbingSession,
+    getClimbingSessionDate,
     deleteClimbingSession,
     createClimbingSession
 };

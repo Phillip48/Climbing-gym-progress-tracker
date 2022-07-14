@@ -1,5 +1,12 @@
 const { Schema, model } = require('mongoose');
 
+const date = new Date;
+
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let format = month + '/' + day + '/' + year;
+
 // Schema to create session model
 const TrainingSessionSchema = new Schema(
     {
@@ -73,8 +80,8 @@ const TrainingSessionSchema = new Schema(
             max: 10,
         },
         createdAt: {
-            type: Date,
-            default: Date.now,
+            type: String,
+            default: format
         },
     },
     {

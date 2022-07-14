@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+const date = new Date;
+
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let format = month + '/' + day + '/' + year;
 // Schema to create Send model
 // A probelm you sent
 const sendSchema = new Schema(
@@ -39,8 +45,8 @@ const sendSchema = new Schema(
             ref: 'ClimbingSession',
         },
         createdAt: {
-            type: Date,
-            default: Date.now,
+            type: String,
+            default: format
         },
     },
     {

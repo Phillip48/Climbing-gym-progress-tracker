@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+const date = new Date;
+
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let format = month + '/' + day + '/' + year;
 // Schema to create Project model
 // Project is something that takes multiple sessions to send
 const projectSchema = new Schema(
@@ -29,14 +35,14 @@ const projectSchema = new Schema(
             type: Number,
             required: true,
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
         sendProject: {
             type: Boolean,
             required: true,
             default: false,
+        },
+        createdAt: {
+            type: String,
+            default: format
         },
     },
     {

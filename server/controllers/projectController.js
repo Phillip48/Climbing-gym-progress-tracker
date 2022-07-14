@@ -19,6 +19,11 @@ const getSingleProject = asyncHandler(async (req, res) => {
         )
         .catch((err) => res.status(500).json(err));
 })
+const getProjectDate = asyncHandler(async (req, res) => {
+    Project.find({ createdAt: req.body.createdAt })
+        .then((project) => res.json(project))
+        .catch((err) => res.status(500).json(err));
+})
 // create a new projects
 const createProject = asyncHandler(async (req, res) => {
     // Check for user
@@ -108,5 +113,6 @@ module.exports = {
     getSingleProject,
     createProject,
     updateProject,
-    deleteProject
+    deleteProject,
+    getProjectDate
 };

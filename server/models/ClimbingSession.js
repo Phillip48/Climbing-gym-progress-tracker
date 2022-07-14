@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+const date = new Date;
+
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let format = month + '/' + day + '/' + year;
 // Schema to create session model
 const ClimbingSessionSchema = new Schema(
     {
@@ -48,8 +54,8 @@ const ClimbingSessionSchema = new Schema(
         //     },
         // ],
         createdAt: {
-            type: Date,
-            default: Date.now,
+            type: String,
+            default: format
         },
     },
     {

@@ -19,6 +19,18 @@ const getSingleTrainingSession = asyncHandler(async (req, res) => {
         )
         .catch((err) => res.status(500).json(err));
 })
+
+// Get a single TrainingSession
+const getTrainingSessionDate = asyncHandler(async (req, res) => {
+    TrainingSession.find({ createdAt: req.body.createdAt })
+        .select('-__v')
+        .then((trainingSession) =>
+            !trainingSession
+                ? res.status(404).json({ message: 'No training session with that date' })
+                : res.json(trainingSession)
+        )
+        .catch((err) => res.status(500).json(err));
+})
 // create a new TrainingSession
 const createTrainingSession = asyncHandler(async (req, res) => {
 
@@ -35,7 +47,7 @@ const createTrainingSession = asyncHandler(async (req, res) => {
     }
 
     if (!req.body.hangBoard || !req.body.sprayBoard || !req.body.rating
-        || !req.body.moonBoard || !req.body.kelterBoard || !req.body.liftWeights || !req.body.trainingNotes) {
+        || !req.body.moonBoard || !req.body.kelterBoard || !req.body.liftWeights) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
@@ -117,5 +129,6 @@ module.exports = {
     getTrainingSessions,
     updateTrainingSession,
     createTrainingSession,
+    getTrainingSessionDate,
     deleteTrainingSession
 };

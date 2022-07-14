@@ -1,5 +1,11 @@
 const { Schema, model } = require('mongoose');
 
+const date = new Date;
+
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let format = month + '/' + day + '/' + year;
 // Schema to create User model
 const userSchema = new Schema(
   {
@@ -49,8 +55,8 @@ const userSchema = new Schema(
       max_length: 200,
     },
     createdAt: {
-      type: Date,
-      default: Date.now,
+      type: String,
+      default: format
     },
     // Might be needed for a user to have sends and projects to his name
     sends: [

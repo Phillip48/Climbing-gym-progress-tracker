@@ -19,6 +19,17 @@ const getSingleSend = asyncHandler(async (req, res) => {
         )
         .catch((err) => res.status(500).json(err));
 })
+// Get a single send
+const getSendDate = asyncHandler(async (req, res) => {
+    Send.find({ createdAt: req.body.createdAt })
+        .select('-__v')
+        .then((send) =>
+            !send
+                ? res.status(404).json({ message: 'No send with that date' })
+                : res.json(send)
+        )
+        .catch((err) => res.status(500).json(err));
+})
 // creates a send
 const createSend = asyncHandler(async (req, res) => {
     // Check for user
@@ -110,7 +121,8 @@ module.exports = {
     updateSend,
     createSend,
     getSends,
-    getSingleSend
+    getSingleSend,
+    getSendDate
 };
 
 
