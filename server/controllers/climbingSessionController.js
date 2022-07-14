@@ -42,12 +42,13 @@ const createClimbingSession = asyncHandler(async (req, res) => {
     //     res.status(401)
     //     throw new Error('User not authorized')
     // }
-    if (!req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
+    if (!req.body.durationMinutes || !req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
 
     const climbingSession = await ClimbingSession.create({
+        durationMinutes: req.body.durationMinutes,
         numberOfSends: req.body.numberOfSends,
         indoorOutdoor: req.body.indoorOutdoor,
         totalAttempts: req.body.totalAttempts,

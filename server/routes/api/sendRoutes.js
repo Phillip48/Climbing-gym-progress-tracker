@@ -13,7 +13,7 @@ const {
 
 // Sends Routes 
 router.route('/sends').get(protect, getSends).post(protect, createSend);
-router.route('/sends/date').get(protect, getSendDate);
+router.route('/sends/find').get(protect, getSendDate);
 router.route('/sends/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend);
 
 

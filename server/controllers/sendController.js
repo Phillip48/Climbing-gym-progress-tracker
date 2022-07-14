@@ -21,7 +21,7 @@ const getSingleSend = asyncHandler(async (req, res) => {
 })
 // Get a single send
 const getSendDate = asyncHandler(async (req, res) => {
-    Send.find({ createdAt: req.body.createdAt })
+    Send.find({ createdAt: req.body.createdAt } )
         .select('-__v')
         .then((send) =>
             !send
@@ -37,15 +37,6 @@ const createSend = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not found')
     }
-    // Make sure the logged in user matches
-    // if (send.user.toString() !== req.user.id) {
-    //     res.status(401)
-    //     throw new Error('User not authorized')
-    // }
-    // if (req.user.id !== req.params.userId) {
-    //     res.status(401)
-    //     throw new Error('User not authorized')
-    // }
 
     if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
         res.status(400)

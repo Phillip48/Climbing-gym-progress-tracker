@@ -14,6 +14,10 @@ const ClimbingSessionSchema = new Schema(
             required: true,
             ref: 'User',
         },
+        durationMinutes: {
+            type: Number,
+            required: true,
+        },
         numberOfSends: {
             type: Number,
             required: true,
