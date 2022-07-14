@@ -4,12 +4,23 @@ const asyncHandler = require('express-async-handler')
 
 // Get all sends
 const getSends = asyncHandler(async (req, res) => {
-    Send.find()
-        .then((sends) => res.json(sends))
-        .catch((err) => res.status(500).json(err));
+    const sends = await Send.find({ user: req.user.id })
+
+    res.status(200).json(sends)
 })
 // Get a single send
 const getSingleSend = asyncHandler(async (req, res) => {
+    const send = await Send.findById(req.params.id)
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (send.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Send.findOne({ _id: req.params.id })
         .select('-__v')
         .then((send) =>
@@ -21,7 +32,7 @@ const getSingleSend = asyncHandler(async (req, res) => {
 })
 // Get a single send
 const getSendDate = asyncHandler(async (req, res) => {
-    Send.find({ createdAt: req.body.createdAt } )
+    Send.find({ actualGrade: req.body.actualGrade, createdAt: req.body.createdAt })
         .select('-__v')
         .then((send) =>
             !send

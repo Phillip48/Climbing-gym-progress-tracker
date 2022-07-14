@@ -4,12 +4,23 @@ const asyncHandler = require('express-async-handler')
 
 // Get all projects
 const getProjects = asyncHandler(async (req, res) => {
-    Project.find()
-        .then((project) => res.json(project))
-        .catch((err) => res.status(500).json(err));
+    const project = await Project.find({ user: req.user.id })
+
+    res.status(200).json(project)
 })
 // Get a single projects
 const getSingleProject = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.params.id)
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (project.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     Project.findOne({ _id: req.params.id })
         .select('-__v')
         .then((project) =>

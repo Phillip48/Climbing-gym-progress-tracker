@@ -4,12 +4,23 @@ const asyncHandler = require('express-async-handler')
 
 // Get all TrainingSession
 const getTrainingSessions = asyncHandler(async (req, res) => {
-    TrainingSession.find()
-        .then((trainingSession) => res.json(trainingSession))
-        .catch((err) => res.status(500).json(err));
+    const trainingSession = await TrainingSession.find({ user: req.user.id })
+
+    res.status(200).json(trainingSession)
 })
 // Get a single TrainingSession
 const getSingleTrainingSession = asyncHandler(async (req, res) => {
+    const trainingSession = await TrainingSession.findById(req.params.id)
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (trainingSession.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     TrainingSession.findOne({ _id: req.params.id })
         .select('-__v')
         .then((trainingSession) =>

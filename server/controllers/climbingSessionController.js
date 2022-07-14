@@ -4,12 +4,23 @@ const asyncHandler = require('express-async-handler')
 
 // Get all climbing Sessions
 const getClimbingSessions = asyncHandler(async (req, res) => {
-    ClimbingSession.find()
-        .then((climbingSession) => res.json(climbingSession))
-        .catch((err) => res.status(500).json(err));
+    const climbingSession = await ClimbingSession.find({ user: req.user.id })
+
+    res.status(200).json(climbingSession)
 })
 // Get a single climbing Session
 const getSingleClimbingSession = asyncHandler(async (req, res) => {
+    const climbingSession = await ClimbingSession.findById(req.params.id)
+    // Check for user
+    if (!req.user) {
+        res.status(401)
+        throw new Error('User not found')
+    }
+    // Make sure the logged in user matches
+    if (climbingSession.user.toString() !== req.user.id) {
+        res.status(401)
+        throw new Error('User not authorized')
+    }
     ClimbingSession.findOne({ _id: req.params.id })
         .select('-__v')
         .then((climbingSession) =>
