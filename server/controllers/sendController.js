@@ -72,13 +72,14 @@ const createSend = asyncHandler(async (req, res) => {
 
 // update a send
 const updateSend = asyncHandler(async (req, res) => {
+    const send = await Send.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (send.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -96,13 +97,14 @@ const updateSend = asyncHandler(async (req, res) => {
 })
 // Delete a send
 const deleteSend = asyncHandler(async (req, res) => {
+    const send = await Send.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (send.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -111,7 +113,7 @@ const deleteSend = asyncHandler(async (req, res) => {
         .catch((err) => res.status(500).json(err));
 
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $pull: { sends: req.params.id } },
         { runValidators: true, new: true }
     );

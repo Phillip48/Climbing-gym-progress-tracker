@@ -62,13 +62,14 @@ const createProject = asyncHandler(async (req, res) => {
 })
 // update a projects
 const updateProject = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (project.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -86,13 +87,14 @@ const updateProject = asyncHandler(async (req, res) => {
 })
 // Delete a projects
 const deleteProject = asyncHandler(async (req, res) => {
+    const project = await Project.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (project.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -100,7 +102,7 @@ const deleteProject = asyncHandler(async (req, res) => {
         .then(() => res.json({ message: 'Project deleted!' }))
         .catch((err) => res.status(500).json(err));
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $pull: { projects: req.params.id } },
         { runValidators: true, new: true }
     );

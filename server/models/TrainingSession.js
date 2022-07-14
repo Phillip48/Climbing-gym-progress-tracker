@@ -63,7 +63,7 @@ const TrainingSessionSchema = new Schema(
             max_length: 40,
         },
         weightReps: {
-            type: String,
+            type: Number,
             default: null,
             max_length: 20,
         },

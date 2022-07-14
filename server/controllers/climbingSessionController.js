@@ -68,13 +68,14 @@ const createClimbingSession = asyncHandler(async (req, res) => {
 
 // update a climbing session
 const updateClimbingSession = asyncHandler(async (req, res) => {
+    const climbingSessionVar = await ClimbingSession.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (climbingSessionVar.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -92,13 +93,14 @@ const updateClimbingSession = asyncHandler(async (req, res) => {
 })
 // Delete a climbing session
 const deleteClimbingSession = asyncHandler(async (req, res) => {
+    const climbingSessionVar = await ClimbingSession.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (climbingSessionVar.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -106,7 +108,7 @@ const deleteClimbingSession = asyncHandler(async (req, res) => {
         .then(() => res.json({ message: 'Climbing session deleted!' }))
         .catch((err) => res.status(500).json(err));
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $pull: { climbingSessions: req.params.id } },
         { runValidators: true, new: true }
     );

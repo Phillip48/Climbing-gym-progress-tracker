@@ -79,13 +79,14 @@ const createTrainingSession = asyncHandler(async (req, res) => {
 })
 // update a TrainingSession
 const updateTrainingSession = asyncHandler(async (req, res) => {
+    const trainingSessionVar = await TrainingSession.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (trainingSessionVar.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -103,13 +104,14 @@ const updateTrainingSession = asyncHandler(async (req, res) => {
 })
 // Delete a TrainingSession
 const deleteTrainingSession = asyncHandler(async (req, res) => {
+    const trainingSessionVar = await TrainingSession.findById(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    if (req.user.id !== req.params.userId) {
+    if (trainingSessionVar.user.toString() !== req.user.id) {
         res.status(401)
         throw new Error('User not authorized')
     }
@@ -117,7 +119,7 @@ const deleteTrainingSession = asyncHandler(async (req, res) => {
         .then(() => res.json({ message: 'Training session deleted!' }))
         .catch((err) => res.status(500).json(err));
     const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.params.userId },
+        { _id: req.user.id },
         { $pull: { trainingSessions: req.params.id } },
         { runValidators: true, new: true }
     );
