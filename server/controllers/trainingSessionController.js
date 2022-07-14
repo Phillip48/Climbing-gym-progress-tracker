@@ -21,39 +21,48 @@ const getSingleTrainingSession = asyncHandler(async (req, res) => {
 })
 // create a new TrainingSession
 const createTrainingSession = asyncHandler(async (req, res) => {
+
     // Check for user
     if (!req.user) {
         res.status(401)
         throw new Error('User not found')
     }
+
     // Make sure the logged in user matches
-    // console.log('userid', req.user.id)
-    // console.log('params id', req.params.id)
     if (req.user.id !== req.params.userId) {
         res.status(401)
         throw new Error('User not authorized')
     }
 
-    // TrainingSession.create(req.body)
-    //     .then((trainingSession) => {
-    //         return User.findOneAndUpdate(
-    //             { _id: req.body.userId },
-    //             { $addToSet: { trainingSessions: trainingSession._id } },
-    //             { new: true }
-    //         );
-    //     })
-    //     .then((user) =>
-    //         !user
-    //             ? res
-    //                 .status(404)
-    //                 // Should not happen 
-    //                 .json({ message: 'training Session created, but found no user with that ID' })
-    //             : res.json('Created the training session 🎉')
-    //     )
-    //     .catch((err) => {
-    //         console.log(err);
-    //         res.status(500).json(err);
-    //     });
+    if (!req.body.hangBoard || !req.body.sprayBoard || !req.body.rating
+        || !req.body.moonBoard || !req.body.kelterBoard || !req.body.liftWeights || !req.body.trainingNotes) {
+        res.status(400)
+        throw new Error('Please add the needed fields')
+    }
+
+    const trainingSession = await TrainingSession.create({
+        hangBoard: req.body.hangBoard,
+        hangBoardNotes: req.body.hangBoardNotes,
+        sprayBoard: req.body.sprayBoard,
+        moonBoard: req.body.moonBoard,
+        kelterBoard: req.body.kelterBoard,
+        trainingBoardNotes: req.body.trainingBoardNotes,
+        liftWeights: req.body.liftWeights,
+        weightSets: req.body.weightSets,
+        weightReps: req.body.weightReps,
+        weightLBS: req.body.weightLBS,
+        trainingNotes: req.body.trainingNotes,
+        rating: req.body.rating,
+        user: req.params.userId,
+    })
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { trainingSessions: trainingSession } },
+        { runValidators: true, new: true }
+    );
+
+    res.status(200).json(updatedUser)
+
 })
 // update a TrainingSession
 const updateTrainingSession = asyncHandler(async (req, res) => {
@@ -78,17 +87,6 @@ const updateTrainingSession = asyncHandler(async (req, res) => {
                 : res.json(trainingSession)
         )
         .catch((err) => res.status(500).json(err));
-    // TrainingSession.findOneAndUpdate(
-    //     { _id: req.params.trainingSessionId },
-    //     { $set: req.body },
-    //     { runValidators: true, new: true }
-    // )
-    //     .then((trainingSession) =>
-    //         !trainingSession
-    //             ? res.status(404).json({ message: 'No training session with this id!' })
-    //             : res.json(trainingSession)
-    //     )
-    //     .catch((err) => res.status(500).json(err));
 })
 // Delete a TrainingSession
 const deleteTrainingSession = asyncHandler(async (req, res) => {
@@ -102,9 +100,15 @@ const deleteTrainingSession = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not authorized')
     }
-    TrainingSession.findOneAndDelete({ _id: req.params.trainingSessionId })
+    TrainingSession.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Training session deleted!' }))
         .catch((err) => res.status(500).json(err));
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { trainingSessions: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    // res.status(200).json(updatedUser)
 })
 
 
