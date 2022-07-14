@@ -2,8 +2,8 @@ const router = require('express').Router();
 const userRoutes = require('./userRoutes');
 const sendRoutes = require('./sendRoutes');
 const projectRoutes = require('./projectRoutes');
-const climbingRoutes = require('./projectRoutes');
-const trainingRoutes = require('./projectRoutes');
+const climbingRoutes = require('./climbingSessionRoutes');
+const trainingRoutes = require('./trainingSessionRoutes');
 
 router.use('/user', userRoutes);
 router.use('/send', sendRoutes);

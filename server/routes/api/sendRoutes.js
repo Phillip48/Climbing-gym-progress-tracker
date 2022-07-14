@@ -12,9 +12,9 @@ const {
 } = require('../../controllers/sendController');
 
 // Sends Routes 
-router.route('/send').get(protect, getSends).post(protect, createSend);
-router.route('/send/date').get(protect, getSendDate);
-router.route('/send/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend);
+router.route('/sends').get(protect, getSends).post(protect, createSend);
+router.route('/sends/date').get(protect, getSendDate);
+router.route('/sends/:id').get(protect, getSingleSend).delete(protect, deleteSend).put(protect, updateSend);
 
 
 module.exports = router;
