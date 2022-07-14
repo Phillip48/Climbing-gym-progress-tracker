@@ -19,7 +19,8 @@ const sendSchema = new Schema(
         },
         notes: {
             type: String,
-            required: true,
+            default: 'No notes were made',
+            max_length: 800,
         },
         sent: {
             type: Boolean,
@@ -32,6 +33,10 @@ const sendSchema = new Schema(
         totalSessions: {
             type: Number,
             required: true,
+        },
+        climbingSession: {
+            type: Schema.Types.ObjectId,
+            ref: 'ClimbingSession',
         },
         createdAt: {
             type: Date,

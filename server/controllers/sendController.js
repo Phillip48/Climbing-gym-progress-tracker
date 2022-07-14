@@ -27,15 +27,12 @@ const createSend = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure the logged in user matches
-    // console.log('userid', req.user.id)
-    // console.log('params id', req.params.id)
     if (req.user.id !== req.params.userId) {
         res.status(401)
         throw new Error('User not authorized')
     }
 
-    if (!req.body.actualGrade || !req.body.totalAttempts
-        || !req.body.feltGrade || !req.body.notes || !req.body.sent || !req.body.totalSessions) {
+    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }

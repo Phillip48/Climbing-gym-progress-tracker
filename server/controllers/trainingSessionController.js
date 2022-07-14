@@ -10,7 +10,7 @@ const getTrainingSessions = asyncHandler(async (req, res) => {
 })
 // Get a single TrainingSession
 const getSingleTrainingSession = asyncHandler(async (req, res) => {
-    TrainingSession.findOne({ _id: req.params.trainingSessionId })
+    TrainingSession.findOne({ _id: req.params.id })
         .select('-__v')
         .then((trainingSession) =>
             !trainingSession

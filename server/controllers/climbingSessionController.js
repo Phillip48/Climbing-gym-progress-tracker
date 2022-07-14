@@ -10,7 +10,7 @@ const getClimbingSessions = asyncHandler(async (req, res) => {
 })
 // Get a single climbing Session
 const getSingleClimbingSession = asyncHandler(async (req, res) => {
-    ClimbingSession.findOne({ _id: req.params.climbingSessionId })
+    ClimbingSession.findOne({ _id: req.params.id })
         .select('-__v')
         .then((climbingSession) =>
             !climbingSession
@@ -31,27 +31,30 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not authorized')
     }
-    ClimbingSession.create(req.body)
-        .then((climbingSession) => {
-            return User.findOneAndUpdate(
-                { _id: req.body.userId },
-                { $addToSet: { climbingSessions: climbingSession._id } },
-                { new: true }
-            );
-        })
-        .then((user) =>
-            !user
-                ? res
-                    .status(404)
-                    // Should not happen 
-                    .json({ message: 'Climbing Session created, but found no user with that ID' })
-                : res.json('Created the climbing session 🎉')
-        )
-        .catch((err) => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    if (!req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
+        res.status(400)
+        throw new Error('Please add the needed fields')
+    }
+
+    const climbingSession = await ClimbingSession.create({
+        numberOfSends: req.body.numberOfSends,
+        indoorOutdoor: req.body.indoorOutdoor,
+        totalAttempts: req.body.totalAttempts,
+        climbingNotes: req.body.climbingNotes,
+        rating: req.body.rating,
+        user: req.params.userId,
+    })
+
+    // send._id.toString()
+    // sends: send._id.toString()
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $addToSet: { climbingSessions: climbingSession } },
+        { runValidators: true, new: true }
+    );
+    res.status(200).json(updatedUser)
 })
+
 // update a climbing session
 const updateClimbingSession = asyncHandler(async (req, res) => {
     // Check for user
@@ -65,7 +68,7 @@ const updateClimbingSession = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
     ClimbingSession.findOneAndUpdate(
-        { _id: req.params.climbingSessionId },
+        { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
     )
@@ -88,9 +91,15 @@ const deleteClimbingSession = asyncHandler(async (req, res) => {
         res.status(401)
         throw new Error('User not authorized')
     }
-    ClimbingSession.findOneAndDelete({ _id: req.params.climbingSessionId })
+    ClimbingSession.findOneAndDelete({ _id: req.params.id })
         .then(() => res.json({ message: 'Climbing session deleted!' }))
         .catch((err) => res.status(500).json(err));
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: req.params.userId },
+        { $pull: { climbingSessions: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    // res.status(200).json(updatedUser)
 })
 
 module.exports = {

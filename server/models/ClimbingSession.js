@@ -16,6 +16,7 @@ const ClimbingSessionSchema = new Schema(
             type: String,
             min_length: 6,
             max_length: 7,
+            required: true,
         },
         totalAttempts: {
             // Not required, Tries in total session
@@ -24,15 +25,12 @@ const ClimbingSessionSchema = new Schema(
         },
         climbingNotes: {
             type: String,
+            default: 'No notes were made',
             max_length: 800,
         },
-        // notes: {
-        //     type: String,
-        //     max_length: 800,
-        // },
         rating: {
             // Out of 10
-            type: String,
+            type: Number,
             required: true,
             min: 1,
             max: 10,
@@ -43,12 +41,12 @@ const ClimbingSessionSchema = new Schema(
                 ref: 'send',
             },
         ],
-        projects: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'project',
-            },
-        ],
+        // projects: [
+        //     {
+        //         type: Schema.Types.ObjectId,
+        //         ref: 'project',
+        //     },
+        // ],
         createdAt: {
             type: Date,
             default: Date.now,
