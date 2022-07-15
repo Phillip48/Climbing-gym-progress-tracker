@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongoose').Types;
-const { Send, User } = require('../models');
+const { Send, User, ClimbingSession } = require('../models');
 const asyncHandler = require('express-async-handler')
 
 // Get all sends
@@ -53,7 +53,8 @@ const createSend = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
-    const sendObj = await Send.create({
+
+    let sendObj = {
         actualGrade: req.body.actualGrade,
         feltGrade: req.body.feltGrade,
         notes: req.body.notes,
@@ -61,16 +62,67 @@ const createSend = asyncHandler(async (req, res) => {
         totalAttempts: req.body.totalAttempts,
         totalSessions: req.body.totalSessions,
         videoOrImg: req.body.videoOrImg,
+        climbingSession: req.body.climbingSession,
         user: req.user.id,
-    })
+    }
 
-    const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.user.id },
-        { $addToSet: { sends: sendObj } },
-        { runValidators: true, new: true }
-    );
-
-    res.status(200).json(updatedUser)
+    if (req.body.climbingSession) {
+        const findID = await ClimbingSession.findOne({ _id : req.body.climbingSession});
+        if (findID === null){
+            // console.log('Not found!');
+            sendObj = await Send.create({
+                actualGrade: req.body.actualGrade,
+                feltGrade: req.body.feltGrade,
+                notes: req.body.notes,
+                sent: req.body.sent,
+                totalAttempts: req.body.totalAttempts,
+                totalSessions: req.body.totalSessions,
+                videoOrImg: req.body.videoOrImg,
+                // climbingSession: '',
+                user: req.user.id,
+            })
+            const updatedUser = await User.findByIdAndUpdate(
+                { _id: req.user.id },
+                { $addToSet: { sends: sendObj } },
+                { runValidators: true, new: true }
+            );
+            res.status(200).json(updatedUser)
+            throw new Error('Send was created however no Climbing Session was found with that ID')
+        } else {
+            sendObj = await Send.create({
+                actualGrade: req.body.actualGrade,
+                feltGrade: req.body.feltGrade,
+                notes: req.body.notes,
+                sent: req.body.sent,
+                totalAttempts: req.body.totalAttempts,
+                totalSessions: req.body.totalSessions,
+                videoOrImg: req.body.videoOrImg,
+                climbingSession: req.body.climbingSession,
+                user: req.user.id,
+            })
+            const updatedUser = await User.findByIdAndUpdate(
+                { _id: req.user.id },
+                { $addToSet: { sends: sendObj } },
+                { runValidators: true, new: true }
+            );
+            const updatedSessions = await ClimbingSession.findByIdAndUpdate(sendObj.climbingSession._id.toString(), { $addToSet:{sends: sendObj._id.toString()}}, {
+                new: true,
+            })
+            res.status(200).json(updatedSessions)
+        }
+    }
+    // console.log('In the function', sendObj)
+    // sendObj = await Send.create({
+    //     actualGrade: req.body.actualGrade,
+    //     feltGrade: req.body.feltGrade,
+    //     notes: req.body.notes,
+    //     sent: req.body.sent,
+    //     totalAttempts: req.body.totalAttempts,
+    //     totalSessions: req.body.totalSessions,
+    //     videoOrImg: req.body.videoOrImg,
+    //     // climbingSession: req.body.climbingSession,
+    //     user: req.user.id,
+    // })
 })
 
 // update a send

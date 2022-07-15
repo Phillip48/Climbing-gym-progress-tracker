@@ -96,7 +96,7 @@ const signIn = asyncHandler(async (req, res) => {
 // Register a user (works)
 const register = asyncHandler(async (req, res) => {
     const { userName, firstName, lastName, email, phoneNumber, password, maxBoulderingGrade,
-        maxTopRopingGrade, bio } = req.body
+        maxTopRopingGrade, bio, profileImg } = req.body
 
     if (!userName || !maxBoulderingGrade || !maxTopRopingGrade || !firstName || !lastName || !phoneNumber || !email || !password) {
         res.status(400)
