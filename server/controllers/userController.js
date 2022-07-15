@@ -118,7 +118,7 @@ const register = asyncHandler(async (req, res) => {
     // Create user
     const user = await User.create({
         userName, firstName, lastName, email, phoneNumber, password, maxBoulderingGrade,
-        maxTopRopingGrade, bio,
+        maxTopRopingGrade, bio, profileImg,
         password: hashedPassword,
     })
 
