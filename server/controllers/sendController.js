@@ -60,6 +60,7 @@ const createSend = asyncHandler(async (req, res) => {
         sent: req.body.sent,
         totalAttempts: req.body.totalAttempts,
         totalSessions: req.body.totalSessions,
+        videoOrImg: req.body.videoOrImg,
         user: req.user.id,
     })
 
