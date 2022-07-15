@@ -58,6 +58,11 @@ const userSchema = new Schema(
       type: String,
       default: format
     },
+    profileImg:
+    {
+      data: Buffer,
+      contentType: String
+    },
     // Might be needed for a user to have sends and projects to his name
     sends: [
       {

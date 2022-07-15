@@ -48,6 +48,11 @@ const sendSchema = new Schema(
             type: String,
             default: format
         },
+        videoOrImg:
+        {
+            data: Buffer,
+            contentType: String
+        }
     },
     {
         toJSON: {
