@@ -174,6 +174,7 @@ const updateSend = asyncHandler(async (req, res) => {
 // Delete a send
 const deleteSend = asyncHandler(async (req, res) => {
     const send = await Send.findById(req.params.id)
+    // console.log(send.climbingSession.toString())
     // Check for user
     if (!req.user) {
         res.status(401)
@@ -190,6 +191,11 @@ const deleteSend = asyncHandler(async (req, res) => {
 
     const updatedUser = await User.findByIdAndUpdate(
         { _id: req.user.id },
+        { $pull: { sends: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    const updatedSession = await ClimbingSession.findByIdAndUpdate(
+        { _id: send.climbingSession.toString() },
         { $pull: { sends: req.params.id } },
         { runValidators: true, new: true }
     );

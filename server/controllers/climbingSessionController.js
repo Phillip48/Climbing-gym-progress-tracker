@@ -162,6 +162,9 @@ const updateClimbingSession = asyncHandler(async (req, res) => {
 // Delete a climbing session
 const deleteClimbingSession = asyncHandler(async (req, res) => {
     const climbingSessionVar = await ClimbingSession.findById(req.params.id)
+    const findSend = await Send.find({ climbingSessions: req.params.id })
+    // console.log(findSend)
+    // console.log(climbingSessionVar.sends.toString())
     // Check for user
     if (!req.user) {
         res.status(401)
@@ -178,6 +181,11 @@ const deleteClimbingSession = asyncHandler(async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
         { _id: req.user.id },
         { $pull: { climbingSessions: req.params.id } },
+        { runValidators: true, new: true }
+    );
+    const updatedSession = await Send.findByIdAndUpdate(
+        { _id: climbingSessionVar.sends.toString() },
+        { $pull: { climbingSession: req.params.id } },
         { runValidators: true, new: true }
     );
     // res.status(200).json(updatedUser)
