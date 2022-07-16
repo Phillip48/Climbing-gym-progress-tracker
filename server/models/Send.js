@@ -40,10 +40,10 @@ const sendSchema = new Schema(
             type: Number,
             required: true,
         },
-        climbingSession: {
+        climbingSession: [{
             type: Schema.Types.ObjectId,
             ref: 'ClimbingSession',
-        },
+        }],
         createdAt: {
             type: String,
             default: format
