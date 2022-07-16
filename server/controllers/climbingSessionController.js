@@ -51,55 +51,76 @@ const createClimbingSession = asyncHandler(async (req, res) => {
     // Make sure all the needed fields is there for the climbing session
     if (!req.body.durationMinutes || !req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
         res.status(400)
-        throw new Error('Climbing Session created; Send was not created')
+        throw new Error('Please add the needed fields for the climbing session; Nothing was created')
     }
-    // climbing session object 
-    const climbingSession = await ClimbingSession.create({
-        durationMinutes: req.body.durationMinutes,
-        numberOfSends: req.body.numberOfSends,
-        indoorOutdoor: req.body.indoorOutdoor,
-        totalAttempts: req.body.totalAttempts,
-        climbingNotes: req.body.climbingNotes,
-        rating: req.body.rating,
-        user: req.user.id,
-    })
-
-    // Make sure all the needed fields is there for the send
-    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
-        res.status(400)
-        throw new Error('Please add the needed fields')
-    }
-    // Send obj
-    const sendObj = await Send.create({
-        actualGrade: req.body.actualGrade,
-        feltGrade: req.body.feltGrade,
-        notes: req.body.notes,
-        sent: req.body.sent,
-        totalAttempts: req.body.totalAttempts,
-        totalSessions: req.body.totalSessions,
-        videoOrImg: req.body.videoOrImg,
-        climbingSession: climbingSession._id.toString(),
-        user: req.user.id,
-    })
-    // Update the climbing session with the send id
-    const updatedSessions = await ClimbingSession.findByIdAndUpdate(climbingSession._id.toString(), {$addToSet:{sends: sendObj._id.toString()}}, {
-        new: true,
-    })
-    // Update the user with the climbing session
-    const updatedUser = await User.findByIdAndUpdate(
-        { _id: req.user.id },
-        { $addToSet: { climbingSessions: climbingSession } },
-        { runValidators: true, new: true }
-    );
-    // Update the user with the send
-    const updatedUser2 = await User.findByIdAndUpdate(
-        { _id: req.user.id },
-        { $addToSet: { sends: sendObj } },
-        { runValidators: true, new: true }
-    );
-    // Response JSON the updated climbing session 
-    res.status(200).json(updatedSessions)
+    // If there are any of the needed fields to make a send then this will run
+    if (req.body.actualGrade || req.body.feltGrade || req.body.sent || req.body.totalSessions) {
+        // Make sure all the needed fields is there for the send
+        if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
+            res.status(400)
+            throw new Error('Please add the needed fields for the send; Nothing was created')
+        }
+        // climbing session object create
+        const climbingSession = await ClimbingSession.create({
+            durationMinutes: req.body.durationMinutes,
+            numberOfSends: req.body.numberOfSends,
+            indoorOutdoor: req.body.indoorOutdoor,
+            totalAttempts: req.body.totalAttempts,
+            climbingNotes: req.body.climbingNotes,
+            rating: req.body.rating,
+            user: req.user.id,
+        })
+        // Send obj
+        const sendObj = await Send.create({
+            actualGrade: req.body.actualGrade,
+            feltGrade: req.body.feltGrade,
+            notes: req.body.notes,
+            sent: req.body.sent,
+            totalAttempts: req.body.totalAttempts,
+            totalSessions: req.body.totalSessions,
+            videoOrImg: req.body.videoOrImg,
+            climbingSession: climbingSession._id.toString(),
+            user: req.user.id,
+        })
+        // Update the climbing session with the send id
+        const updatedSessions = await ClimbingSession.findByIdAndUpdate(climbingSession._id.toString(), { $addToSet: { sends: sendObj._id.toString() } }, {
+            new: true,
+        })
+        // Update the user with the climbing session
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: req.user.id },
+            { $addToSet: { climbingSessions: climbingSession } },
+            { runValidators: true, new: true }
+        );
+        // Update the user with the send
+        const updatedUser2 = await User.findByIdAndUpdate(
+            { _id: req.user.id },
+            { $addToSet: { sends: sendObj } },
+            { runValidators: true, new: true }
+        );
+        // Response JSON the updated climbing session 
+        res.status(200).json(updatedSessions)
     // console.log(climbingSession._id.toString())
+    } else{
+        // this will run if there is nothing for a send and just a climbing session
+        // climbing session object create
+        const climbingSession = await ClimbingSession.create({
+            durationMinutes: req.body.durationMinutes,
+            numberOfSends: req.body.numberOfSends,
+            indoorOutdoor: req.body.indoorOutdoor,
+            totalAttempts: req.body.totalAttempts,
+            climbingNotes: req.body.climbingNotes,
+            rating: req.body.rating,
+            user: req.user.id,
+        })
+        // Update the user with the climbing session
+        const updatedUser = await User.findByIdAndUpdate(
+            { _id: req.user.id },
+            { $addToSet: { climbingSessions: climbingSession } },
+            { runValidators: true, new: true }
+        );
+        res.status(200).json(updatedUser)
+    }
 })
 
 // update a climbing session
