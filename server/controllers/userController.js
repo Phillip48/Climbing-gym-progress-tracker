@@ -146,7 +146,7 @@ const getMe = asyncHandler(async (req, res) => {
 const generateToken = (id) => {
     // process.env.JWT_SECRET needs to replace JWTSECRETKEY123 BUT ENV NOT WORKING
     return jwt.sign({ id }, 'JWTSECRETKEY123', {
-        expiresIn: '30d',
+        expiresIn: '2h',
     })
 }
 console.log(process.env.JWT_SECRET)
