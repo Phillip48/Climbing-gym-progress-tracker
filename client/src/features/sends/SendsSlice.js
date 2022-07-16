@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import goalService from './goalService'
+import sendService from './sendsService'
 
 const initialState = {
   goals: [],
@@ -10,12 +10,12 @@ const initialState = {
 }
 
 // Create new goal
-export const createGoal = createAsyncThunk(
-  'goals/create',
+export const createSend = createAsyncThunk(
+  'sends/create',
   async (goalData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await goalService.createGoal(goalData, token)
+      return await sendService.createGoal(goalData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -29,12 +29,12 @@ export const createGoal = createAsyncThunk(
 )
 
 // Get user goals
-export const getGoals = createAsyncThunk(
-  'goals/getAll',
+export const getSends= createAsyncThunk(
+  'sends/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await goalService.getGoals(token)
+      return await sendService.getSends(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -47,13 +47,13 @@ export const getGoals = createAsyncThunk(
   }
 )
 
-// Delete user goal
-export const deleteGoal = createAsyncThunk(
-  'goals/delete',
+// Delete user send
+export const deleteSend = createAsyncThunk(
+  'sends/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await goalService.deleteGoal(id, token)
+      return await sendService.deleteSends(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -66,51 +66,51 @@ export const deleteGoal = createAsyncThunk(
   }
 )
 
-export const goalSlice = createSlice({
-  name: 'goal',
+export const sendSlice = createSlice({
+  name: 'send',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createGoal.pending, (state) => {
+      .addCase(createSend.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createGoal.fulfilled, (state, action) => {
+      .addCase(createSend.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.goals.push(action.payload)
+        state.sends.push(action.payload)
       })
       .addCase(createGoal.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getGoals.pending, (state) => {
+      .addCase(getSends.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getGoals.fulfilled, (state, action) => {
+      .addCase(getSends.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.goals = action.payload
+        state.sends = action.payload
       })
-      .addCase(getGoals.rejected, (state, action) => {
+      .addCase(getSends.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(deleteGoal.pending, (state) => {
+      .addCase(deleteSend.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(deleteGoal.fulfilled, (state, action) => {
+      .addCase(deleteSend.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.goals = state.goals.filter(
-          (goal) => goal._id !== action.payload.id
+        state.sends = state.sends.filter(
+          (send) => send._id !== action.payload.id
         )
       })
-      .addCase(deleteGoal.rejected, (state, action) => {
+      .addCase(deleteSend.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -118,5 +118,5 @@ export const goalSlice = createSlice({
   },
 })
 
-export const { reset } = goalSlice.actions
-export default goalSlice.reducer
+export const { reset } = sendSlice.actions
+export default sendSlice.reducer
