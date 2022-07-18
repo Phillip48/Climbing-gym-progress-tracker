@@ -1,11 +1,15 @@
-import React, { useState } from "react";
-import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
+import React, { useState, useEffect } from "react";
 import { FaUser } from 'react-icons/fa'
-import axios from 'axios';
-// import Auth from '../../utils/auth';
+import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
+import { useNavigate } from 'react-router-dom'
+import { register, reset } from '../../features/auth/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
+// import { toast } from 'react-toastify'
+// import axios from 'axios';
 import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../signup/style.css'
+import Spinner from '../../components/Spinner'
 
 const Signup = () => {
     const [formState, setFormState] = useState({
@@ -21,8 +25,29 @@ const Signup = () => {
         aboutMe: '',
         profileImg: ''
     });
+    // console.log(formState)
 
-    const { firstName, lastName, userName, email, phoneNumber, maxBoulderingGrade, maxTopRopingGrade, password, password2, aboutMe, profileImg } = formState
+    const { firstName, lastName, userName, email, phoneNumber, maxBoulderingGrade, maxTopRopingGrade, password, aboutMe, profileImg } = formState
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+    )
+
+    useEffect(() => {
+        if (isError) {
+            alert(message)
+            // toast.error(message)
+        }
+
+        if (isSuccess || user) {
+            navigate('/')
+        }
+
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -37,34 +62,32 @@ const Signup = () => {
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log('This is from the form state and is the user info:', formState);
 
-        const user = formState;
-
-        console.log('This is the user object', user)
-
-        axios.post('http://localhost:3000/api/user/register', user)
-            .then(res => console.log(res.data));
-
-        // redirect to profile and login
-        window.location.assign('/');
-
-        // clear form values
-        setFormState({
-            firstName: '',
-            lastName: '',
-            userName: '',
-            email: '',
-            phoneNumber: '',
-            maxBoulderingGrade: '',
-            maxTopRopingGrade: '',
-            password: '',
-            password2: '',
-            aboutMe: '',
-            profileImg: ''
-        })
-
+        if (formState.password !== formState.password2) {
+            alert('Passwords do not match')
+            // console.log('Passwords do not match')
+            // toast.error('Passwords do not match')
+        } else {
+            const userData = {
+                firstName,
+                lastName,
+                userName,
+                email,
+                phoneNumber,
+                maxBoulderingGrade,
+                maxTopRopingGrade,
+                password,
+                aboutMe,
+                profileImg
+            }
+            console.log(userData)
+            dispatch(register(userData))
+        }
     };
+
+    if (isLoading) {
+        return <Spinner />
+    }
 
     return (
         <>
@@ -87,7 +110,7 @@ const Signup = () => {
                                                 placeholder="First Name"
                                                 type="text"
                                                 required
-                                                value={firstName}
+                                                value={formState.firstName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
@@ -104,7 +127,7 @@ const Signup = () => {
                                                 placeholder="Last Name"
                                                 type="text"
                                                 required
-                                                value={lastName}
+                                                value={formState.lastName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
@@ -122,7 +145,7 @@ const Signup = () => {
                                             placeholder="User123"
                                             type="text"
                                             required
-                                            value={userName}
+                                            value={formState.userName}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -138,7 +161,7 @@ const Signup = () => {
                                             placeholder="Email Address"
                                             type="email"
                                             required
-                                            value={email}
+                                            value={formState.email}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -155,7 +178,7 @@ const Signup = () => {
                                             placeholder="******"
                                             type="password"
                                             required
-                                            value={password}
+                                            value={formState.password}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -163,7 +186,7 @@ const Signup = () => {
                                 <Col md={12}>
                                     <FormGroup>
                                         <Label className="labels" for="examplePassword">
-                                            Password
+                                            Confrim Password
                                         </Label>
                                         <Input
                                             id="examplePassword2"
@@ -171,7 +194,7 @@ const Signup = () => {
                                             placeholder="******"
                                             type="password"
                                             required
-                                            value={password2}
+                                            value={formState.password2}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -188,7 +211,7 @@ const Signup = () => {
                                             placeholder="123-456-7890"
                                             type="tel"
                                             required
-                                            value={phoneNumber}
+                                            value={formState.phoneNumber}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -200,7 +223,7 @@ const Signup = () => {
                                             <Label className="labels" for="maxBoulderingGrade">
                                                 Max Bouldering Grade:
                                             </Label>
-                                            <select className="signup-grade-option" id="examplemaxBoulderingGrade" name="maxBoulderingGrade" value={maxBoulderingGrade} onChange={handleChange} required>
+                                            <select className="signup-grade-option" id="examplemaxBoulderingGrade" name="maxBoulderingGrade" value={formState.maxBoulderingGrade} onChange={handleChange} required>
                                                 <option onChange={handleChange} value=""></option>
                                                 <option onChange={handleChange} value="V0">V0</option>
                                                 <option onChange={handleChange} value="V1">V1</option>
@@ -226,7 +249,7 @@ const Signup = () => {
                                             <Label className="labels" for="maxTopRopingGrade">
                                                 Max Top Roping Grade:
                                             </Label>
-                                            <select className="signup-grade-option" id="examplemaxTopRopingGrade" name="maxTopRopingGrade" value={maxTopRopingGrade} onChange={handleChange} required>
+                                            <select className="signup-grade-option" id="examplemaxTopRopingGrade" name="maxTopRopingGrade" value={formState.maxTopRopingGrade} onChange={handleChange} required>
                                                 <option onChange={handleChange} value=""></option>
                                                 <option onChange={handleChange} value="5.6">5.6</option>
                                                 <option onChange={handleChange} value="5.7">5.7</option>
@@ -272,7 +295,7 @@ const Signup = () => {
                                             name="aboutMe"
                                             placeholder="Type Here..."
                                             type="textarea"
-                                            value={aboutMe}
+                                            value={formState.aboutMe}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -287,7 +310,7 @@ const Signup = () => {
                                             name="profileImg"
                                             placeholder="Type Here..."
                                             type="file"
-                                            value={profileImg}
+                                            value={formState.profileImg}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>

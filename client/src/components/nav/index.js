@@ -1,13 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom'
 import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../nav/style.css'
 import ClimbingLogo from '../../assets/logo/The Climbing Wall-logos_transparent.png';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../../features/auth/authSlice'
+
 const Nav = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { user } = useSelector((state) => state.auth)
 
-
+    const onLogout = () => {
+        dispatch(logout())
+        dispatch(reset())
+        navigate('/')
+    }
     return (
         <>
             <header className="hold-everything-navbar">
@@ -15,20 +25,20 @@ const Nav = () => {
                     <div className="holds-climbinglogo">
                         <a href="/"><img className="climbinglogo" src={ClimbingLogo} alt='logo'></img></a>
                     </div>
-
-                    {/* <div className="holds-page-options">
-                        <Link to='/profile'><button className="navbar-button">Profile</button></Link>
-                        <div className="div-padding-verysmall"></div>
-                        <Link to='/logs'><button className="navbar-button">Logs</button></Link>
-                        <button className="navbar-button"><FaSignOutAlt /> Log Out</button>
-                    </div> */}
-
-                    <div className="holds-page-options">
-                        <Link to='/signup'><button className="navbar-button"><FaUser />Register</button></Link>
-                        <div className="div-padding-verysmall"></div>
-                        <Link to='/login'><button className="navbar-button"><FaSignInAlt /> Log In</button></Link>
-                    </div>
-
+                    {user ? (
+                        <div className="holds-page-options">
+                            <Link to='/profile'><button className="navbar-button">Profile</button></Link>
+                            <div className="div-padding-verysmall"></div>
+                            <Link to='/logs'><button className="navbar-button">Logs</button></Link>
+                            <button className="navbar-button" onClick={onLogout}><FaSignOutAlt /> Log Out</button>
+                        </div>
+                    ) : (
+                        <div className="holds-page-options">
+                            <Link to='/signup'><button className="navbar-button"><FaUser />Register</button></Link>
+                            <div className="div-padding-verysmall"></div>
+                            <Link to='/login'><button className="navbar-button"><FaSignInAlt /> Log In</button></Link>
+                        </div>
+                    )}
                 </section>
             </header>
             {/* <section className="nav-undernav-holds-banner">

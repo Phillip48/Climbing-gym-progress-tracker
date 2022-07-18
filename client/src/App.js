@@ -8,6 +8,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+// import { ToastContainer } from 'react-toastify'
 
 // Component imports
 import Nav from '../src/components/nav/index.js';
@@ -22,6 +23,7 @@ import NotFound from '../src/pages/404Page';
 
 function App() {
   return (
+    <>
     <BrowserRouter>
       {/* The Navbar is added here to be added to every page that renders */}
       <Nav />
@@ -51,6 +53,7 @@ function App() {
         </Routes>
       </main>
     </BrowserRouter>
+    </>
   );
 }
 

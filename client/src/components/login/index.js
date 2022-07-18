@@ -1,17 +1,39 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
 import { FaSignInAlt } from 'react-icons/fa'
-import axios from 'axios';
-// import Auth from '../../utils/auth';
 import Banner from '../banner/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../login/style.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+// import { toast } from 'react-toastify'
+import { login, reset } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 const Login = () => {
     // state for login
     const [formState, setFormState] = useState({ email: '', password: '' });
 
     const { email, password } = formState
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+    )
+
+    useEffect(() => {
+        if (isError) {
+            alert(message)
+        }
+
+        if (isSuccess || user) {
+            navigate('/')
+        }
+
+        dispatch(reset())
+    }, [user, isError, isSuccess, message, navigate, dispatch])
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -26,28 +48,17 @@ const Login = () => {
     // submit form
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log('This is from the form state and is the user info:', formState);
-
-        try{
-            const user = formState;
-
-            axios.post('http://localhost:3000/api/user/signin', user)
-            .then(res => console.log(res.data));
-            // redirect to profile
-            // window.location.assign('/profile')
-            // window.location.assign(`/profile/${Auth.getProfile()}`)
-        } catch (e) {
-            console.error(e);
+        const userData = {
+            email,
+            password,
         }
-        
-        // window.location.assign(`/profile/${Auth.getProfile}`)
-        // clear form values
-        setFormState({
-            email: '',
-            password: '',
-        });
 
+        dispatch(login(userData))
     };
+
+    if (isLoading) {
+        return <Spinner />
+    }
 
     return (
         <>
