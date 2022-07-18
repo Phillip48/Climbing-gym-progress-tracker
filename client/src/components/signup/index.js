@@ -312,6 +312,7 @@ const Signup = () => {
                                             type="file"
                                             value={formState.profileImg}
                                             onChange={handleChange}
+                                            accept="image/*"
                                         />
                                     </FormGroup>
                                 </Col>

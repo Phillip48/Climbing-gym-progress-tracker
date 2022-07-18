@@ -7,8 +7,8 @@ import '../login/style.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 // import { toast } from 'react-toastify'
-import { login, reset } from '../features/auth/authSlice'
-import Spinner from '../components/Spinner'
+import { login, reset } from '../../features/auth/authSlice'
+import Spinner from '../../components/Spinner'
 
 const Login = () => {
     // state for login
