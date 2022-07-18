@@ -12,6 +12,315 @@ code {
     monospace;
 }
 
+
+/* ======================= LogIn ======================= */
+.hold-everything-login {
+  margin: 5rem 5rem 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.holds-login-interaction {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  /* width: 100%;
+    height: 60vh; */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  background-color: #9cfc97;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  width: 100%;
+  height: 45vh;
+}
+
+.login-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  color: white;
+  background-color: #342e37;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  width: 100%;
+  height: 45vh;
+  /* border-left: 2px solid #342e37; */
+}
+
+.login-info-text {
+  margin: 1rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3em;
+  color: white;
+}
+
+.login-form-text {
+  margin: 1rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3em;
+  color: black;
+}
+
+.login-info-subtext {
+  text-align: center;
+  margin: 1rem;
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  color: white;
+}
+
+.actual-login-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-labels-login{
+  margin-top: .5rem;
+  background: transparent;
+}
+
+.login-button{
+  /* margin-top: 1rem; */
+  background: transparent;
+  font-size: 1em;
+  transition: ease-in-out .4s;
+}
+
+.login-button:hover{
+  color: white;
+  background-color: black;
+}
+
+.loginLink{
+  margin-top: .5rem;
+  text-align: center;
+
+}
+
+.loginButton{
+  color: white;
+}
+/* ============================================== */
+/* ======================= SignUp ======================= */
+.signup-holds-form{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+/* .holds-signup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+} */
+
+.actual-signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-grade-option{
+    margin-left: .5rem;
+}
+
+.user-grades-inputs{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center
+}
+/* ============================================== */
+
+/* ======================= Info page ======================= */
+
+.info-holds-all {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-background-pic-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  /* margin-top: 5rem; */
+  background-image: url(./assets/other/climbinggymwall.jpg);
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 60vh;
+}
+
+.logo-text {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 7.5em;
+}
+
+.logo-subtext {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5em;
+}
+
+.banner-h-width {
+  width: 20%;
+}
+
+.banner-p-width {
+  width: 25%;
+}
+
+.info-holds-3part-page-info {
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.info-info-part {
+  width: 30%;
+  text-align: center;
+}
+
+.part3-text {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3em;
+  color: black;
+}
+
+.part3-subtext {
+  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1em;
+  color: black;
+}
+
+.holds-whats-different-info {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 3rem 0 3rem;
+}
+/* .info-holds-moreinfo{
+  margin: 1rem;
+} */
+
+.info-signup-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+   color: white;
+  background-color: #342e37;
+  border-color: #342e37;
+  font-size: 1.3em;
+  transition: ease-in-out 0.4s;
+  margin: 1rem;
+}
+.info-signup-button:hover {
+  color: black;
+  background-color: transparent;
+}
+
+/* ======================= Profile ======================= */
+
+.holds-user-profile {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+}
+
+.user-username {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  border-bottom: 1px solid black;
+}
+
+/* .profile-pic {
+  width: 10%;
+  border-radius: 25%;
+} */
+
+/* .username-h1{
+    
+} */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
+}
+
+.user-bio-p {
+  text-align: center;
+}
+
+.user-stats {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.user-stats-3parts {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+}
+
+.user-previous-sessions-and-sends{
+    margin-top: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.user-previous-sends{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+}
+
+.user-previous-sessions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  width: 45%;
+}
+.previous-sends{
+    margin-top: 1rem;
+}
+
+.previous-sessions{
+    margin-top: 1rem;
+}
+/* ======================= Spinner ======================= */
 .loadingSpinnerContainer {
   position: fixed;
   top: 0;
