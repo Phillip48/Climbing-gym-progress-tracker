@@ -16,6 +16,7 @@ import Nav from '../src/components/nav/index.js';
 
 // Page imports
 import HomePage from '../src/pages/Home';
+import DashboardPage from '../src/pages/Dashboard';
 import SignupPage from '../src/pages/Signup';
 import LoginPage from '../src/pages/Login';
 import ProfilePage from '../src/pages/Profile';
