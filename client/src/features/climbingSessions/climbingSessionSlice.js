@@ -1,21 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import sendService from './sendsService'
+import climbingSessionService from './climbingSessionService'
+
+// climbingSession
+// ClimbingSession
 
 const initialState = {
-  sends: [],
+  climbingSessions: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 }
 
-// Create new send
-export const createSend = createAsyncThunk(
-  'sends/create',
-  async (sendData, thunkAPI) => {
+// Create new ClimbingSession
+export const createClimbingSession = createAsyncThunk(
+  'climbingSessions/create',
+  async (climbingSessionData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.createSend(sendData, token)
+      return await climbingSessionService.createClimbingSession(climbingSessionData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -28,13 +31,13 @@ export const createSend = createAsyncThunk(
   }
 )
 
-// Get user sends
-export const getSends= createAsyncThunk(
-  'sends/getAll',
+// Get user climbingSessions
+export const getClimbingSessions = createAsyncThunk(
+  'climbingSessions/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.getSends(token)
+      return await climbingSessionService.getClimbingSessions(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -47,13 +50,13 @@ export const getSends= createAsyncThunk(
   }
 )
 
-// Delete user sends
-export const deleteSend = createAsyncThunk(
-  'sends/delete',
+// Delete user climbingSession
+export const deleteClimbingSession = createAsyncThunk(
+  'climbingSessions/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.deleteSends(id, token)
+      return await climbingSessionService.deleteClimbingSession(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -66,51 +69,51 @@ export const deleteSend = createAsyncThunk(
   }
 )
 
-export const sendSlice = createSlice({
-  name: 'send',
+export const climbingSessionSlice = createSlice({
+  name: 'climbingSession',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createSend.pending, (state) => {
+      .addCase(createClimbingSession.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createSend.fulfilled, (state, action) => {
+      .addCase(createClimbingSession.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends.push(action.payload)
+        state.climbingSessions.push(action.payload)
       })
-      .addCase(createSend.rejected, (state, action) => {
+      .addCase(createClimbingSession.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getSends.pending, (state) => {
+      .addCase(getClimbingSessions.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getSends.fulfilled, (state, action) => {
+      .addCase(getClimbingSessions.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = action.payload
+        state.climbingSessions = action.payload
       })
-      .addCase(getSends.rejected, (state, action) => {
+      .addCase(getClimbingSessions.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(deleteSend.pending, (state) => {
+      .addCase(deleteClimbingSession.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(deleteSend.fulfilled, (state, action) => {
+      .addCase(deleteClimbingSession.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = state.sends.filter(
-          (send) => send._id !== action.payload.id
+        state.climbingSessions = state.climbingSessions.filter(
+          (climbingSession) => climbingSession._id !== action.payload.id
         )
       })
-      .addCase(deleteSend.rejected, (state, action) => {
+      .addCase(deleteClimbingSession.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -118,5 +121,5 @@ export const sendSlice = createSlice({
   },
 })
 
-export const { reset } = sendSlice.actions
-export default sendSlice.reducer
+export const { reset } = climbingSessionSlice.actions
+export default climbingSessionSlice.reducer

@@ -10,7 +10,7 @@ const createSend = async (sendData, token) => {
     },
   }
 
-  const response = await axios.post(API_URL, sendData, config)
+  const response = await axios.post(API_URL + 'sends', sendData, config)
 
   return response.data
 }
@@ -23,7 +23,7 @@ const getSends = async (token) => {
     },
   }
 
-  const response = await axios.get(API_URL, config)
+  const response = await axios.get(API_URL + 'sends', config)
 
   return response.data
 }
@@ -36,10 +36,12 @@ const deleteSend = async (sendId, token) => {
     },
   }
 
-  const response = await axios.delete(API_URL + sendId, config)
+  const response = await axios.delete(API_URL + 'sends/' + sendId, config)
 
   return response.data
 }
+
+// Update sends
 
 const sendService = {
   createSend,

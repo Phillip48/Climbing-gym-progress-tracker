@@ -1,21 +1,23 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import sendService from './sendsService'
+import trainingSessionService from './trainingSessionService'
+
+// TrainingSession
 
 const initialState = {
-  sends: [],
+  trainingSessions: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 }
 
-// Create new send
-export const createSend = createAsyncThunk(
-  'sends/create',
-  async (sendData, thunkAPI) => {
+// Create new training Session
+export const createTrainingSession = createAsyncThunk(
+  'trainingSession/create',
+  async (trainingSessionData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.createSend(sendData, token)
+      return await trainingSessionService.createTrainingSession(trainingSessionData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -28,13 +30,13 @@ export const createSend = createAsyncThunk(
   }
 )
 
-// Get user sends
-export const getSends= createAsyncThunk(
-  'sends/getAll',
+// Get user training Sessions
+export const getTrainingSessions = createAsyncThunk(
+  'trainingSession/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.getSends(token)
+      return await trainingSessionService.getTrainingSessions(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -47,13 +49,13 @@ export const getSends= createAsyncThunk(
   }
 )
 
-// Delete user sends
-export const deleteSend = createAsyncThunk(
-  'sends/delete',
+// Delete user TrainingSession
+export const deleteTrainingSession = createAsyncThunk(
+  'trainingSession/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.deleteSends(id, token)
+      return await trainingSessionService.deleteTrainingSession(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -66,51 +68,51 @@ export const deleteSend = createAsyncThunk(
   }
 )
 
-export const sendSlice = createSlice({
-  name: 'send',
+export const trainingSessionSlice = createSlice({
+  name: 'trainingSession',
   initialState,
   reducers: {
     reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createSend.pending, (state) => {
+      .addCase(createTrainingSession.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createSend.fulfilled, (state, action) => {
+      .addCase(createTrainingSession.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends.push(action.payload)
+        state.trainingSession.push(action.payload)
       })
-      .addCase(createSend.rejected, (state, action) => {
+      .addCase(createTrainingSession.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getSends.pending, (state) => {
+      .addCase(getTrainingSessions.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getSends.fulfilled, (state, action) => {
+      .addCase(getTrainingSessions.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = action.payload
+        state.trainingSessions = action.payload
       })
-      .addCase(getSends.rejected, (state, action) => {
+      .addCase(getTrainingSessions.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(deleteSend.pending, (state) => {
+      .addCase(deleteTrainingSession.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(deleteSend.fulfilled, (state, action) => {
+      .addCase(deleteTrainingSession.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = state.sends.filter(
-          (send) => send._id !== action.payload.id
+        state.trainingSessions = state.trainingSessions.filter(
+          (trainingSession) => trainingSession._id !== action.payload.id
         )
       })
-      .addCase(deleteSend.rejected, (state, action) => {
+      .addCase(deleteTrainingSession.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -118,5 +120,5 @@ export const sendSlice = createSlice({
   },
 })
 
-export const { reset } = sendSlice.actions
-export default sendSlice.reducer
+export const { reset } = trainingSessionSlice.actions
+export default trainingSessionSlice.reducer

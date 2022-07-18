@@ -1,21 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import sendService from './sendsService'
+import projectService from './projectsService'
 
 const initialState = {
-  sends: [],
+  projects: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: '',
 }
 
-// Create new send
-export const createSend = createAsyncThunk(
-  'sends/create',
-  async (sendData, thunkAPI) => {
+// Create new Project
+export const createProject = createAsyncThunk(
+  'projects/create',
+  async (projectData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.createSend(sendData, token)
+      return await projectService.createProject(projectData, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -28,13 +28,13 @@ export const createSend = createAsyncThunk(
   }
 )
 
-// Get user sends
-export const getSends= createAsyncThunk(
-  'sends/getAll',
+// Get user projects
+export const getProjects= createAsyncThunk(
+  'projects/getAll',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.getSends(token)
+      return await projectService.getSends(token)
     } catch (error) {
       const message =
         (error.response &&
@@ -47,13 +47,13 @@ export const getSends= createAsyncThunk(
   }
 )
 
-// Delete user sends
-export const deleteSend = createAsyncThunk(
-  'sends/delete',
+// Delete user send
+export const deleteProject = createAsyncThunk(
+  'projects/delete',
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.deleteSends(id, token)
+      return await projectService.deleteSends(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -66,7 +66,9 @@ export const deleteSend = createAsyncThunk(
   }
 )
 
-export const sendSlice = createSlice({
+// update user projects
+
+export const projectSlice = createSlice({
   name: 'send',
   initialState,
   reducers: {
@@ -74,43 +76,43 @@ export const sendSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(createSend.pending, (state) => {
+      .addCase(createProject.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(createSend.fulfilled, (state, action) => {
+      .addCase(createProject.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends.push(action.payload)
+        state.projects.push(action.payload)
       })
-      .addCase(createSend.rejected, (state, action) => {
+      .addCase(createProject.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(getSends.pending, (state) => {
+      .addCase(getProjects.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getSends.fulfilled, (state, action) => {
+      .addCase(getProjects.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = action.payload
+        state.projects = action.payload
       })
-      .addCase(getSends.rejected, (state, action) => {
+      .addCase(getProjects.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
       })
-      .addCase(deleteSend.pending, (state) => {
+      .addCase(deleteProject.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(deleteSend.fulfilled, (state, action) => {
+      .addCase(deleteProject.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.sends = state.sends.filter(
-          (send) => send._id !== action.payload.id
+        state.projects = state.projects.filter(
+          (project) => project._id !== action.payload.id
         )
       })
-      .addCase(deleteSend.rejected, (state, action) => {
+      .addCase(deleteProject.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
@@ -118,5 +120,5 @@ export const sendSlice = createSlice({
   },
 })
 
-export const { reset } = sendSlice.actions
-export default sendSlice.reducer
+export const { reset } = projectSlice.actions
+export default projectSlice.reducer
