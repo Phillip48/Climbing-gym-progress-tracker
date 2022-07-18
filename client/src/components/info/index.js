@@ -1,10 +1,10 @@
 import React from "react";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import '../home/style.css'
+import '../info/style.css'
 // import ClimbingImage from '../../assets/logo/The Climbing Wall-logos_transparent.png';
 import Banner from '../banner/index';
 
-const Home = () => {
+const Info = () => {
 
 
     return (
@@ -65,4 +65,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Info;

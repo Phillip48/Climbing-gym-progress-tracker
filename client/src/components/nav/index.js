@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaInfoCircle } from 'react-icons/fa'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../nav/style.css'
 import ClimbingLogo from '../../assets/logo/The Climbing Wall-logos_transparent.png';
@@ -27,13 +27,17 @@ const Nav = () => {
                     </div>
                     {user ? (
                         <div className="holds-page-options">
-                            <Link to='/profile'><button className="navbar-button">Profile</button></Link>
+                            <Link to='/info'><button className="navbar-button"><FaInfoCircle />Info</button></Link>
                             <div className="div-padding-verysmall"></div>
-                            <Link to='/logs'><button className="navbar-button">Logs</button></Link>
+                            <Link to='/'><button className="navbar-button">Dashboard</button></Link>
+                            <div className="div-padding-verysmall"></div>
+                            {/* <Link to='/logs'><button className="navbar-button">Logs</button></Link> */}
                             <button className="navbar-button" onClick={onLogout}><FaSignOutAlt /> Log Out</button>
                         </div>
                     ) : (
                         <div className="holds-page-options">
+                            <Link to='/info'><button className="navbar-button"><FaInfoCircle />Info</button></Link>
+                            <div className="div-padding-verysmall"></div>
                             <Link to='/signup'><button className="navbar-button"><FaUser />Register</button></Link>
                             <div className="div-padding-verysmall"></div>
                             <Link to='/login'><button className="navbar-button"><FaSignInAlt /> Log In</button></Link>

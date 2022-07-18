@@ -1,18 +1,18 @@
 import React from "react";
-import HomeComp from "../components/home/index.js";
+import InfoComp from "../components/info/index.js";
 // import HeaderBanner from '../components/banner/index.js';
 // import ContactMeComp from "../components/contactForm/Index";
 import Footer from '../components/footer/index';
 
-const Homepage = () => {
+const InfoPage = () => {
   return (
     <>
       {/* <HeaderBanner /> */}
-      <HomeComp />
+      <InfoComp />
       {/* <ContactMeComp /> */}
       <Footer />
     </>
   );
 };
 
-export default Homepage;
+export default InfoPage;

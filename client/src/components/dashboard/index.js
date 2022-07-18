@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 // import GoalForm from '../components/GoalForm'
 // import GoalItem from '../components/GoalItem'
-import Spinner from '../components/Spinner'
-import { getSends, reset } from '../features/goals/goalSlice'
+import Spinner from '../Spinner'
+import { getSends, reset } from '../../features/sends/sendsSlice'
 
 function Dashboard() {
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ function Dashboard() {
     return (
         <>
             <section className='heading'>
-                <h1>Welcome {user.userName}</h1>
+                {/* <h1>Welcome {user.userName}</h1> */}
                 <p>Dashboard</p>
             </section>
 

@@ -15,7 +15,7 @@ import Nav from '../src/components/nav/index.js';
 // import Footer from '../src/components/footer/index.js';
 
 // Page imports
-import HomePage from '../src/pages/Home';
+import InfoPage from './pages/Info';
 import DashboardPage from '../src/pages/Dashboard';
 import SignupPage from '../src/pages/Signup';
 import LoginPage from '../src/pages/Login';
@@ -25,35 +25,39 @@ import NotFound from '../src/pages/404Page';
 function App() {
   return (
     <>
-    <BrowserRouter>
-      {/* The Navbar is added here to be added to every page that renders */}
-      <Nav />
-      <main>
-        {/* Routing to render different pages when needed */}
-        <Routes>
-          <Route
-            path="/"
-            element={<HomePage />}
-          />
-          <Route
-            path="/signup"
-            element={<SignupPage />}
-          />
-          <Route
-            path="/login"
-            element={<LoginPage />}
-          />
-          <Route
-            path="/profile/:userId"
-            element={<ProfilePage />}
-          />
-          <Route
-            path="*"
-            element={<NotFound />}
-          />
-        </Routes>
-      </main>
-    </BrowserRouter>
+      <BrowserRouter>
+        {/* The Navbar is added here to be added to every page that renders */}
+        <Nav />
+        <main>
+          {/* Routing to render different pages when needed */}
+          <Routes>
+            <Route
+              path="/"
+              element={<DashboardPage />}
+            />
+            <Route
+              path="/info"
+              element={<InfoPage />}
+            />
+            <Route
+              path="/signup"
+              element={<SignupPage />}
+            />
+            <Route
+              path="/login"
+              element={<LoginPage />}
+            />
+            <Route
+              path="/profile/:userId"
+              element={<ProfilePage />}
+            />
+            <Route
+              path="*"
+              element={<NotFound />}
+            />
+          </Routes>
+        </main>
+      </BrowserRouter>
     </>
   );
 }
