@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
+import { FaUser } from 'react-icons/fa'
 import axios from 'axios';
 // import Auth from '../../utils/auth';
 import Banner from '../banner/index';
@@ -16,8 +17,12 @@ const Signup = () => {
         maxBoulderingGrade: '',
         maxTopRopingGrade: '',
         password: '',
-        aboutMe: ''
+        password2: '',
+        aboutMe: '',
+        profileImg: ''
     });
+
+    const { firstName, lastName, userName, email, phoneNumber, maxBoulderingGrade, maxTopRopingGrade, password, password2, aboutMe, profileImg } = formState
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -54,7 +59,9 @@ const Signup = () => {
             maxBoulderingGrade: '',
             maxTopRopingGrade: '',
             password: '',
-            aboutMe: ''
+            password2: '',
+            aboutMe: '',
+            profileImg: ''
         })
 
     };
@@ -65,7 +72,7 @@ const Signup = () => {
             <section className="hold-everything-Signup">
                 <section className="signup-holds-form">
                     <div className="holds-signup">
-                        <h1 className="login-form-text" style={{ textAlign: 'center' }}>Sign Up:</h1>
+                        <h1 className="login-form-text" style={{ textAlign: 'center' }}><FaUser />Register:</h1>
                         <Form className="actual-signup-form" onSubmit={handleFormSubmit}>
                             <div>
                                 <Row>
@@ -80,7 +87,7 @@ const Signup = () => {
                                                 placeholder="First Name"
                                                 type="text"
                                                 required
-                                                value={formState.firstName}
+                                                value={firstName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
@@ -97,7 +104,7 @@ const Signup = () => {
                                                 placeholder="Last Name"
                                                 type="text"
                                                 required
-                                                value={formState.lastName}
+                                                value={lastName}
                                                 onChange={handleChange}
                                             />
                                         </FormGroup>
@@ -115,7 +122,7 @@ const Signup = () => {
                                             placeholder="User123"
                                             type="text"
                                             required
-                                            value={formState.userName}
+                                            value={userName}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -131,7 +138,7 @@ const Signup = () => {
                                             placeholder="Email Address"
                                             type="email"
                                             required
-                                            value={formState.email}
+                                            value={email}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -148,7 +155,23 @@ const Signup = () => {
                                             placeholder="******"
                                             type="password"
                                             required
-                                            value={formState.password}
+                                            value={password}
+                                            onChange={handleChange}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label className="labels" for="examplePassword">
+                                            Password
+                                        </Label>
+                                        <Input
+                                            id="examplePassword2"
+                                            name="password2"
+                                            placeholder="******"
+                                            type="password"
+                                            required
+                                            value={password2}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -165,7 +188,7 @@ const Signup = () => {
                                             placeholder="123-456-7890"
                                             type="tel"
                                             required
-                                            value={formState.phoneNumber}
+                                            value={phoneNumber}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>
@@ -177,7 +200,7 @@ const Signup = () => {
                                             <Label className="labels" for="maxBoulderingGrade">
                                                 Max Bouldering Grade:
                                             </Label>
-                                            <select className="signup-grade-option" id="examplemaxBoulderingGrade" name="maxBoulderingGrade" value={formState.maxBoulderingGrade} onChange={handleChange} required>
+                                            <select className="signup-grade-option" id="examplemaxBoulderingGrade" name="maxBoulderingGrade" value={maxBoulderingGrade} onChange={handleChange} required>
                                                 <option onChange={handleChange} value=""></option>
                                                 <option onChange={handleChange} value="V0">V0</option>
                                                 <option onChange={handleChange} value="V1">V1</option>
@@ -203,7 +226,7 @@ const Signup = () => {
                                             <Label className="labels" for="maxTopRopingGrade">
                                                 Max Top Roping Grade:
                                             </Label>
-                                            <select className="signup-grade-option" id="examplemaxTopRopingGrade" name="maxTopRopingGrade" value={formState.maxTopRopingGrade} onChange={handleChange} required>
+                                            <select className="signup-grade-option" id="examplemaxTopRopingGrade" name="maxTopRopingGrade" value={maxTopRopingGrade} onChange={handleChange} required>
                                                 <option onChange={handleChange} value=""></option>
                                                 <option onChange={handleChange} value="5.6">5.6</option>
                                                 <option onChange={handleChange} value="5.7">5.7</option>
@@ -249,7 +272,22 @@ const Signup = () => {
                                             name="aboutMe"
                                             placeholder="Type Here..."
                                             type="textarea"
-                                            value={formState.aboutMe}
+                                            value={aboutMe}
+                                            onChange={handleChange}
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={12}>
+                                    <FormGroup>
+                                        <Label className="labels" for="profileImg">
+                                            Profile Image
+                                        </Label>
+                                        <Input
+                                            id="profileImg"
+                                            name="profileImg"
+                                            placeholder="Type Here..."
+                                            type="file"
+                                            value={profileImg}
                                             onChange={handleChange}
                                         />
                                     </FormGroup>

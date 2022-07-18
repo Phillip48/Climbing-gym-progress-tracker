@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { CardTitle, Label, Input, Row, Col, FormGroup, Form } from 'reactstrap';
+import { FaSignInAlt } from 'react-icons/fa'
 import axios from 'axios';
 // import Auth from '../../utils/auth';
 import Banner from '../banner/index';
@@ -9,6 +10,8 @@ import '../login/style.css'
 const Login = () => {
     // state for login
     const [formState, setFormState] = useState({ email: '', password: '' });
+
+    const { email, password } = formState
 
     // update state based on form input changes
     const handleChange = (event) => {
@@ -52,7 +55,7 @@ const Login = () => {
             <section className="hold-everything-login">
                 <section className="holds-login-interaction">
                     <div className="login-form">
-                        <h1 className="login-form-text">Login:</h1>
+                        <h1 className="login-form-text"><FaSignInAlt /> Login:</h1>
                         <div className="formBody">
                             <CardTitle tag="h3" id="login">
                                 Login
@@ -70,6 +73,7 @@ const Login = () => {
                                                     name="email"
                                                     placeholder="Email Address"
                                                     type="email"
+                                                    value={email}
                                                 onChange={handleChange}
                                                 />
                                             </FormGroup>
@@ -84,7 +88,8 @@ const Login = () => {
                                                     name="password"
                                                     placeholder="Password"
                                                     type="password"
-                                                onChange={handleChange}
+                                                    value={password}
+                                                    onChange={handleChange}
                                                 />
                                             </FormGroup>
                                         </Col>

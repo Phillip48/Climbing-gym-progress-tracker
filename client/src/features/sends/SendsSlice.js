@@ -82,7 +82,7 @@ export const sendSlice = createSlice({
         state.isSuccess = true
         state.sends.push(action.payload)
       })
-      .addCase(createGoal.rejected, (state, action) => {
+      .addCase(createSend.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

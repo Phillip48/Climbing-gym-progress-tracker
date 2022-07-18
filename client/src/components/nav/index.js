@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../nav/style.css'
 import ClimbingLogo from '../../assets/logo/The Climbing Wall-logos_transparent.png';
@@ -14,21 +15,19 @@ const Nav = () => {
                     <div className="holds-climbinglogo">
                         <a href="/"><img className="climbinglogo" src={ClimbingLogo} alt='logo'></img></a>
                     </div>
-                    
 
-                        
-                        <div className="holds-page-options">
-                            <Link to='/profile'><button className="navbar-button">Profile</button></Link>
-                            <div className="div-padding-verysmall"></div>
-                            <Link to='/logs'><button className="navbar-button">Logs</button></Link>
-                        </div>
+                    {/* <div className="holds-page-options">
+                        <Link to='/profile'><button className="navbar-button">Profile</button></Link>
+                        <div className="div-padding-verysmall"></div>
+                        <Link to='/logs'><button className="navbar-button">Logs</button></Link>
+                        <button className="navbar-button"><FaSignOutAlt /> Log Out</button>
+                    </div> */}
 
-                        
-                        <div className="holds-page-options">
-                            <Link to='/signup'><button className="navbar-button">Sign Up</button></Link>
-                            <div className="div-padding-verysmall"></div>
-                            <Link to='/login'><button className="navbar-button">Log In</button></Link>
-                        </div>
+                    <div className="holds-page-options">
+                        <Link to='/signup'><button className="navbar-button"><FaUser />Register</button></Link>
+                        <div className="div-padding-verysmall"></div>
+                        <Link to='/login'><button className="navbar-button"><FaSignInAlt /> Log In</button></Link>
+                    </div>
 
                 </section>
             </header>
