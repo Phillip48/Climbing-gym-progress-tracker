@@ -69,6 +69,25 @@ export const deleteClimbingSession = createAsyncThunk(
   }
 )
 
+// update user climbingSession
+export const updateClimbingSession = createAsyncThunk(
+  'climbingSessions/update',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await climbingSessionService.updateClimbingSession(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 export const climbingSessionSlice = createSlice({
   name: 'climbingSession',
   initialState,
@@ -114,6 +133,22 @@ export const climbingSessionSlice = createSlice({
         )
       })
       .addCase(deleteClimbingSession.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      // 
+      .addCase(updateClimbingSession.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateClimbingSession.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.climbingSessions = state.climbingSessions.filter(
+          (climbingSession) => climbingSession._id !== action.payload.id
+        )
+      })
+      .addCase(updateClimbingSession.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

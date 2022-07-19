@@ -66,7 +66,25 @@ export const deleteProject = createAsyncThunk(
   }
 )
 
-// update user projects
+// update user send
+export const updateProject = createAsyncThunk(
+  'projects/update',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await projectService.updateSends(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 
 export const projectSlice = createSlice({
   name: 'send',
@@ -113,6 +131,22 @@ export const projectSlice = createSlice({
         )
       })
       .addCase(deleteProject.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      // 
+      .addCase(updateProject.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateProject.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.projects = state.projects.filter(
+          (project) => project._id !== action.payload.id
+        )
+      })
+      .addCase(updateProject.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

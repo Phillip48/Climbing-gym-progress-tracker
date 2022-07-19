@@ -53,7 +53,26 @@ export const deleteSend = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await sendService.deleteSends(id, token)
+      return await sendService.deleteSend(id, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+// Delete user sends
+export const updateSend = createAsyncThunk(
+  'sends/update',
+  async (id, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await sendService.updateSend(id, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -87,6 +106,7 @@ export const sendSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      // 
       .addCase(getSends.pending, (state) => {
         state.isLoading = true
       })
@@ -100,6 +120,7 @@ export const sendSlice = createSlice({
         state.isError = true
         state.message = action.payload
       })
+      // 
       .addCase(deleteSend.pending, (state) => {
         state.isLoading = true
       })
@@ -111,6 +132,22 @@ export const sendSlice = createSlice({
         )
       })
       .addCase(deleteSend.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      // 
+      .addCase(updateSend.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(updateSend.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.sends = state.sends.filter(
+          (send) => send._id !== action.payload.id
+        )
+      })
+      .addCase(updateSend.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
