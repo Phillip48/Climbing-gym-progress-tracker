@@ -55,6 +55,7 @@ const createProject = asyncHandler(async (req, res) => {
         totalSessions: req.body.totalSessions,
         totalAttempts: req.body.totalAttempts,
         videoOrImg: req.body.videoOrImg,
+        createdAt: req.body.createdAt,
         user: req.user.id,
     })
 

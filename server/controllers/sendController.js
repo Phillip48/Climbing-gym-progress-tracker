@@ -63,6 +63,7 @@ const createSend = asyncHandler(async (req, res) => {
         totalSessions: req.body.totalSessions,
         videoOrImg: req.body.videoOrImg,
         climbingSession: req.body.climbingSession,
+        createdAt: req.body.createdAt,
         user: req.user.id,
     }
     // If the user sends a climbing session id
@@ -79,6 +80,7 @@ const createSend = asyncHandler(async (req, res) => {
                 totalAttempts: req.body.totalAttempts,
                 totalSessions: req.body.totalSessions,
                 videoOrImg: req.body.videoOrImg,
+                createdAt: req.body.createdAt,
                 // climbingSession: '',
                 user: req.user.id,
             })
@@ -100,6 +102,7 @@ const createSend = asyncHandler(async (req, res) => {
                 totalSessions: req.body.totalSessions,
                 videoOrImg: req.body.videoOrImg,
                 climbingSession: req.body.climbingSession,
+                createdAt: req.body.createdAt,
                 user: req.user.id,
             })
             const updatedUser = await User.findByIdAndUpdate(
@@ -122,6 +125,7 @@ const createSend = asyncHandler(async (req, res) => {
             totalAttempts: req.body.totalAttempts,
             totalSessions: req.body.totalSessions,
             videoOrImg: req.body.videoOrImg,
+            createdAt: req.body.createdAt,
             user: req.user.id,
         })
         const updatedUser = await User.findByIdAndUpdate(

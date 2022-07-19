@@ -77,6 +77,7 @@ const createTrainingSession = asyncHandler(async (req, res) => {
         weightLBS: req.body.weightLBS,
         trainingNotes: req.body.trainingNotes,
         rating: req.body.rating,
+        createdAt: req.body.createdAt,
         user: req.user.id,
     })
     const updatedUser = await User.findByIdAndUpdate(

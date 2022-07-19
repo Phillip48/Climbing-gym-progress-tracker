@@ -67,6 +67,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
             indoorOutdoor: req.body.indoorOutdoor,
             totalAttempts: req.body.totalAttempts,
             climbingNotes: req.body.climbingNotes,
+            createdAt: req.body.createdAt,
             rating: req.body.rating,
             user: req.user.id,
         })
@@ -80,6 +81,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
             totalSessions: req.body.totalSessions,
             videoOrImg: req.body.videoOrImg,
             climbingSession: climbingSession._id.toString(),
+            createdAt: req.body.createdAt,
             user: req.user.id,
         })
         // Update the climbing session with the send id
@@ -111,6 +113,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
             totalAttempts: req.body.totalAttempts,
             climbingNotes: req.body.climbingNotes,
             rating: req.body.rating,
+            createdAt: req.body.createdAt,
             user: req.user.id,
         })
         // Update the user with the climbing session
