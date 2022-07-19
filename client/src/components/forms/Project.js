@@ -131,7 +131,7 @@ function ProjectForm() {
                     placeholder="True"
                     type="radio"
                     required
-                    value={formState.sendProject = 1}
+                    value={'1'}
                     onChange={handleChange}
                   />
                 </div>
@@ -143,7 +143,7 @@ function ProjectForm() {
                     placeholder="False"
                     type="radio"
                     required
-                    value={formState.sendProject = 0}
+                    value={'0'}
                     onChange={handleChange}
                   />
                 </div>

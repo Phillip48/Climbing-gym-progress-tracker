@@ -153,7 +153,7 @@ function SendForm() {
                                         placeholder="True"
                                         type="radio"
                                         required
-                                        value={formState.sent = '1'}
+                                        value={'1'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -165,7 +165,7 @@ function SendForm() {
                                         placeholder="False"
                                         type="radio"
                                         required
-                                        value={formState.sent = '0'}
+                                        value={'0'}
                                         onChange={handleChange}
                                     />
                                 </div>

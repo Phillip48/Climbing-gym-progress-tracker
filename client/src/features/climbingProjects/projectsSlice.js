@@ -34,7 +34,7 @@ export const getProjects= createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await projectService.getSends(token)
+      return await projectService.getProjects(token)
     } catch (error) {
       const message =
         (error.response &&

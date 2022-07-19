@@ -3,11 +3,11 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { getSends, reset } from '../features/sends/sendsSlice'
-// import { getProjects, reset } from '../features/climbingProjects/projectsSlice'
+import { getProjects } from '../features/climbingProjects/projectsSlice'
 // import { getClimbingSessions, reset } from '../features/climbingSessions/climbingSessionSlice'
 // import { getTrainingSessions, reset } from '../features/trainingSessions/trainingSessionSlice'
 import SendItem from '../components/items/SendItem'
-// import ProjectItem from '../components/items/ProjectItem'
+import ProjectItem from '../components/items/ProjectItem'
 // import TrainingItem from '../components/items/TrainingSessionItem'
 // import ClimbingItem from '../components/items/climbingSessionItem'
 
@@ -20,12 +20,15 @@ function Dashboard() {
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
-    // console.log('dash', sends)
+    const { projects } = useSelector(
+        (state) => state.projects
+    )
+    console.log('dash', projects)
     // ============================================= //
     const isActive = () => {
         if (active === "LogSend") {
             if (sends.length > 0) {
-                return (sends.map((sends) => <SendItem key={sends.id} sends={sends}/>))
+                return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
             } else {
                 return ('You have not logged any Sends')
             }
@@ -42,8 +45,8 @@ function Dashboard() {
                 return ('You have not logged any Training Sessions')
             }
         } else if (active === "LogProject") {
-            if (sends.length > 0) {
-                return ('test3')
+            if (projects.length > 0) {
+                return (projects.map((projects) => <ProjectItem key={projects.id} projects={projects} />))
             } else {
                 return ('You have not logged any Projects')
             }
@@ -54,12 +57,13 @@ function Dashboard() {
         if (!user) {
             navigate('/login')
         }
-        
+
         if (isError) {
             console.log(message)
         }
 
         dispatch(getSends())
+        dispatch(getProjects())
 
         return () => {
             dispatch(reset())
@@ -111,7 +115,7 @@ function Dashboard() {
                 </section>
 
                 <section className="forms-rendered-user-selection">
-                   <div className='dash-holds-info'>
+                    <div className='dash-holds-info'>
                         {isActive()}
                         {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
                     </div>

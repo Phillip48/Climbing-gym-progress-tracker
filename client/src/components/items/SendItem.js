@@ -8,7 +8,7 @@ function SendItem({ sends }) {
     const dispatch = useDispatch()
 
     const ifSent = () => {
-        if (sends.sent === 'true') {
+        if (sends.sent) {
             return ('Climb sent!')
         } else {
             return ('Climb was not sent!')
