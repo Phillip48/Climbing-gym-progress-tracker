@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+.flex-col{
+  display: flex;
+  flex-direction: column;
+}
 
 /* ======================= LogIn ======================= */
 .hold-everything-login {
@@ -143,6 +147,16 @@ code {
     text-align: center;
     justify-content: center
 }
+.user-grades-inputs-col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center
+}
+/* .input-checkbox{
+  margin-top: -1rem;
+} */
 /* ============================================== */
 
 /* ======================= Info page ======================= */
@@ -320,6 +334,90 @@ code {
 .previous-sessions{
     margin-top: 1rem;
 }
+/* ======================= Dashboard ======================= */
+.dash-heading{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-form-buttons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.different-form-buttons{
+  /* margin-top: 1rem; */
+  height: auto;
+  width: 13rem;
+  background: transparent;
+  font-size: 1em;
+  transition: ease-in-out .4s;
+}
+
+.different-form-buttons:hover{
+  color: white;
+  background-color: black;
+}
+
+.dash-mapping{
+  /* margin-top: 5rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.dash-mapping-holds-options{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 49%;
+}
+
+.dash-mapping-options{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.different-form-buttons-select{
+  /* margin-top: 1rem; */
+  width: 50%;
+}
+
+.different-form-buttons-:hover{
+  color: white;
+  background-color: black;
+}
+
+.dash-buttons-split{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+/* ======================= Form page ======================= */
+
+.form-holds-all{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.forms-rendered-user-selection{
+  margin-top: 2rem;
+  
+}
+.form-center-button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ======================= Spinner ======================= */
 .loadingSpinnerContainer {
   position: fixed;

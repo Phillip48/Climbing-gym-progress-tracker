@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import { FaSignInAlt, FaSignOutAlt, FaUser, FaInfoCircle } from 'react-icons/fa'
+import { FaSignInAlt, FaSignOutAlt, FaUser, FaInfoCircle, FaCheckCircle } from 'react-icons/fa'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import '../nav/style.css'
 import ClimbingLogo from '../../assets/logo/The Climbing Wall-logos_transparent.png';
@@ -29,7 +29,7 @@ const Nav = () => {
                         <div className="holds-page-options">
                             <Link to='/info'><button className="navbar-button"><FaInfoCircle />Info</button></Link>
                             <div className="div-padding-verysmall"></div>
-                            <Link to='/'><button className="navbar-button">Dashboard</button></Link>
+                            <Link to='/logforms'><button className="navbar-button"><FaCheckCircle />Log</button></Link>
                             <div className="div-padding-verysmall"></div>
                             {/* <Link to='/logs'><button className="navbar-button">Logs</button></Link> */}
                             <button className="navbar-button" onClick={onLogout}><FaSignOutAlt /> Log Out</button>

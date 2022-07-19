@@ -21,6 +21,7 @@ import SignupPage from '../src/pages/Signup';
 import LoginPage from '../src/pages/Login';
 import ProfilePage from '../src/pages/Profile';
 import NotFound from '../src/pages/404Page';
+import Forms from '../src/pages/Form';
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
             <Route
               path="/signup"
               element={<SignupPage />}
+            />
+            <Route
+              path="/logforms"
+              element={<Forms />}
             />
             <Route
               path="/login"
