@@ -292,6 +292,9 @@ function TrainingSessionForm() {
                                 />
                             </FormGroup>
                         </Col>
+                        <div className='form-center-button'>
+                            <button className="login-button" onClick={handleFormSubmit}>Log</button>
+                        </div>
                     </form>
                 </div>
             </section>
