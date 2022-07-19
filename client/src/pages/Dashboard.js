@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { getSends, reset } from '../features/sends/sendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
-// import { getClimbingSessions, reset } from '../features/climbingSessions/climbingSessionSlice'
-// import { getTrainingSessions, reset } from '../features/trainingSessions/trainingSessionSlice'
+import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
+import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
 import SendItem from '../components/items/SendItem'
 import ProjectItem from '../components/items/ProjectItem'
-// import TrainingItem from '../components/items/TrainingSessionItem'
-// import ClimbingItem from '../components/items/climbingSessionItem'
+import TrainingItem from '../components/items/TrainingSessionItem'
+import ClimbingItem from '../components/items/ClimbingSessionItem'
 
 function Dashboard() {
     const navigate = useNavigate()
@@ -23,6 +23,12 @@ function Dashboard() {
     const { projects } = useSelector(
         (state) => state.projects
     )
+    const { climbingSessions } = useSelector(
+        (state) => state.climbingSessions
+    )
+    const { trainingSessions } = useSelector(
+        (state) => state.trainingSessions
+    )
     console.log('dash', projects)
     // ============================================= //
     const isActive = () => {
@@ -33,14 +39,14 @@ function Dashboard() {
                 return ('You have not logged any Sends')
             }
         } else if (active === "LogClimbingSession") {
-            if (sends.length > 0) {
-                return ('test1')
+            if (climbingSessions.length > 0) {
+                return (climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />))
             } else {
                 return ('You have not logged any Climbing Sessions')
             }
         } else if (active === "LogTrainingSession") {
-            if (sends.length > 0) {
-                return ('test2')
+            if (trainingSessions.length > 0) {
+                return (trainingSessions.map((trainingSessions) => <TrainingItem key={trainingSessions.id} trainingSessions={trainingSessions} />))
             } else {
                 return ('You have not logged any Training Sessions')
             }
@@ -64,7 +70,8 @@ function Dashboard() {
 
         dispatch(getSends())
         dispatch(getProjects())
-
+        dispatch(getClimbingSessions())
+        dispatch(getTrainingSessions())
         return () => {
             dispatch(reset())
         }
