@@ -13,6 +13,7 @@ function TrainingSessionForm() {
         sprayBoard: '',
         moonBoard: '',
         kelterBoard: '',
+        createdAt: '',
         trainingBoardNotes: '',
         liftWeights: '',
         // weightSets: '',
@@ -23,7 +24,7 @@ function TrainingSessionForm() {
     });
     console.log(formState)
 
-    const { durationMinutes, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes } = formState
+    const { durationMinutes, createdAt, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes } = formState
     // console.log(formState)
 
     const handleChange = (event) => {
@@ -40,7 +41,7 @@ function TrainingSessionForm() {
         event.preventDefault();
 
         const userData = {
-            durationMinutes, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes
+            durationMinutes, createdAt, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes
         }
         // console.log('Before dispatch', userData)
         dispatch(createTrainingSession(userData))
@@ -50,6 +51,22 @@ function TrainingSessionForm() {
             <section className=''>
                 <div className=''>
                     <form onSubmit={handleFormSubmit} className=''>
+                        <Col md={12} className="user-grades-inputs-col">
+                            <FormGroup >
+                                <Label className="labels user-grades-inputs-col" for="examplecreatedAt">
+                                    Date:
+                                </Label>
+                                <Input
+                                    id="examplecreatedAt"
+                                    name="createdAt"
+                                    placeholder={'hi'}
+                                    type="date"
+                                    required
+                                    value={formState.createdAt}
+                                    onChange={handleChange}
+                                />
+                            </FormGroup>
+                        </Col>
                         <Col md={12}>
                             <FormGroup>
                                 <Label className="labels user-grades-inputs-col" for="exampledurationMinutes">

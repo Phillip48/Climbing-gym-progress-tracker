@@ -9,13 +9,14 @@ function ProjectForm() {
     actualGrade: '',
     feltGrade: '',
     notes: '',
+    createdAt: '',
     sendProject: '',
     totalAttempts: '',
     totalSessions: '',
     videoOrImg: '',
     climbingSession: '',
   });
-  const { actualGrade, feltGrade, notes, sendProject, totalAttempts, totalSessions,
+  const { actualGrade, createdAt, feltGrade, notes, sendProject, totalAttempts, totalSessions,
     videoOrImg, climbingSession } = formState
   // console.log(formState)
 
@@ -36,6 +37,7 @@ function ProjectForm() {
       actualGrade,
       feltGrade,
       notes,
+      createdAt,
       sendProject,
       totalAttempts,
       totalSessions,
@@ -63,6 +65,22 @@ function ProjectForm() {
       <section className=''>
         <div className=''>
           <form onSubmit={handleFormSubmit} className=''>
+            <Col md={12} className="user-grades-inputs-col">
+              <FormGroup >
+                <Label className="labels user-grades-inputs-col" for="examplecreatedAt">
+                  Date:
+                </Label>
+                <Input
+                  id="examplecreatedAt"
+                  name="createdAt"
+                  placeholder={'hi'}
+                  type="date"
+                  required
+                  value={formState.createdAt}
+                  onChange={handleChange}
+                />
+              </FormGroup>
+            </Col>
             <Row className="user-grades-inputs">
               <Col md={5}>
                 <FormGroup>

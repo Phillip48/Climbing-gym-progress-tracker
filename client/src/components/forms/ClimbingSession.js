@@ -10,12 +10,13 @@ function ClimbingSessionForm() {
         durationMinutes: '',
         numberOfSends: '',
         indoorOutdoor: '',
-        totalAttempts: 0,
+        createdAt: '',
+        totalAttempts: '',
         climbingNotes: '',
-        rating: 0,
+        rating: '',
     });
 
-    const { durationMinutes, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
+    const { durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
         videoOrImg, climbingSession } = formState
     // console.log(formState)
 
@@ -39,6 +40,7 @@ function ClimbingSessionForm() {
             totalAttempts,
             climbingNotes,
             rating,
+            createdAt,
             videoOrImg,
             climbingSession
         }
@@ -50,6 +52,22 @@ function ClimbingSessionForm() {
             <section className=''>
                 <div className=''>
                     <form onSubmit={handleFormSubmit} className=''>
+                        <Col md={12} className="user-grades-inputs-col">
+                            <FormGroup >
+                                <Label className="labels user-grades-inputs-col" for="examplecreatedAt">
+                                    Date:
+                                </Label>
+                                <Input
+                                    id="examplecreatedAt"
+                                    name="createdAt"
+                                    placeholder={'hi'}
+                                    type="date"
+                                    required
+                                    value={formState.createdAt}
+                                    onChange={handleChange}
+                                />
+                            </FormGroup>
+                        </Col>
                         <Col md={12}>
                             <FormGroup>
                                 <Label className="labels user-grades-inputs-col" for="exampledurationMinutes">
