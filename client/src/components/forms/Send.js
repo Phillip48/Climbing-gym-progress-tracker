@@ -63,7 +63,7 @@ function SendForm() {
         <>
             <section className=''>
                 <div className=''>
-                    <form className=''>
+                    <form onSubmit={handleFormSubmit} className=''>
                         <Row className="user-grades-inputs">
                             <Col md={5}>
                                 <FormGroup>
@@ -123,24 +123,31 @@ function SendForm() {
                                 <Label className="labels user-grades-inputs-col" for="exampleSent">
                                     Was it sent?
                                 </Label>
-                                <Input
-                                    id="exampleSent"
-                                    name="Sent"
-                                    placeholder="True"
-                                    type="radio"
-                                    required
-                                    value={formState.sent = 1}
-                                    onChange={handleChange}
-                                />
-                                <Input
-                                    id="exampleSent"
-                                    name="Sent"
-                                    placeholder="False"
-                                    type="radio"
-                                    required
-                                    value={formState.sent = 0}
-                                    onChange={handleChange}
-                                />
+                                <div className='div-padding-verysmall'></div>
+                                <div className='form-inputs-center'>
+                                    <p>Yes</p>
+                                    <Input
+                                        id="exampleSent"
+                                        name="Sent"
+                                        placeholder="True"
+                                        type="radio"
+                                        required
+                                        value={formState.sent = 1}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className='form-inputs-center'>
+                                    <p>No</p>
+                                    <Input
+                                        id="exampleSent"
+                                        name="Sent"
+                                        placeholder="False"
+                                        type="radio"
+                                        required
+                                        value={formState.sent = 0}
+                                        onChange={handleChange}
+                                    />
+                                </div>
                             </FormGroup>
                         </Col>
                         <Row className="user-grades-inputs">
@@ -186,7 +193,7 @@ function SendForm() {
                                     id="notes"
                                     name="notes"
                                     placeholder="Notes..."
-                                    type="textArea"
+                                    type="textarea"
                                     required
                                     value={formState.notes}
                                     onChange={handleChange}
@@ -212,7 +219,7 @@ function SendForm() {
                         <div className='form-center-button'>
                             <button className="login-button" onClick={handleFormSubmit}>Log</button>
                         </div>
-                        
+
                     </form>
                 </div>
             </section>

@@ -418,6 +418,12 @@ code {
   justify-content: center;
 }
 
+.form-inputs-center{
+  display: flex;
+  justify-content: center;
+  margin-top: -1rem;
+}
+
 /* ======================= Spinner ======================= */
 .loadingSpinnerContainer {
   position: fixed;
