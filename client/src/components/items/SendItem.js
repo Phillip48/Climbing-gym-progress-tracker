@@ -1,16 +1,68 @@
 import { useDispatch } from 'react-redux'
-import { deleteSend } from '../../features/sends/sendsSlice'
+import { deleteSend, updateSend } from '../../features/sends/sendsSlice'
+import { GrUpdate } from 'react-icons/gr';
+import { AiFillDelete } from 'react-icons/ai';
+// import { updateSend } from '../../features/sends/sendsSlice'
 
-function SendItem({ send }) {
+function SendItem({ sends }) {
     const dispatch = useDispatch()
 
+    const ifSent = () => {
+        if (sends.sent === 'true') {
+            return ('Climb sent!')
+        } else {
+            return ('Climb was not sent!')
+        }
+    }
+
     return (
-        <div className='send'>
-            <div>{new Date(send.createdAt).toLocaleString('en-US')}</div>
-            <h2>{send}</h2>
-            <button onClick={() => dispatch(deleteSend(send._id))} className='close'>
-                X
-            </button>
+        <div className='send-item'>
+            <div className='send-item-buttons'>
+                <div>
+                    <h3>{sends.createdAt}</h3>
+                    {ifSent()}
+                </div>
+                <div className='div-padding-1'></div>
+
+                <div>
+                    <button onClick={() => dispatch(updateSend(sends._id))} className='close'>
+                        <GrUpdate />
+                    </button>
+                    <button onClick={() => dispatch(deleteSend(sends._id))} className='close margin-side'>
+                        <AiFillDelete />
+                    </button>
+                </div>
+            </div>
+            <div className='send-item-grades'>
+                <div className='send-item-grades-div'><p>
+                    Grade: <b>{sends.actualGrade}</b>
+                </p>
+                </div>
+                <div className='div-padding-1'></div>
+                <div className='send-item-grades-div'>
+                    <p>
+                        It felt like: <b>{sends.feltGrade}</b>
+                    </p>
+                </div>
+            </div>
+            <div className='send-item-grades'>
+                <div className='send-item-grades-div'><p>
+                    Total Attempts: <b>{sends.totalAttempts}</b>
+                </p>
+                </div>
+                <div className='div-padding-1'></div>
+                <div className='send-item-grades-div'>
+                    <p>
+                        Total Sessions: <b>{sends.totalSessions}</b>
+                    </p>
+                </div>
+            </div>
+            <div className='send-item-grades'>
+                <div className='send-item-grades-div'><p>
+                    Notes: <b>{sends.notes}</b>
+                </p>
+                </div>
+            </div>
         </div>
     )
 }

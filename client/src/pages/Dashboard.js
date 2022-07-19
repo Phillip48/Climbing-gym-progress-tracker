@@ -4,73 +4,56 @@ import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { getSends, reset } from '../features/sends/sendsSlice'
 import SendItem from '../components/items/SendItem'
-import ProjectItem from '../components/items/ProjectItem'
-import TrainingItem from '../components/items/TrainingSessionItem'
-import ClimbingItem from '../components/items/climbingSessionItem'
+// import ProjectItem from '../components/items/ProjectItem'
+// import TrainingItem from '../components/items/TrainingSessionItem'
+// import ClimbingItem from '../components/items/climbingSessionItem'
 
 function Dashboard() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const { user } = useSelector((state) => state.auth)
     const [active, setActive] = useState("LogSend", "LogClimbingSession");
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
-    // const { projects } = useSelector(
-    //     (state) => state.projects
-    // )
-    // const mappingSends = sends.map((send) => (
-    //     <SendItem key={send._id} send={send} />
-    // ))
-    // const mappingProjects = projects.map((project) => (
-    //     <ProjectItem key={project._id} project={project} />
-    // ))
-    // // Refractor
-    // const mappingClimbingSession = sends.map((send) => (
-    //     <ClimbingItem key={send._id} send={send} />
-    // ))
-    // const mappingTrainingSession = sends.map((send) => (
-    //     <TrainingItem key={send._id} send={send} />
-    // ))
+    // console.log('dash', sends)
     // ============================================= //
     const isActive = () => {
         if (active === "LogSend") {
             if (sends.length > 0) {
-                return ('te')
+                return (sends.map((sends) => <SendItem key={sends.id} sends={sends}/>))
             } else {
                 return ('You have not logged any Sends')
             }
         } else if (active === "LogClimbingSession") {
             if (sends.length > 0) {
-                return ('testr')
+                return ('test1')
             } else {
                 return ('You have not logged any Climbing Sessions')
             }
         } else if (active === "LogTrainingSession") {
             if (sends.length > 0) {
-                return ('testr')
+                return ('test2')
             } else {
                 return ('You have not logged any Training Sessions')
             }
         } else if (active === "LogProject") {
             if (sends.length > 0) {
-                return ('testr')
+                return ('test3')
             } else {
                 return ('You have not logged any Projects')
             }
         }
     }
 
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
-
-    const { user } = useSelector((state) => state.auth)
-
-
     useEffect(() => {
-        if (isError) {
-            console.log(message)
-        }
-
         if (!user) {
             navigate('/login')
+        }
+        
+        if (isError) {
+            console.log(message)
         }
 
         dispatch(getSends())
@@ -125,7 +108,10 @@ function Dashboard() {
                 </section>
 
                 <section className="forms-rendered-user-selection">
-                    {isActive()}
+                   <div className='dash-holds-info'>
+                        {isActive()}
+                        {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
+                    </div>
                 </section>
             </section>
         </>

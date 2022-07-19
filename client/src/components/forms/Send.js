@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
 import { useDispatch } from 'react-redux'
 import { createSend } from '../../features/sends/sendsSlice'
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 function SendForm() {
     const dispatch = useDispatch()
@@ -10,12 +12,14 @@ function SendForm() {
         feltGrade: '',
         notes: '',
         sent: '',
+        createdAt: '',
         totalAttempts: '',
         totalSessions: '',
         videoOrImg: '',
         climbingSession: '',
     });
-    const { actualGrade, feltGrade, notes, sent, totalAttempts, totalSessions,
+    console.log(formState)
+    const { actualGrade, feltGrade, notes, sent, totalAttempts, totalSessions, createdAt,
         videoOrImg, climbingSession } = formState
     console.log(formState)
 
@@ -35,6 +39,7 @@ function SendForm() {
         const userData = {
             actualGrade,
             feltGrade,
+            createdAt,
             notes,
             sent,
             totalAttempts,
@@ -64,6 +69,22 @@ function SendForm() {
             <section className=''>
                 <div className=''>
                     <form onSubmit={handleFormSubmit} className=''>
+                        <Col md={12} className="user-grades-inputs-col">
+                            <FormGroup >
+                                <Label className="labels user-grades-inputs-col" for="examplecreatedAt">
+                                    Date:
+                                </Label>
+                                <Input
+                                    id="examplecreatedAt"
+                                    name="createdAt"
+                                    placeholder={'hi'}
+                                    type="date"
+                                    required
+                                    value={formState.createdAt}
+                                    onChange={handleChange}
+                                />
+                            </FormGroup>
+                        </Col>
                         <Row className="user-grades-inputs">
                             <Col md={5}>
                                 <FormGroup>
