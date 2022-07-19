@@ -42,10 +42,24 @@ const deleteClimbingSession = async (climbingSessionId, token) => {
   return response.data
 }
 
+// update
+const updateClimbingSession = async (climbingSessionId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.put(API_URL + 'climbingsession/' + climbingSessionId, config)
+
+  return response.data
+}
+
 const climbingSessionService = {
   createClimbingSession,
   getClimbingSessions,
   deleteClimbingSession,
+  updateClimbingSession
 }
 
 export default climbingSessionService

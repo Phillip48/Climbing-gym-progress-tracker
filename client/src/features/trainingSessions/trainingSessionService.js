@@ -45,12 +45,23 @@ const deleteTrainingSession = async(trainingSessionId, token) => {
 }
 
 // Update user trainingSession
+const updateTrainingSession = async (trainingSessionId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
 
+  const response = await axios.put(API_URL + 'trainingsession/' + trainingSessionId, config)
+
+  return response.data
+}
 
 const trainingSessionService = {
   createTrainingSession,
   getTrainingSessions,
   deleteTrainingSession,
+  updateTrainingSession
 }
 
 export default trainingSessionService

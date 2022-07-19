@@ -42,11 +42,23 @@ const deleteSend = async (sendId, token) => {
 }
 
 // Update sends
+const updateSend = async (sendId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  const response = await axios.put(API_URL + 'sends/' + sendId, config)
+
+  return response.data
+}
 
 const sendService = {
   createSend,
   getSends,
   deleteSend,
+  updateSend
 }
 
 export default sendService
