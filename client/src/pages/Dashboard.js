@@ -13,45 +13,45 @@ function Dashboard() {
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
-    const { projects } = useSelector(
-        (state) => state.projects
-    )
-    const mappingSends = sends.map((send) => (
-        <SendItem key={send._id} send={send} />
-    ))
-    const mappingProjects = projects.map((project) => (
-        <ProjectItem key={project._id} project={project} />
-    ))
-    // Refractor
-    const mappingClimbingSession = sends.map((send) => (
-        <ClimbingItem key={send._id} send={send} />
-    ))
-    const mappingTrainingSession = sends.map((send) => (
-        <TrainingItem key={send._id} send={send} />
-    ))
+    // const { projects } = useSelector(
+    //     (state) => state.projects
+    // )
+    // const mappingSends = sends.map((send) => (
+    //     <SendItem key={send._id} send={send} />
+    // ))
+    // const mappingProjects = projects.map((project) => (
+    //     <ProjectItem key={project._id} project={project} />
+    // ))
+    // // Refractor
+    // const mappingClimbingSession = sends.map((send) => (
+    //     <ClimbingItem key={send._id} send={send} />
+    // ))
+    // const mappingTrainingSession = sends.map((send) => (
+    //     <TrainingItem key={send._id} send={send} />
+    // ))
     // ============================================= //
     const isActive = () => {
         if (active === "LogSend") {
-            if (sends.length > 0){
-                return (mappingSends)
-            } else{
+            if (sends.length > 0) {
+                return ('te')
+            } else {
                 return ('You have not logged any Sends')
             }
         } else if (active === "LogClimbingSession") {
             if (sends.length > 0) {
-                return (mappingClimbingSession)
+                return ('testr')
             } else {
                 return ('You have not logged any Climbing Sessions')
             }
         } else if (active === "LogTrainingSession") {
             if (sends.length > 0) {
-                return (mappingTrainingSession)
+                return ('testr')
             } else {
                 return ('You have not logged any Training Sessions')
             }
         } else if (active === "LogProject") {
             if (sends.length > 0) {
-                return (mappingProjects)
+                return ('testr')
             } else {
                 return ('You have not logged any Projects')
             }
@@ -87,7 +87,7 @@ function Dashboard() {
     return (
         <>
             <section className='dash-heading'>
-                <h1>Welcome {user.userName}</h1>
+                <h1>Welcome</h1>
                 <p>Dashboard</p>
             </section>
 
@@ -95,7 +95,22 @@ function Dashboard() {
                 <Link to={'/logforms'}><button className='different-form-buttons'>Get Logging!</button></Link>
             </section>
 
-            <h3 style={{textAlign: 'center', marginTop: '2rem'}}>Previous Logs</h3>
+            <section className='dash-holds-stats'>
+                <div className='dash-stat-3'>
+                    <h3>Total Climbing Sessions:</h3>
+                    <span>0</span>
+                </div>
+                <div className='dash-stat-3'>
+                    <h3>Total Sends:</h3>
+                    <span>0</span>
+                </div>
+                <div className='dash-stat-3'>
+                    <h3>Total Training Sessions:</h3>
+                    <span>0</span>
+                </div>
+            </section>
+
+            <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Previous Logs</h3>
             <p style={{ textAlign: 'center' }}>Select one to see your older logs</p>
 
             <section className='dash-mapping'>

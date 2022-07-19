@@ -9,7 +9,7 @@ function SendForm() {
         actualGrade: '',
         feltGrade: '',
         notes: '',
-        sent: 0,
+        sent: '',
         totalAttempts: '',
         totalSessions: '',
         videoOrImg: '',
@@ -17,7 +17,7 @@ function SendForm() {
     });
     const { actualGrade, feltGrade, notes, sent, totalAttempts, totalSessions,
         videoOrImg, climbingSession } = formState
-    // console.log(formState)
+    console.log(formState)
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -42,7 +42,7 @@ function SendForm() {
             videoOrImg,
             climbingSession
         }
-        // console.log('Before dispatch', userData)
+        console.log('Before dispatch', userData)
         dispatch(createSend(userData))
 
         // // Clear values after submit
@@ -127,24 +127,24 @@ function SendForm() {
                                 <div className='form-inputs-center'>
                                     <p>Yes</p>
                                     <Input
-                                        id="exampleSent"
-                                        name="Sent"
+                                        id="examplesent"
+                                        name="sent"
                                         placeholder="True"
                                         type="radio"
                                         required
-                                        value={formState.sent = 1}
+                                        value={formState.sent = '1'}
                                         onChange={handleChange}
                                     />
                                 </div>
                                 <div className='form-inputs-center'>
                                     <p>No</p>
                                     <Input
-                                        id="exampleSent"
-                                        name="Sent"
+                                        id="examplesent"
+                                        name="sent"
                                         placeholder="False"
                                         type="radio"
                                         required
-                                        value={formState.sent = 0}
+                                        value={formState.sent = '0'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -161,6 +161,7 @@ function SendForm() {
                                         name="totalAttempts"
                                         placeholder="3"
                                         type="number"
+                                        min='1'
                                         onChange={handleChange}
                                         required
                                         value={formState.totalAttempts}
@@ -176,6 +177,7 @@ function SendForm() {
                                         id="exampletotalSessions"
                                         name="totalSessions"
                                         placeholder="3"
+                                        min='1'
                                         type="number"
                                         onChange={handleChange}
                                         required

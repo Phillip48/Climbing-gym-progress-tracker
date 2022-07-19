@@ -361,6 +361,22 @@ code {
   background-color: black;
 }
 
+.dash-holds-stats{
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: #342e37 1px solid; */
+  /* margin: 0 2rem 0 2rem; */
+}
+
+.dash-stat-3{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .dash-mapping{
   /* margin-top: 5rem; */
   display: flex;
