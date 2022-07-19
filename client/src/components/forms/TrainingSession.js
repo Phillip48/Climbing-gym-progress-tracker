@@ -5,7 +5,6 @@ import { createTrainingSession } from '../../features/trainingSessions/trainingS
 
 
 function TrainingSessionForm() {
-
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
         durationMinutes: '',
@@ -19,9 +18,10 @@ function TrainingSessionForm() {
         // weightSets: '',
         // weightReps: '',
         // weightLBS: '',
-        rating: 0,
+        rating: '',
         trainingNotes: '',
     });
+    console.log(formState)
 
     const { durationMinutes, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes } = formState
     // console.log(formState)
@@ -81,7 +81,7 @@ function TrainingSessionForm() {
                                         placeholder="True"
                                         type="radio"
                                         required
-                                        value={formState.hangBoard = 1}
+                                        value={'1'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -93,7 +93,7 @@ function TrainingSessionForm() {
                                         placeholder="False"
                                         type="radio"
                                         required
-                                        value={formState.hangBoard = 0}
+                                        value={'0'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -129,7 +129,7 @@ function TrainingSessionForm() {
                                             placeholder="True"
                                             type="radio"
                                             required
-                                            value={formState.kelterBoard = 1}
+                                            value={'1'}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -141,7 +141,7 @@ function TrainingSessionForm() {
                                             placeholder="False"
                                             type="radio"
                                             required
-                                            value={formState.kelterBoard = 0}
+                                            value={'0'}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -161,7 +161,7 @@ function TrainingSessionForm() {
                                             placeholder="True"
                                             type="radio"
                                             required
-                                            value={formState.moonBoard = 1}
+                                            value={'1'}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -173,7 +173,7 @@ function TrainingSessionForm() {
                                             placeholder="False"
                                             type="radio"
                                             required
-                                            value={formState.moonBoard = 0}
+                                            value={'0'}
                                             onChange={handleChange}
                                         />
                                     </div>
@@ -194,7 +194,7 @@ function TrainingSessionForm() {
                                         placeholder="True"
                                         type="radio"
                                         required
-                                        value={formState.sprayBoard = 1}
+                                        value={'1'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -206,7 +206,7 @@ function TrainingSessionForm() {
                                         placeholder="False"
                                         type="radio"
                                         required
-                                        value={formState.sprayBoard = 0}
+                                        value={'0'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -241,7 +241,7 @@ function TrainingSessionForm() {
                                         placeholder="True"
                                         type="radio"
                                         required
-                                        value={formState.liftWeights = 1}
+                                        value={'1'}
                                         onChange={handleChange}
                                     />
                                 </div>
@@ -253,7 +253,7 @@ function TrainingSessionForm() {
                                         placeholder="False"
                                         type="radio"
                                         required
-                                        value={formState.liftWeights = 0}
+                                        value={'0'}
                                         onChange={handleChange}
                                     />
                                 </div>

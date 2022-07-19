@@ -118,7 +118,7 @@ function ClimbingSessionForm() {
                                         type="radio"
                                         onChange={handleChange}
                                         required
-                                        value={formState.indoorOutdoor = 'indoor'}
+                                        value={'indoor'}
                                     />
                                 </div>
                                 <div className='form-inputs-center'>
@@ -130,7 +130,7 @@ function ClimbingSessionForm() {
                                         type="radio"
                                         onChange={handleChange}
                                         required
-                                        value={formState.indoorOutdoor = 'outdoor'}
+                                        value={'outdoor'}
                                     />
                                 </div>
                             </FormGroup>

@@ -26,7 +26,7 @@ function ClimbingSessionItem({ climbingSessions }) {
       </div>
       <div className='send-item-grades'>
         <div className='send-item-grades-div'><p>
-          Session Length: <b>{climbingSessions.durationMinutes}</b>
+          Session Length: <b>{climbingSessions.durationMinutes}</b> minutes
         </p>
         </div>
         <div className='div-padding-1'></div>
