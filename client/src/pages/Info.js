@@ -10,13 +10,13 @@ const Info = () => {
       <Banner />
       <section className="info-holds-all">
         <div className="info-background-pic-text">
-          <div className=" banner-h-width">
+          <div className="banner-h-width">
             <h1 className="logo-text">The Climbing Wall</h1>
           </div>
 
           {/* <img alt='logo' src={ClimbingImage}></img> */}
           <div className=" banner-p-width">
-            <p className="logo-subtext">
+            <p className="logo-subtext" style={{ textAlign: 'center' }}>
               Whether you're at the crag or in the gym logging your progress
               is an important step to climbing!
             </p>
@@ -40,10 +40,10 @@ const Info = () => {
         </section>
 
 
-        <button className="info-signup-button">Sign Up!</button>
+        {/* <button className="info-signup-button">Sign Up!</button> */}
 
         <section className="info-holds-3part-page-info">
-          <div className="info-info-part margin-top2">
+          <div className="info-info-part">
             <h1 className="part3-text" style={{ textAlign: 'center' }}>Things to come</h1>
             <p className="part3-subtext" style={{ textAlign: 'center' }}>Currently this is only a web app. However in the unforseen future we plan on making this a full on mobile app.</p>
           </div>
@@ -53,9 +53,9 @@ const Info = () => {
             <p className="part3-subtext" style={{ textAlign: 'center' }}>Made by climbers who share the same passion for the sport as you do!</p>
           </div>
 
-          <div className="info-info-part margin-top2">
+          <div className="info-info-part">
             <h1 className="part3-text" style={{ textAlign: 'center' }}>Log some sends</h1>
-            <p className="part3-subtext" style={{ textAlign: 'center' }}>Track your progress!</p>
+            <p className="part3-subtext" style={{ textAlign: 'center' }}>Track your progress in various different ways! Including sends and projects but also with climbing and training sessions!</p>
           </div>
         </section>
       </section>

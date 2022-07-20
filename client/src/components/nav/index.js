@@ -32,7 +32,7 @@ const Nav = () => {
                             <Link to='/logforms'><button className="navbar-button"><FaCheckCircle />Log</button></Link>
                             <div className="div-padding-verysmall"></div>
                             {/* <Link to='/logs'><button className="navbar-button">Logs</button></Link> */}
-                            <button className="navbar-button" onClick={onLogout}><FaSignOutAlt /> Log Out</button>
+                            <button className="navbar-button" onClick={onLogout}><FaSignOutAlt /> LogOut</button>
                         </div>
                     ) : (
                         <div className="holds-page-options">

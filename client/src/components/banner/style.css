@@ -19,3 +19,9 @@
   font-size: 1em;
   color: white;
 }
+
+@media (max-width: 1055px) {
+  .nav-undernav-banner {
+    min-width: 80%;
+  }
+}
