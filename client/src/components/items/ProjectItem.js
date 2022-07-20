@@ -17,7 +17,8 @@ function ProjectItem({ projects }) {
       <div className='send-item-buttons'>
         <div>
           <h3>{projects.createdAt}</h3>
-          {ifSent()}
+          <p style={{ marginTop: '-.3rem' }}>{projects.indoorOutdoor} {projects.boulderingOrSportClimbing}</p>
+          <p style={{ marginTop: '-1.2rem' }}>{ifSent()}</p>
         </div>
         <div className='div-padding-1'></div>
 
@@ -32,13 +33,13 @@ function ProjectItem({ projects }) {
       </div>
       <div className='send-item-grades'>
         <div className='send-item-grades-div'><p>
-          Grade: <b>{projects.actualGrade}</b>
+          Grade: <b>{projects.boulderingActualGrade}{projects.sportClimbingActualGrade}</b>
         </p>
         </div>
         <div className='div-padding-1'></div>
         <div className='send-item-grades-div'>
           <p>
-            It felt like: <b>{projects.feltGrade}</b>
+            It felt like: <b>{projects.boulderingFeltGrade}{projects.sportClimbingFeltGrade}</b>
           </p>
         </div>
       </div>

@@ -6,22 +6,33 @@ import { createSend } from '../../features/sends/sendsSlice'
 // import "react-datepicker/dist/react-datepicker.css";
 
 function SendForm() {
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let format = year + '/' + month + '/' + day;
+
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
-        actualGrade: '',
-        feltGrade: '',
+        boulderingActualGrade: '',
+        boulderingOrSportClimbing: '',
+        boulderingFeltGrade: '',
+        sportClimbingActualGrade: '',
+        sportClimbingFeltGrade: '',
         notes: '',
         sent: '',
-        createdAt: '',
+        createdAt: format,
         totalAttempts: '',
+        indoorOutdoor: '',
+        sportClimbing: '',
+        bouldering: '',
         totalSessions: '',
         videoOrImg: '',
         climbingSession: '',
     });
-    console.log(formState)
-    const { actualGrade, feltGrade, notes, sent, totalAttempts, totalSessions, createdAt,
+    // console.log(formState)
+    const { boulderingOrSportClimbing, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, notes, indoorOutdoor, sent, totalAttempts, totalSessions, createdAt,
         videoOrImg, climbingSession } = formState
-    console.log(formState)
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -37,8 +48,8 @@ function SendForm() {
         event.preventDefault();
 
         const userData = {
-            actualGrade,
-            feltGrade,
+            boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing,
+            indoorOutdoor,
             createdAt,
             notes,
             sent,
@@ -47,7 +58,7 @@ function SendForm() {
             videoOrImg,
             climbingSession
         }
-        // console.log('Before dispatch', userData)
+        console.log('Before dispatch', userData)
         dispatch(createSend(userData))
 
         // // Clear values after submit
@@ -63,6 +74,268 @@ function SendForm() {
         // }
         // console.log('After dispatch', userData)
     };
+
+    const ifBoulderingOrSportClimb = () => {
+        if (formState.boulderingOrSportClimbing === 'Bouldering') {
+            return (
+                <Row className="user-grades-inputs">
+                    <Col md={5} className="user-grades-inputs-col">
+                        <FormGroup>
+                            <Label className="labels user-grades-inputs-col" for="boulderingActualGrade">
+                                What was the bouldering grade??
+                            </Label>
+                            <select className="signup-grade-option" id="exampleboulderingActualGrade" name="boulderingActualGrade" value={formState.boulderingActualGrade} onChange={handleChange} required>
+                                <option onChange={handleChange} value=""></option>
+                                <option onChange={handleChange} value="V0">V0</option>
+                                <option onChange={handleChange} value="V1">V1</option>
+                                <option onChange={handleChange} value="V2">V2</option>
+                                <option onChange={handleChange} value="V3">V3</option>
+                                <option onChange={handleChange} value="V4">V4</option>
+                                <option onChange={handleChange} value="V5">V5</option>
+                                <option onChange={handleChange} value="V6">V6</option>
+                                <option onChange={handleChange} value="V7">V7</option>
+                                <option onChange={handleChange} value="V8">V8</option>
+                                <option onChange={handleChange} value="V9">V9</option>
+                                <option onChange={handleChange} value="V10">V10</option>
+                                <option onChange={handleChange} value="V11">V11</option>
+                                <option onChange={handleChange} value="V12">V12</option>
+                                <option onChange={handleChange} value="V13">V13</option>
+                                <option onChange={handleChange} value="V14">V14</option>
+                                <option onChange={handleChange} value="V15">V15</option>
+                            </select>
+                        </FormGroup>
+                    </Col>
+                    <Col md={5} className="user-grades-inputs-col">
+                        <FormGroup>
+                            <Label className="labels user-grades-inputs-col" for="boulderingFeltGrade">
+                                What did the send feel like?
+                            </Label>
+                            <select className="signup-grade-option" id="exampleboulderingFeltGrade" name="boulderingFeltGrade" value={formState.boulderingFeltGrade} onChange={handleChange} required>
+                                <option onChange={handleChange} value=""></option>
+                                <option onChange={handleChange} value="V0">V0</option>
+                                <option onChange={handleChange} value="V1">V1</option>
+                                <option onChange={handleChange} value="V2">V2</option>
+                                <option onChange={handleChange} value="V3">V3</option>
+                                <option onChange={handleChange} value="V4">V4</option>
+                                <option onChange={handleChange} value="V5">V5</option>
+                                <option onChange={handleChange} value="V6">V6</option>
+                                <option onChange={handleChange} value="V7">V7</option>
+                                <option onChange={handleChange} value="V8">V8</option>
+                                <option onChange={handleChange} value="V9">V9</option>
+                                <option onChange={handleChange} value="V10">V10</option>
+                                <option onChange={handleChange} value="V11">V11</option>
+                                <option onChange={handleChange} value="V12">V12</option>
+                                <option onChange={handleChange} value="V13">V13</option>
+                                <option onChange={handleChange} value="V14">V14</option>
+                                <option onChange={handleChange} value="V15">V15</option>
+                            </select>
+                        </FormGroup>
+                    </Col>
+                </Row>
+            )
+        } else if (formState.boulderingOrSportClimbing === 'Sport Climb') {
+            return (
+                <Row className="user-grades-inputs">
+                    <Col md={5} className="user-grades-inputs-col">
+                        <FormGroup>
+                            <Label className="labels user-grades-inputs-col" for="sportClimbing">
+                                What was the sport climbing grade??
+                            </Label>
+                            <select className="signup-grade-option" id="examplesportClimbingActualGrade" name="sportClimbingActualGrade" value={formState.sportClimbingActualGrade} onChange={handleChange} required>
+                                <option onChange={handleChange} value=""></option>
+                                <option onChange={handleChange} value="5.6">5.6</option>
+                                <option onChange={handleChange} value="5.7">5.7</option>
+                                <option onChange={handleChange} value="5.8">5.8</option>
+                                <option onChange={handleChange} value="5.9">5.9</option>
+                                <option onChange={handleChange} value="5.10a">5.10a</option>
+                                <option onChange={handleChange} value="5.10b">5.10b</option>
+                                <option onChange={handleChange} value="5.10c">5.10c</option>
+                                <option onChange={handleChange} value="5.10d">5.10d</option>
+                                <option onChange={handleChange} value="5.11a">5.11a</option>
+                                <option onChange={handleChange} value="5.11b">5.11b</option>
+                                <option onChange={handleChange} value="5.11c">5.11c</option>
+                                <option onChange={handleChange} value="5.11d">5.11d</option>
+                                <option onChange={handleChange} value="5.12a">5.12a</option>
+                                <option onChange={handleChange} value="5.12b">5.12b</option>
+                                <option onChange={handleChange} value="5.12c">5.12c</option>
+                                <option onChange={handleChange} value="5.12d">5.12d</option>
+                                <option onChange={handleChange} value="5.13a">5.13a</option>
+                                <option onChange={handleChange} value="5.13b">5.13b</option>
+                                <option onChange={handleChange} value="5.13c">5.13c</option>
+                                <option onChange={handleChange} value="5.13d">5.13d</option>
+                                <option onChange={handleChange} value="5.14a">5.14a</option>
+                                <option onChange={handleChange} value="5.14b">5.14b</option>
+                                <option onChange={handleChange} value="5.14c">5.14c</option>
+                                <option onChange={handleChange} value="5.14d">5.14d</option>
+                                <option onChange={handleChange} value="5.15a">5.15a</option>
+                                <option onChange={handleChange} value="5.15b">5.15b</option>
+                                <option onChange={handleChange} value="5.15c">5.15c</option>
+                                <option onChange={handleChange} value="5.15d">5.15d</option>
+                                <option onChange={handleChange} value="5.16a">5.16a</option>
+                            </select>
+                        </FormGroup>
+                    </Col>
+                    <Col md={5} className="user-grades-inputs-col">
+                        <FormGroup>
+                            <Label className="labels user-grades-inputs-col" for="feltGrade">
+                                What did the send feel like?
+                            </Label>
+                            <select className="signup-grade-option" id="examplesportClimbingFeltGradee" name="sportClimbingFeltGradee" value={formState.sportClimbingFeltGradee} onChange={handleChange} required>
+                                <option onChange={handleChange} value=""></option>
+                                <option onChange={handleChange} value="5.6">5.6</option>
+                                <option onChange={handleChange} value="5.7">5.7</option>
+                                <option onChange={handleChange} value="5.8">5.8</option>
+                                <option onChange={handleChange} value="5.9">5.9</option>
+                                <option onChange={handleChange} value="5.10a">5.10a</option>
+                                <option onChange={handleChange} value="5.10b">5.10b</option>
+                                <option onChange={handleChange} value="5.10c">5.10c</option>
+                                <option onChange={handleChange} value="5.10d">5.10d</option>
+                                <option onChange={handleChange} value="5.11a">5.11a</option>
+                                <option onChange={handleChange} value="5.11b">5.11b</option>
+                                <option onChange={handleChange} value="5.11c">5.11c</option>
+                                <option onChange={handleChange} value="5.11d">5.11d</option>
+                                <option onChange={handleChange} value="5.12a">5.12a</option>
+                                <option onChange={handleChange} value="5.12b">5.12b</option>
+                                <option onChange={handleChange} value="5.12c">5.12c</option>
+                                <option onChange={handleChange} value="5.12d">5.12d</option>
+                                <option onChange={handleChange} value="5.13a">5.13a</option>
+                                <option onChange={handleChange} value="5.13b">5.13b</option>
+                                <option onChange={handleChange} value="5.13c">5.13c</option>
+                                <option onChange={handleChange} value="5.13d">5.13d</option>
+                                <option onChange={handleChange} value="5.14a">5.14a</option>
+                                <option onChange={handleChange} value="5.14b">5.14b</option>
+                                <option onChange={handleChange} value="5.14c">5.14c</option>
+                                <option onChange={handleChange} value="5.14d">5.14d</option>
+                                <option onChange={handleChange} value="5.15a">5.15a</option>
+                                <option onChange={handleChange} value="5.15b">5.15b</option>
+                                <option onChange={handleChange} value="5.15c">5.15c</option>
+                                <option onChange={handleChange} value="5.15d">5.15d</option>
+                                <option onChange={handleChange} value="5.16a">5.16a</option>
+                            </select>
+                        </FormGroup>
+                    </Col>
+                </Row>
+            )
+        } 
+        // else if (formState.boulderingOrSportClimbing === 'Sport Climb and Boulder') {
+        //     return(
+        //         <>
+        //             <Row className="user-grades-inputs">
+        //                 <Col md={5} className="user-grades-inputs-col">
+        //                     <FormGroup>
+        //                         <Label className="labels user-grades-inputs-col" for="sportClimbing">
+        //                             What was the sport climbing grade??
+        //                         </Label>
+        //                         <select className="signup-grade-option" id="examplesportClimbing" name="sportClimbing" value={formState.sportClimbing} onChange={handleChange} required>
+        //                             <option onChange={handleChange} value=""></option>
+        //                             <option onChange={handleChange} value="V0">V0</option>
+        //                             <option onChange={handleChange} value="V1">V1</option>
+        //                             <option onChange={handleChange} value="V2">V2</option>
+        //                             <option onChange={handleChange} value="V3">V3</option>
+        //                             <option onChange={handleChange} value="V4">V4</option>
+        //                             <option onChange={handleChange} value="V5">V5</option>
+        //                             <option onChange={handleChange} value="V6">V6</option>
+        //                             <option onChange={handleChange} value="V7">V7</option>
+        //                             <option onChange={handleChange} value="V8">V8</option>
+        //                             <option onChange={handleChange} value="V9">V9</option>
+        //                             <option onChange={handleChange} value="V10">V10</option>
+        //                             <option onChange={handleChange} value="V11">V11</option>
+        //                             <option onChange={handleChange} value="V12">V12</option>
+        //                             <option onChange={handleChange} value="V13">V13</option>
+        //                             <option onChange={handleChange} value="V14">V14</option>
+        //                             <option onChange={handleChange} value="V15">V15</option>
+        //                         </select>
+        //                     </FormGroup>
+        //                 </Col>
+        //                 <Col md={5} className="user-grades-inputs-col">
+        //                     <FormGroup>
+        //                         <Label className="labels user-grades-inputs-col" for="feltGrade">
+        //                             What did the send feel like?
+        //                         </Label>
+        //                         <select className="signup-grade-option" id="examplesportClimbing" name="sportClimbing" value={formState.sportClimbing} onChange={handleChange} required>
+        //                             <option onChange={handleChange} value=""></option>
+        //                             <option onChange={handleChange} value="V0">V0</option>
+        //                             <option onChange={handleChange} value="V1">V1</option>
+        //                             <option onChange={handleChange} value="V2">V2</option>
+        //                             <option onChange={handleChange} value="V3">V3</option>
+        //                             <option onChange={handleChange} value="V4">V4</option>
+        //                             <option onChange={handleChange} value="V5">V5</option>
+        //                             <option onChange={handleChange} value="V6">V6</option>
+        //                             <option onChange={handleChange} value="V7">V7</option>
+        //                             <option onChange={handleChange} value="V8">V8</option>
+        //                             <option onChange={handleChange} value="V9">V9</option>
+        //                             <option onChange={handleChange} value="V10">V10</option>
+        //                             <option onChange={handleChange} value="V11">V11</option>
+        //                             <option onChange={handleChange} value="V12">V12</option>
+        //                             <option onChange={handleChange} value="V13">V13</option>
+        //                             <option onChange={handleChange} value="V14">V14</option>
+        //                             <option onChange={handleChange} value="V15">V15</option>
+        //                         </select>
+        //                     </FormGroup>
+        //                 </Col>
+        //             </Row>
+        //             <Row className="user-grades-inputs">
+        //                 <Col md={5} className="user-grades-inputs-col">
+        //                     <FormGroup>
+        //                         <Label className="labels user-grades-inputs-col" for="boulderingActualGrade">
+        //                             What was the bouldering grade??
+        //                         </Label>
+        //                         <select className="signup-grade-option" id="exampleboulderingActualGrade" name="boulderingActualGrade" value={formState.boulderingActualGrade} onChange={handleChange} required>
+        //                             <option onChange={handleChange} value=""></option>
+        //                             <option onChange={handleChange} value="V0">V0</option>
+        //                             <option onChange={handleChange} value="V1">V1</option>
+        //                             <option onChange={handleChange} value="V2">V2</option>
+        //                             <option onChange={handleChange} value="V3">V3</option>
+        //                             <option onChange={handleChange} value="V4">V4</option>
+        //                             <option onChange={handleChange} value="V5">V5</option>
+        //                             <option onChange={handleChange} value="V6">V6</option>
+        //                             <option onChange={handleChange} value="V7">V7</option>
+        //                             <option onChange={handleChange} value="V8">V8</option>
+        //                             <option onChange={handleChange} value="V9">V9</option>
+        //                             <option onChange={handleChange} value="V10">V10</option>
+        //                             <option onChange={handleChange} value="V11">V11</option>
+        //                             <option onChange={handleChange} value="V12">V12</option>
+        //                             <option onChange={handleChange} value="V13">V13</option>
+        //                             <option onChange={handleChange} value="V14">V14</option>
+        //                             <option onChange={handleChange} value="V15">V15</option>
+        //                         </select>
+        //                     </FormGroup>
+        //                 </Col>
+        //                 <Col md={5} className="user-grades-inputs-col">
+        //                     <FormGroup>
+        //                         <Label className="labels user-grades-inputs-col" for="boulderingFeltGrade">
+        //                             What did the send feel like?
+        //                         </Label>
+        //                         <select className="signup-grade-option" id="exampleboulderingFeltGrade" name="boulderingFeltGrade" value={formState.boulderingFeltGrade} onChange={handleChange} required>
+        //                             <option onChange={handleChange} value=""></option>
+        //                             <option onChange={handleChange} value="V0">V0</option>
+        //                             <option onChange={handleChange} value="V1">V1</option>
+        //                             <option onChange={handleChange} value="V2">V2</option>
+        //                             <option onChange={handleChange} value="V3">V3</option>
+        //                             <option onChange={handleChange} value="V4">V4</option>
+        //                             <option onChange={handleChange} value="V5">V5</option>
+        //                             <option onChange={handleChange} value="V6">V6</option>
+        //                             <option onChange={handleChange} value="V7">V7</option>
+        //                             <option onChange={handleChange} value="V8">V8</option>
+        //                             <option onChange={handleChange} value="V9">V9</option>
+        //                             <option onChange={handleChange} value="V10">V10</option>
+        //                             <option onChange={handleChange} value="V11">V11</option>
+        //                             <option onChange={handleChange} value="V12">V12</option>
+        //                             <option onChange={handleChange} value="V13">V13</option>
+        //                             <option onChange={handleChange} value="V14">V14</option>
+        //                             <option onChange={handleChange} value="V15">V15</option>
+        //                         </select>
+        //                     </FormGroup>
+        //                 </Col>
+        //             </Row>
+        //         </>
+        //     )
+        // }
+    }
+
+    // if (formState.bouldering && formState.sportClimbing === '0'){
+    //     alert('Bouldering and Sport Climbing cannot both be no. Please indicate which one you did')
+    // }
 
     return (
         <>
@@ -85,60 +358,85 @@ function SendForm() {
                                 />
                             </FormGroup>
                         </Col>
-                        <Row className="user-grades-inputs">
-                            <Col md={5}>
+                        <Row>
+                            <Col md={6}>
                                 <FormGroup>
-                                    <Label className="labels" for="actualGrade">
-                                        What was the grade?
+                                    <Label className="labels user-grades-inputs-col" for="indoorOutdoor">
+                                        Was it an indoor or outdoor climb?
                                     </Label>
-                                    <select className="signup-grade-option" id="exampleactualGrade" name="actualGrade" value={formState.actualGrade} onChange={handleChange} required>
-                                        <option onChange={handleChange} value=""></option>
-                                        <option onChange={handleChange} value="V0">V0</option>
-                                        <option onChange={handleChange} value="V1">V1</option>
-                                        <option onChange={handleChange} value="V2">V2</option>
-                                        <option onChange={handleChange} value="V3">V3</option>
-                                        <option onChange={handleChange} value="V4">V4</option>
-                                        <option onChange={handleChange} value="V5">V5</option>
-                                        <option onChange={handleChange} value="V6">V6</option>
-                                        <option onChange={handleChange} value="V7">V7</option>
-                                        <option onChange={handleChange} value="V8">V8</option>
-                                        <option onChange={handleChange} value="V9">V9</option>
-                                        <option onChange={handleChange} value="V10">V10</option>
-                                        <option onChange={handleChange} value="V11">V11</option>
-                                        <option onChange={handleChange} value="V12">V12</option>
-                                        <option onChange={handleChange} value="V13">V13</option>
-                                        <option onChange={handleChange} value="V14">V14</option>
-                                        <option onChange={handleChange} value="V15">V15</option>
-                                    </select>
+                                    <div className='div-padding-verysmall'></div>
+                                    <div className='form-inputs-center'>
+                                        <p>Indoor</p>
+                                        <Input
+                                            id="exampleindoorOutdoor"
+                                            name="indoorOutdoor"
+                                            placeholder="Indoor"
+                                            type="radio"
+                                            onChange={handleChange}
+                                            required
+                                            value={'Indoor'}
+                                        />
+                                    </div>
+                                    <div className='form-inputs-center'>
+                                        <p>Outdoor</p>
+                                        <Input
+                                            id="exampleindoorOutdoor"
+                                            name="indoorOutdoor"
+                                            placeholder="Indoor"
+                                            type="radio"
+                                            onChange={handleChange}
+                                            required
+                                            value={'Outdoor'}
+                                        />
+                                    </div>
                                 </FormGroup>
                             </Col>
-                            <Col md={5}>
+                            <Col md={6}>
                                 <FormGroup>
-                                    <Label className="labels" for="feltGrade">
-                                        What did it feel like?
+                                    <Label className="labels user-grades-inputs-col" for="boulderingOrSportClimbing">
+                                        Did you sport climb or boulder?
                                     </Label>
-                                    <select className="signup-grade-option" id="examplefeltGrade" name="feltGrade" value={formState.feltGrade} onChange={handleChange} required>
-                                        <option onChange={handleChange} value=""></option>
-                                        <option onChange={handleChange} value="V0">V0</option>
-                                        <option onChange={handleChange} value="V1">V1</option>
-                                        <option onChange={handleChange} value="V2">V2</option>
-                                        <option onChange={handleChange} value="V3">V3</option>
-                                        <option onChange={handleChange} value="V4">V4</option>
-                                        <option onChange={handleChange} value="V5">V5</option>
-                                        <option onChange={handleChange} value="V6">V6</option>
-                                        <option onChange={handleChange} value="V7">V7</option>
-                                        <option onChange={handleChange} value="V8">V8</option>
-                                        <option onChange={handleChange} value="V9">V9</option>
-                                        <option onChange={handleChange} value="V10">V10</option>
-                                        <option onChange={handleChange} value="V11">V11</option>
-                                        <option onChange={handleChange} value="V12">V12</option>
-                                        <option onChange={handleChange} value="V13">V13</option>
-                                        <option onChange={handleChange} value="V14">V14</option>
-                                        <option onChange={handleChange} value="V15">V15</option>
-                                    </select>
+                                    <div className='div-padding-verysmall'></div>
+                                    <div className='form-inputs-center'>
+                                        <p>Sport Climb</p>
+                                        <Input
+                                            id="exampleboulderingOrSportClimbing"
+                                            name="boulderingOrSportClimbing"
+                                            placeholder="Indoor"
+                                            type="radio"
+                                            onChange={handleChange}
+                                            required
+                                            value={'Sport Climb'}
+                                        />
+                                    </div>
+                                    <div className='form-inputs-center'>
+                                        <p>Boulder</p>
+                                        <Input
+                                            id="exampleboulderingOrSportClimbing"
+                                            name="boulderingOrSportClimbing"
+                                            placeholder="Indoor"
+                                            type="radio"
+                                            onChange={handleChange}
+                                            required
+                                            value={'Bouldering'}
+                                        />
+                                    </div>
+                                    {/* <div className='form-inputs-center'>
+                                        <p>Both</p>
+                                        <Input
+                                            id="exampleboulderingOrSportClimbing"
+                                            name="boulderingOrSportClimbing"
+                                            placeholder="Indoor"
+                                            type="radio"
+                                            onChange={handleChange}
+                                            required
+                                            value={'Sport Climb and Boulder'}
+                                        />
+                                    </div> */}
                                 </FormGroup>
                             </Col>
                         </Row>
+                        {ifBoulderingOrSportClimb()}
                         <Col md={12} className="user-grades-inputs-col">
                             <FormGroup >
                                 <Label className="labels user-grades-inputs-col" for="exampleSent">
@@ -217,9 +515,9 @@ function SendForm() {
                                     name="notes"
                                     placeholder="Notes..."
                                     type="textarea"
-                                    required
                                     value={formState.notes}
                                     onChange={handleChange}
+                                    required
                                 />
                             </FormGroup>
                         </Col>
@@ -240,7 +538,7 @@ function SendForm() {
                             </FormGroup>
                         </Col>
                         <div className='form-center-button'>
-                            <button className="login-button" onClick={handleFormSubmit}>Log</button>
+                            <button type="submit" className="login-button" onClick={handleFormSubmit}>Log</button>
                         </div>
 
                     </form>

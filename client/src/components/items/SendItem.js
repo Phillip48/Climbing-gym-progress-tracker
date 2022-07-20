@@ -20,7 +20,8 @@ function SendItem({ sends }) {
             <div className='send-item-buttons'>
                 <div>
                     <h3>{sends.createdAt}</h3>
-                    {ifSent()}
+                    <p style={{ marginTop: '-.3rem' }}>{sends.indoorOutdoor} {sends.boulderingOrSportClimbing}</p>
+                    <p style={{marginTop: '-1.2rem'}}>{ifSent()}</p>
                 </div>
                 <div className='div-padding-1'></div>
 
@@ -35,13 +36,13 @@ function SendItem({ sends }) {
             </div>
             <div className='send-item-grades'>
                 <div className='send-item-grades-div'><p>
-                    Grade: <b>{sends.actualGrade}</b>
+                    Grade: <b>{sends.boulderingActualGrade}{sends.sportClimbingActualGrade}</b>
                 </p>
                 </div>
                 <div className='div-padding-1'></div>
                 <div className='send-item-grades-div'>
                     <p>
-                        It felt like: <b>{sends.feltGrade}</b>
+                        It felt like: <b>{sends.boulderingFeltGrade}{sends.sportClimbingFeltGrade}</b>
                     </p>
                 </div>
             </div>

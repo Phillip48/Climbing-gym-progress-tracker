@@ -7,6 +7,11 @@ function ClimbingSessionForm() {
 
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
+        boulderingActualGrade: '',
+        boulderingOrSportClimbing: '',
+        boulderingFeltGrade: '',
+        sportClimbingActualGrade: '',
+        sportClimbingFeltGrade: '',
         durationMinutes: '',
         numberOfSends: '',
         indoorOutdoor: '',
@@ -16,7 +21,7 @@ function ClimbingSessionForm() {
         rating: '',
     });
 
-    const { durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
+    const { boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing, durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
         videoOrImg, climbingSession } = formState
     // console.log(formState)
 
@@ -34,6 +39,7 @@ function ClimbingSessionForm() {
         event.preventDefault();
 
         const userData = {
+            boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing,
             durationMinutes,
             numberOfSends,
             indoorOutdoor,
@@ -47,6 +53,7 @@ function ClimbingSessionForm() {
         // console.log('Before dispatch', userData)
         dispatch(createClimbingSession(userData))
     };
+
     return (
         <>
             <section className=''>
@@ -153,6 +160,51 @@ function ClimbingSessionForm() {
                                 </div>
                             </FormGroup>
                         </Col>
+                        <Col md={12}>
+                            <FormGroup>
+                                <Label className="labels user-grades-inputs-col" for="boulderingOrSportClimbing">
+                                    Did you sport climb or boulder?
+                                </Label>
+                                <div className='div-padding-verysmall'></div>
+                                <div className='form-inputs-center'>
+                                    <p>Sport Climb</p>
+                                    <Input
+                                        id="exampleboulderingOrSportClimbing"
+                                        name="boulderingOrSportClimbing"
+                                        placeholder="Indoor"
+                                        type="radio"
+                                        onChange={handleChange}
+                                        required
+                                        value={'Sport Climb'}
+                                    />
+                                </div>
+                                <div className='form-inputs-center'>
+                                    <p>Boulder</p>
+                                    <Input
+                                        id="exampleboulderingOrSportClimbing"
+                                        name="boulderingOrSportClimbing"
+                                        placeholder="Indoor"
+                                        type="radio"
+                                        onChange={handleChange}
+                                        required
+                                        value={'Bouldering'}
+                                    />
+                                </div>
+                                <div className='form-inputs-center'>
+                                    <p>Both</p>
+                                    <Input
+                                        id="exampleboulderingOrSportClimbing"
+                                        name="boulderingOrSportClimbing"
+                                        placeholder="Indoor"
+                                        type="radio"
+                                        onChange={handleChange}
+                                        required
+                                        value={'Sport Climb and Boulder'}
+                                    />
+                                </div>
+                            </FormGroup>
+                        </Col>
+                        {/* {ifBoulderingOrSportClimb()} */}
                         <Col md={12}>
                             <FormGroup>
                                 <Label className="labels user-grades-inputs-col" for="rating">

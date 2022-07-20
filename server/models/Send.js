@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const date = new Date;
+const date = new Date();
 
 let year = date.getFullYear();
 let month = date.getMonth() + 1;
@@ -15,13 +15,27 @@ const sendSchema = new Schema(
             required: true,
             ref: 'User',
         },
-        actualGrade: {
+        indoorOutdoor: {
+            type: String,
+            min_length: 6,
+            max_length: 7,
+            required: true,
+        },
+        boulderingOrSportClimbing: {
             type: String,
             required: true,
         },
-        feltGrade: {
+        boulderingActualGrade: {
             type: String,
-            required: true,
+        },
+        boulderingFeltGrade: {
+            type: String,
+        },
+        sportClimbingActualGrade: {
+            type: String,
+        },
+        sportClimbingFeltGrade: {
+            type: String,
         },
         notes: {
             type: String,

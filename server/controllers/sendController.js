@@ -49,14 +49,18 @@ const createSend = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure all the needed fields is there for the send
-    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sent || !req.body.totalSessions) {
+    if (!req.body.boulderingOrSportClimbing || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.indoorOutdoor || !req.body.sent || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
     // Establish the sendObj for later use
     let sendObj = {
-        actualGrade: req.body.actualGrade,
-        feltGrade: req.body.feltGrade,
+        boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
+        indoorOutdoor: req.body.indoorOutdoor,
+        boulderingActualGrade: req.body.boulderingActualGrade,
+        boulderingFeltGrade: req.body.boulderingFeltGrade,
+        sportClimbingActualGrade: req.body.sportClimbingActualGrade,
+        sportClimbingFeltGrade: req.body.sportClimbingFeltGrade,
         notes: req.body.notes,
         sent: req.body.sent,
         totalAttempts: req.body.totalAttempts,
@@ -66,6 +70,7 @@ const createSend = asyncHandler(async (req, res) => {
         createdAt: req.body.createdAt,
         user: req.user.id,
     }
+    // console.log(sendObj)
     // If the user sends a climbing session id
     if (req.body.climbingSession) {
         const findID = await ClimbingSession.findOne({ _id : req.body.climbingSession});
@@ -73,8 +78,12 @@ const createSend = asyncHandler(async (req, res) => {
         if (findID === null){
             // change the sendObj to not have a climbingSession key in the variable so it doesnt get posted with an id that doesnt exisit
             sendObj = await Send.create({
-                actualGrade: req.body.actualGrade,
-                feltGrade: req.body.feltGrade,
+                boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
+                indoorOutdoor: req.body.indoorOutdoor,
+                boulderingActualGrade: req.body.boulderingActualGrade,
+                boulderingFeltGrade: req.body.boulderingFeltGrade,
+                sportClimbingActualGrade: req.body.sportClimbingActualGrade,
+                sportClimbingFeltGrade: req.body.sportClimbingFeltGrade,
                 notes: req.body.notes,
                 sent: req.body.sent,
                 totalAttempts: req.body.totalAttempts,
@@ -94,8 +103,12 @@ const createSend = asyncHandler(async (req, res) => {
         } else {
             // if theres a climbing session id and it does exisit it will run this
             sendObj = await Send.create({
-                actualGrade: req.body.actualGrade,
-                feltGrade: req.body.feltGrade,
+                boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
+                indoorOutdoor: req.body.indoorOutdoor,
+                boulderingActualGrade: req.body.boulderingActualGrade,
+                boulderingFeltGrade: req.body.boulderingFeltGrade,
+                sportClimbingActualGrade: req.body.sportClimbingActualGrade,
+                sportClimbingFeltGrade: req.body.sportClimbingFeltGrade,
                 notes: req.body.notes,
                 sent: req.body.sent,
                 totalAttempts: req.body.totalAttempts,
@@ -118,6 +131,12 @@ const createSend = asyncHandler(async (req, res) => {
         // If there isnt a climbing session id this will run 
     } else {
         sendObj = await Send.create({
+            boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
+            indoorOutdoor: req.body.indoorOutdoor,
+            boulderingActualGrade: req.body.boulderingActualGrade,
+            boulderingFeltGrade: req.body.boulderingFeltGrade,
+            sportClimbingActualGrade: req.body.sportClimbingActualGrade,
+            sportClimbingFeltGrade: req.body.sportClimbingFeltGrade,
             actualGrade: req.body.actualGrade,
             feltGrade: req.body.feltGrade,
             notes: req.body.notes,

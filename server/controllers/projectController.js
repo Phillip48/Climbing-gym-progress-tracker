@@ -43,14 +43,24 @@ const createProject = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
 
-    if (!req.body.actualGrade || !req.body.totalAttempts || !req.body.feltGrade || !req.body.sendProject || !req.body.totalSessions) {
+    if (!req.body.boulderingOrSportClimbing || !req.body.totalAttempts || !req.body.indoorOutdoor || !req.body.sendProject || !req.body.totalSessions) {
         res.status(400)
         throw new Error('Please add the needed fields')
     }
+    // boulderingActualGrade: '',
+    // boulderingFeltGrade: '',
+    // sportClimbingActualGrade: '',
+    // sportClimbingFeltGrade: '',
     const project = await Project.create({
-        actualGrade: req.body.actualGrade,
-        feltGrade: req.body.feltGrade,
+        boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
+        boulderingActualGrade: req.body.boulderingActualGrade,
+        boulderingFeltGrade: req.body.boulderingFeltGrade,
+        sportClimbingActualGrade: req.body.sportClimbingActualGrade,
+        sportClimbingFeltGrade: req.body.sportClimbingFeltGrade,
         notes: req.body.notes,
+        indoorOutdoor: req.body.indoorOutdoor,
+        sportClimbing: req.body.sportClimbing,
+        bouldering: req.body.bouldering,
         sendProject: req.body.sendProject,
         totalSessions: req.body.totalSessions,
         totalAttempts: req.body.totalAttempts,
