@@ -176,16 +176,16 @@ const updateSend = asyncHandler(async (req, res) => {
         if (findID === null) {
             throw new Error(`No updates were made; Climbing session ID doesn't exist`)
         }
+        // if it does update the climbing session
+        const updatedSessions = await ClimbingSession.findByIdAndUpdate(req.body.climbingSession, { $addToSet: { sends: req.params.id } }, {
+            new: true,
+        })
     }
-    const updatedSessions = await ClimbingSession.findByIdAndUpdate(req.body.climbingSession, { $addToSet: { sends: req.params.id } }, {
-        new: true,
-    })
     Send.findOneAndUpdate(
         { _id: req.params.id },
         { $set: req.body },
         { runValidators: true, new: true }
     )
-
         .then((send) =>
             !send
                 ? res.status(404).json({ message: 'No send with this id!' })

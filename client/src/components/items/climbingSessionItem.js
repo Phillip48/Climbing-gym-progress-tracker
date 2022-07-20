@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { deleteClimbingSession, updateClimbingSession } from '../../features/climbingSessions/climbingSessionSlice'
+import { deleteClimbingSession } from '../../features/climbingSessions/climbingSessionSlice'
+import { Link } from 'react-router-dom'
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
 
@@ -16,9 +17,9 @@ function ClimbingSessionItem({ climbingSessions }) {
         <div className='div-padding-1'></div>
 
         <div>
-          <button onClick={() => dispatch(updateClimbingSession(climbingSessions._id))} className='close'>
+          <Link to={'/updateforms'}><button className='close'>
             <GrUpdate />
-          </button>
+          </button></Link>
           <button onClick={() => dispatch(deleteClimbingSession(climbingSessions._id))} className='close margin-side'>
             <AiFillDelete />
           </button>

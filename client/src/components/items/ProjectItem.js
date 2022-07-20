@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux'
-import { deleteProject, updateProject } from '../../features/climbingProjects/projectsSlice'
+import { deleteProject } from '../../features/climbingProjects/projectsSlice'
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom'
 
 function ProjectItem({ projects }) {
   const dispatch = useDispatch()
@@ -23,9 +24,9 @@ function ProjectItem({ projects }) {
         <div className='div-padding-1'></div>
 
         <div>
-          <button onClick={() => dispatch(updateProject(projects._id))} className='close'>
+          <Link to={'/updateforms'}><button className='close'>
             <GrUpdate />
-          </button>
+          </button></Link>
           <button onClick={() => dispatch(deleteProject(projects._id))} className='close margin-side'>
             <AiFillDelete />
           </button>

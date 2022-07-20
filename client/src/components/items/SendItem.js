@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux'
-import { deleteSend, updateSend } from '../../features/sends/sendsSlice'
+import { deleteSend } from '../../features/sends/sendsSlice'
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom'
 // import { updateSend } from '../../features/sends/sendsSlice'
 
 function SendItem({ sends }) {
@@ -26,9 +27,9 @@ function SendItem({ sends }) {
                 <div className='div-padding-1'></div>
 
                 <div>
-                    <button onClick={() => dispatch(updateSend(sends._id))} className='close'>
+                    <Link to={'/updateforms'}><button className='close'>
                         <GrUpdate />
-                    </button>
+                    </button></Link>
                     <button onClick={() => dispatch(deleteSend(sends._id))} className='close margin-side'>
                         <AiFillDelete />
                     </button>

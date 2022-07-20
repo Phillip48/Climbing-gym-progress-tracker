@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux'
-import { deleteTrainingSession, updateTrainingSession } from '../../features/trainingSessions/trainingSessionSlice'
+import { deleteTrainingSession } from '../../features/trainingSessions/trainingSessionSlice'
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
+import { Link } from 'react-router-dom'
 
 function TrainingSessionItem({ trainingSessions }) {
   const dispatch = useDispatch()
@@ -50,9 +51,9 @@ function TrainingSessionItem({ trainingSessions }) {
         <div className='div-padding-1'></div>
 
         <div>
-          <button onClick={() => dispatch(updateTrainingSession(trainingSessions._id))} className='close'>
+          <Link to={'/updateforms'}><button className='close'>
             <GrUpdate />
-          </button>
+          </button></Link>
           <button onClick={() => dispatch(deleteTrainingSession(trainingSessions._id))} className='close margin-side'>
             <AiFillDelete />
           </button>
