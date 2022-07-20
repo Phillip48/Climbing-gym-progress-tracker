@@ -78,7 +78,7 @@ const Signup = () => {
         aboutMe,
         profileImg
       }
-      console.log(userData)
+      // console.log(userData)
       dispatch(register(userData))
     }
   };

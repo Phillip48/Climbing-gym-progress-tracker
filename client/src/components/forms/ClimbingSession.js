@@ -23,7 +23,7 @@ function ClimbingSessionForm() {
 
     const { boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing, durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
         videoOrImg, climbingSession } = formState
-    // console.log(formState)
+    console.log(formState)
 
     const handleChange = (event) => {
         const { name, value } = event.target;

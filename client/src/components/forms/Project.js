@@ -56,7 +56,7 @@ function ProjectForm() {
       videoOrImg,
       climbingSession
     }
-    console.log('Before dispatch', userData)
+    // console.log('Before dispatch', userData)
     dispatch(createProject(userData))
 
     // Clear values after submit
