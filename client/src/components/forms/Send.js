@@ -68,7 +68,7 @@ function SendForm() {
         <>
             <section className=''>
                 <div className=''>
-                    <form onSubmit={handleFormSubmit} className=''>
+                    <form onSubmit={handleFormSubmit} className='holds-log-forms'>
                         <Col md={12} className="user-grades-inputs-col">
                             <FormGroup >
                                 <Label className="labels user-grades-inputs-col" for="examplecreatedAt">

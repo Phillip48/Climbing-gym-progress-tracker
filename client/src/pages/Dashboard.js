@@ -62,7 +62,7 @@ function Dashboard() {
     }
     const isActiveTitle = () => {
         if (active === "LogSend") {
-            return('Previous Sends')
+            return ('Previous Sends')
         } else if (active === "LogClimbingSession") {
             return ('Previous Climbing Session')
         } else if (active === "LogTrainingSession") {
@@ -135,15 +135,15 @@ function Dashboard() {
 
             <section className='dash-holds-stats'>
                 <div className='dash-stat-3'>
-                    <h3>Total Climbing Sessions:</h3>
+                    <h3 className='dash-stat-response' style={{ textAlign: 'center' }}>Total Climbing Sessions:</h3>
                     <span>{cSessionStatCounter()}</span>
                 </div>
                 <div className='dash-stat-3'>
-                    <h3>Total Sends:</h3>
+                    <h3 className='dash-stat-response' style={{ textAlign: 'center' }}>Total Sends:</h3>
                     <span>{sendStatCounter()}</span>
                 </div>
                 <div className='dash-stat-3'>
-                    <h3>Total Training Sessions:</h3>
+                    <h3 className='dash-stat-response' style={{ textAlign: 'center' }}>Total Training Sessions:</h3>
                     <span>{tSessionStatCounter()}</span>
                 </div>
             </section>
@@ -153,17 +153,18 @@ function Dashboard() {
 
             <section className='dash-mapping'>
                 <section className='dash-form-buttons'>
-                    <button onClick={() => setActive("LogClimbingSession")} className='different-form-buttons'>Log Climbing Session</button>
-                    <div className='div-padding-1'></div>
-                    <button onClick={() => setActive("LogSend")} className='different-form-buttons'>Log Send</button>
-                    <div className='div-padding-1'></div>
-                    <button onClick={() => setActive("LogTrainingSession")} className='different-form-buttons'>Log Trainging Session</button>
-                    <div className='div-padding-1'></div>
-                    <button onClick={() => setActive("LogProject")} className='different-form-buttons'>Log Project</button>
+                    <div className='holds-different-form-buttons'>
+                        <button onClick={() => setActive("LogClimbingSession")} className='different-form-buttons'>Climbing Sessions</button>
+                        <button onClick={() => setActive("LogSend")} className='different-form-buttons'>Sends</button>
+                    </div>
+                    <div className='holds-different-form-buttons'>
+                        <button onClick={() => setActive("LogTrainingSession")} className='different-form-buttons'>Training Sessions</button>
+                        <button onClick={() => setActive("LogProject")} className='different-form-buttons'>Projects</button>
+                    </div>
                 </section>
 
                 <section className="forms-rendered-user-selection">
-                    <h3 style={{textAlign: 'center'}}>{isActiveTitle()}</h3>
+                    <h3 style={{ textAlign: 'center' }}>{isActiveTitle()}</h3>
                     <div className='dash-holds-info'>
                         {isActive()}
                         {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
