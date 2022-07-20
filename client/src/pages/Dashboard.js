@@ -73,16 +73,12 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        // Check if theres a user
-        if (!user) {
+        // Check if theres a user and check if the user JWT is expired
+        if (!user && isTokenExpired) {
+            
             navigate('/login')
         }
-        // Check if the user JWT is expired
-        if (isTokenExpired) {
-            // console.log( 'Check if token is expired',isTokenExpired())
-            navigate('/login')
-        }
-
+        // Check if theres an error from redux
         if (isError) {
             console.log(message)
         }

@@ -47,7 +47,7 @@ function SendForm() {
             videoOrImg,
             climbingSession
         }
-        console.log('Before dispatch', userData)
+        // console.log('Before dispatch', userData)
         dispatch(createSend(userData))
 
         // // Clear values after submit
