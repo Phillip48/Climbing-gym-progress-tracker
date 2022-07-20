@@ -10,6 +10,7 @@ import SendItem from '../components/items/SendItem'
 import ProjectItem from '../components/items/ProjectItem'
 import TrainingItem from '../components/items/TrainingSessionItem'
 import ClimbingItem from '../components/items/ClimbingSessionItem'
+// import decode from 'jwt-decode';
 
 function Dashboard() {
 
@@ -73,10 +74,13 @@ function Dashboard() {
     }
 
     useEffect(() => {
+        const token = JSON.parse(localStorage.getItem("user"));
         // Check if theres a user and check if the user JWT is expired   && isTokenExpired
-        if (!user) {
+        if (!user && isTokenExpired(token.token)) {
             navigate('/login')
         }
+        // console.log(token.token)
+        // console.log(decode(token.token).exp)
         // Check if theres an error from redux
         if (isError) {
             console.log(message)

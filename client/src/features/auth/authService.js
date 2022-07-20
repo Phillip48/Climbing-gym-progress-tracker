@@ -30,7 +30,6 @@ const logout = () => {
   localStorage.removeItem('user');
   window.location.assign('/login');
 }
-
 // Check if the token is expired
 const isTokenExpired = (token) => {
   // Decode the token to get its expiration time that was set by the server
