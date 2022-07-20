@@ -20,6 +20,7 @@ function ProjectForm() {
     sportClimbingFeltGrade: '',
     feltGrade: '',
     notes: '',
+    indoorOutdoor: '',
     createdAt: format,
     sendProject: '',
     totalAttempts: '',
@@ -27,7 +28,7 @@ function ProjectForm() {
     videoOrImg: '',
     climbingSession: '',
   });
-  const { boulderingOrSportClimbing, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, createdAt, notes, sendProject, totalAttempts, totalSessions,
+  const { boulderingOrSportClimbing, indoorOutdoor, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, createdAt, notes, sendProject, totalAttempts, totalSessions,
     videoOrImg, climbingSession } = formState
   // console.log(formState)
 
@@ -47,6 +48,7 @@ function ProjectForm() {
     const userData = {
       boulderingOrSportClimbing, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade,
       notes,
+      indoorOutdoor,
       createdAt,
       sendProject,
       totalAttempts,
@@ -133,7 +135,7 @@ function ProjectForm() {
         <Row className="user-grades-inputs">
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
-              <Label className="labels user-grades-inputs-col" for="sportClimbing">
+              <Label className="labels user-grades-inputs-col" for="sportClimbingActualGrade">
                 What was the sport climbing grade??
               </Label>
               <select className="signup-grade-option" id="examplesportClimbingActualGrade" name="sportClimbingActualGrade" value={formState.sportClimbingActualGrade} onChange={handleChange} required>
@@ -172,10 +174,10 @@ function ProjectForm() {
           </Col>
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
-              <Label className="labels user-grades-inputs-col" for="feltGrade">
+              <Label className="labels user-grades-inputs-col" for="sportClimbingFeltGrade">
                 What did the send feel like?
               </Label>
-              <select className="signup-grade-option" id="examplesportClimbingFeltGradee" name="sportClimbingFeltGradee" value={formState.sportClimbingFeltGradee} onChange={handleChange} required>
+              <select className="signup-grade-option" id="examplesportClimbingFeltGrade" name="sportClimbingFeltGrade" value={formState.sportClimbingFeltGrade} onChange={handleChange} required>
                 <option onChange={handleChange} value=""></option>
                 <option onChange={handleChange} value="5.6">5.6</option>
                 <option onChange={handleChange} value="5.7">5.7</option>
