@@ -12,6 +12,7 @@ import TrainingItem from '../components/items/TrainingSessionItem'
 import ClimbingItem from '../components/items/ClimbingSessionItem'
 
 function Dashboard() {
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -88,7 +89,29 @@ function Dashboard() {
     if (isLoading) {
         return <Spinner />
     }
+    let sendsCount = 0;
+    let climbingSessionsCount = 0;
+    let trainingSessionsCount = 0;
 
+    const sendStatCounter = () => {
+        sends.forEach(sends => {
+            sendsCount++
+        });
+        return (sendsCount)
+    }
+    const cSessionStatCounter = () => {
+        climbingSessions.forEach(climbingSessions => {
+            climbingSessionsCount++
+        });
+        return (climbingSessionsCount)
+    }
+
+    const tSessionStatCounter = () => {
+        trainingSessions.forEach(trainingSessions => {
+            trainingSessionsCount++
+        });
+        return (trainingSessionsCount)
+    }
     return (
         <>
             <section className='dash-heading'>
@@ -103,15 +126,15 @@ function Dashboard() {
             <section className='dash-holds-stats'>
                 <div className='dash-stat-3'>
                     <h3>Total Climbing Sessions:</h3>
-                    <span>0</span>
+                    <span>{cSessionStatCounter()}</span>
                 </div>
                 <div className='dash-stat-3'>
                     <h3>Total Sends:</h3>
-                    <span>0</span>
+                    <span>{sendStatCounter()}</span>
                 </div>
                 <div className='dash-stat-3'>
                     <h3>Total Training Sessions:</h3>
-                    <span>0</span>
+                    <span>{tSessionStatCounter()}</span>
                 </div>
             </section>
 
