@@ -102,8 +102,8 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         );
         // Response JSON the updated climbing session 
         res.status(200).json(updatedSessions)
-    // console.log(climbingSession._id.toString())
-    } else{
+        // console.log(climbingSession._id.toString())
+    } else {
         // this will run if there is nothing for a send and just a climbing session
         // climbing session object create
         const climbingSession = await ClimbingSession.create({
@@ -186,11 +186,21 @@ const deleteClimbingSession = asyncHandler(async (req, res) => {
         { $pull: { climbingSessions: req.params.id } },
         { runValidators: true, new: true }
     );
-    const updatedSession = await Send.findByIdAndUpdate(
-        { _id: climbingSessionVar.sends.toString() },
-        { $pull: { climbingSession: req.params.id } },
-        { runValidators: true, new: true }
-    );
+    if (climbingSessionVar.send > 0) {
+        const updatedSession = await Send.findByIdAndUpdate(
+            { _id: climbingSessionVar.sends.toString() },
+            { $pull: { climbingSession: req.params.id } },
+            { runValidators: true, new: true }
+        );
+    }
+    // if (findSend ) {
+    //     const updatedSession = await Send.findByIdAndUpdate(
+    //         { _id: climbingSessionVar.sends.toString() },
+    //         { $pull: { climbingSession: req.params.id } },
+    //         { runValidators: true, new: true }
+    //     );
+    // }
+
     // res.status(200).json(updatedUser)
 })
 

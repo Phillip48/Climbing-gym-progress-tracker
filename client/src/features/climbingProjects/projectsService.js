@@ -35,8 +35,8 @@ const deleteProject = async (projectId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
-  const response = await axios.delete(API_URL + projectId, config)
+  console.log(projectId)
+  const response = await axios.delete(API_URL + 'projects/' + projectId, config)
 
   return response.data
 }
