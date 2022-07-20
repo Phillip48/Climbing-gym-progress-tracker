@@ -60,6 +60,17 @@ function Dashboard() {
             }
         }
     }
+    const isActiveTitle = () => {
+        if (active === "LogSend") {
+            return('Previous Sends')
+        } else if (active === "LogClimbingSession") {
+            return ('Previous Climbing Session')
+        } else if (active === "LogTrainingSession") {
+            return ('Previous Training Session')
+        } else if (active === "LogProject") {
+            return ('Previous Projects')
+        }
+    }
 
     useEffect(() => {
         // Check if theres a user
@@ -105,7 +116,6 @@ function Dashboard() {
         });
         return (climbingSessionsCount)
     }
-
     const tSessionStatCounter = () => {
         trainingSessions.forEach(trainingSessions => {
             trainingSessionsCount++
@@ -153,6 +163,7 @@ function Dashboard() {
                 </section>
 
                 <section className="forms-rendered-user-selection">
+                    <h3 style={{textAlign: 'center'}}>{isActiveTitle()}</h3>
                     <div className='dash-holds-info'>
                         {isActive()}
                         {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
