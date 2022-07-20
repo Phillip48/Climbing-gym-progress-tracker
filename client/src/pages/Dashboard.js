@@ -6,6 +6,7 @@ import { getSends, reset } from '../features/sends/sendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
 import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
 import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
+// import { isTokenExpired } from '../features/auth/authSlice'
 import SendItem from '../components/items/SendItem'
 import ProjectItem from '../components/items/ProjectItem'
 import TrainingItem from '../components/items/TrainingSessionItem'
@@ -16,7 +17,8 @@ function Dashboard() {
     const dispatch = useDispatch()
 
     const { user } = useSelector((state) => state.auth)
-    const [active, setActive] = useState("LogSend", "LogClimbingSession");
+    const { isTokenExpired } = useSelector((state) => state.auth)
+    const [active, setActive] = useState("LogSend");
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
@@ -29,7 +31,7 @@ function Dashboard() {
     const { trainingSessions } = useSelector(
         (state) => state.trainingSessions
     )
-    console.log('dash', projects)
+    // console.log('dash', projects)
     // ============================================= //
     const isActive = () => {
         if (active === "LogSend") {
@@ -60,22 +62,29 @@ function Dashboard() {
     }
 
     useEffect(() => {
+        // Check if theres a user
         if (!user) {
+            navigate('/login')
+        }
+        // Check if the user JWT is expired
+        if (isTokenExpired) {
+            // console.log( 'Check if token is expired',isTokenExpired())
             navigate('/login')
         }
 
         if (isError) {
             console.log(message)
         }
-
+        // Get everything needed for the page
         dispatch(getSends())
         dispatch(getProjects())
         dispatch(getClimbingSessions())
         dispatch(getTrainingSessions())
+
         return () => {
             dispatch(reset())
         }
-    }, [user, navigate, isError, message, dispatch])
+    }, [user, isTokenExpired, navigate, isError, message, dispatch])
 
     if (isLoading) {
         return <Spinner />
@@ -84,7 +93,7 @@ function Dashboard() {
     return (
         <>
             <section className='dash-heading'>
-                <h1>Welcome</h1>
+                <h1>Welcome </h1>
                 <p>Dashboard</p>
             </section>
 

@@ -47,6 +47,10 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   await authService.logout()
 })
 
+export const isTokenExpired = createAsyncThunk('auth/isTokenExpired', async () => {
+  await authService.isTokenExpired()
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -89,6 +93,21 @@ export const authSlice = createSlice({
         state.user = null
       })
       .addCase(logout.fulfilled, (state) => {
+        state.user = null
+      })
+      // is expired?
+      .addCase(isTokenExpired.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(isTokenExpired.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.user = action.payload
+      })
+      .addCase(isTokenExpired.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
         state.user = null
       })
   },
