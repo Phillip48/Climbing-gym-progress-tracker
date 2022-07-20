@@ -600,6 +600,26 @@ code {
   .different-form-buttons{
     margin: .5rem;
   }
+  .holds-login-interaction{
+    flex-direction: column;
+  }
+  .hold-everything-login{
+    margin: 2rem 2rem 2rem 2rem;
+  }
+  /* .holds-login-interaction{
+    
+  } */
+  .formBody{
+    margin-bottom: 1rem;
+  }
+  .login-form{
+    border-radius: 25px 25px 0 0;
+    height: auto;
+  }
+  .login-info{
+    border-radius: 0 0 25px 25px;
+    height: auto;
+  }
 }
 
 @media (max-width: 660px) {

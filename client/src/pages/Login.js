@@ -108,7 +108,7 @@ const Login = () => {
           </div>
 
           <div className="login-info">
-            <h1 className="login-info-text ">Don't have an account?</h1>
+            <h1 className="login-info-text " style={{textAlign: 'center'}}>Don't have an account?</h1>
             <p className="login-info-subtext">
               No worries! You can signup for free! It's quick and easy. When you do signup you'll be on the track to
               logging your climbing progress!
