@@ -74,6 +74,10 @@ function Dashboard() {
     }
 
     useEffect(() => {
+        // Check if theres an error from redux
+        if (isError) {
+            console.log(message)
+        }
         // const token = JSON.parse(localStorage.getItem("user"));
         // Check if theres a user and check if the user JWT is expired
         if (!user) {
@@ -87,10 +91,7 @@ function Dashboard() {
         // }
         // console.log(token.token)
         // console.log(decode(token.token).exp)
-        // Check if theres an error from redux
-        if (isError) {
-            console.log(message)
-        }
+ 
         // Get everything needed for the page
         dispatch(getSends())
         dispatch(getProjects())

@@ -155,7 +155,7 @@ function SendItem({ sends }) {
                             <Label className="labels user-grades-inputs-col" for="feltGrade">
                                 What did the send feel like?
                             </Label>
-                            <select className="signup-grade-option" id="examplesportClimbingFeltGradee" name="sportClimbingFeltGradee" value={formState.sportClimbingActualGrade} onChange={handleChange} required>
+                            <select className="signup-grade-option" id="examplesportClimbingFeltGrade" name="sportClimbingFeltGrade" value={formState.sportClimbingFeltGrade} onChange={handleChange} required>
                                 <option onChange={handleChange} value=""></option>
                                 <option onChange={handleChange} value="5.6">5.6</option>
                                 <option onChange={handleChange} value="5.7">5.7</option>
