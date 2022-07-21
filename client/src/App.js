@@ -22,7 +22,6 @@ import LoginPage from '../src/pages/Login';
 import ProfilePage from '../src/pages/Profile';
 import NotFound from '../src/pages/404Page';
 import Forms from '../src/pages/Form';
-import UpdateForms from './pages/UpdateForms';
 
 function App() {
   return (
@@ -56,10 +55,6 @@ function App() {
             <Route
               path="/profile/:userId"
               element={<ProfilePage />}
-            />
-            <Route
-              path="/updateforms"
-              element={<UpdateForms />}
             />
             <Route
               path="*"

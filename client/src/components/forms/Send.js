@@ -24,8 +24,6 @@ function SendForm() {
         createdAt: format,
         totalAttempts: '',
         indoorOutdoor: '',
-        sportClimbing: '',
-        bouldering: '',
         totalSessions: '',
         videoOrImg: '',
         climbingSession: '',
