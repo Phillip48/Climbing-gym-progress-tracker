@@ -78,6 +78,8 @@ function Dashboard() {
         // const token = JSON.parse(localStorage.getItem("user"));
         // Check if theres a user and check if the user JWT is expired
         if (!user) {
+            // Testing the localstorage to fix a problem
+            localStorage.removeItem('user');
             navigate('/login')
         }
         // Not sure about this// doesnt work
