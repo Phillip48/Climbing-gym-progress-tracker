@@ -6,6 +6,7 @@ import { getSends, reset } from '../features/sends/sendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
 import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
 import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
+// import {isTokenExpired} from '../features/auth/authSlice'
 import SendItem from '../components/items/SendItem'
 import ProjectItem from '../components/items/ProjectItem'
 import TrainingItem from '../components/items/TrainingSessionItem'
@@ -18,7 +19,7 @@ function Dashboard() {
     const dispatch = useDispatch()
 
     const { user } = useSelector((state) => state.auth)
-    const { isTokenExpired } = useSelector((state) => state.auth)
+    // const { isTokenExpired } = useSelector((state) => state.auth)
     const [active, setActive] = useState("LogSend");
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
@@ -74,11 +75,15 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem("user"));
-        // Check if theres a user and check if the user JWT is expired   && isTokenExpired
-        if (!user && isTokenExpired(token.token)) {
+        // const token = JSON.parse(localStorage.getItem("user"));
+        // Check if theres a user and check if the user JWT is expired
+        if (!user) {
             navigate('/login')
         }
+        // Not sure about this// doesnt work
+        // if (isTokenExpired(token.token)) {
+        //     navigate('/login')
+        // }
         // console.log(token.token)
         // console.log(decode(token.token).exp)
         // Check if theres an error from redux
@@ -94,7 +99,7 @@ function Dashboard() {
         return () => {
             dispatch(reset())
         }
-    }, [user, isTokenExpired, navigate, isError, message, dispatch])
+    }, [user, navigate, isError, message, dispatch])
 
     if (isLoading) {
         return <Spinner />
