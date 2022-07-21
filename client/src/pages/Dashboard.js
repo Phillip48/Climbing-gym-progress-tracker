@@ -33,7 +33,6 @@ function Dashboard() {
     const { trainingSessions } = useSelector(
         (state) => state.trainingSessions
     )
-    // console.log('dash', projects)
     // ============================================= //
     const isActive = () => {
         if (active === "LogSend") {
