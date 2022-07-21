@@ -14,6 +14,10 @@ const ClimbingSessionSchema = new Schema(
             required: true,
             ref: 'User',
         },
+        boulderingOrSportClimbing: {
+            type: String,
+            required: true,
+        },
         durationMinutes: {
             type: Number,
             required: true,

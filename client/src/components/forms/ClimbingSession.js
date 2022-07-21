@@ -7,11 +7,7 @@ function ClimbingSessionForm() {
 
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
-        boulderingActualGrade: '',
         boulderingOrSportClimbing: '',
-        boulderingFeltGrade: '',
-        sportClimbingActualGrade: '',
-        sportClimbingFeltGrade: '',
         durationMinutes: '',
         numberOfSends: '',
         indoorOutdoor: '',
@@ -21,7 +17,7 @@ function ClimbingSessionForm() {
         rating: '',
     });
 
-    const { boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing, durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
+    const { boulderingOrSportClimbing, durationMinutes, createdAt, numberOfSends, indoorOutdoor, climbingNotes, totalAttempts, rating,
         videoOrImg, climbingSession } = formState
     console.log(formState)
 
@@ -39,7 +35,7 @@ function ClimbingSessionForm() {
         event.preventDefault();
 
         const userData = {
-            boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, boulderingOrSportClimbing,
+           boulderingOrSportClimbing,
             durationMinutes,
             numberOfSends,
             indoorOutdoor,
@@ -143,7 +139,7 @@ function ClimbingSessionForm() {
                                         type="radio"
                                         onChange={handleChange}
                                         required
-                                        value={'indoor'}
+                                        value={'Indoor'}
                                     />
                                 </div>
                                 <div className='form-inputs-center'>
@@ -155,7 +151,7 @@ function ClimbingSessionForm() {
                                         type="radio"
                                         onChange={handleChange}
                                         required
-                                        value={'outdoor'}
+                                        value={'Outdoor'}
                                     />
                                 </div>
                             </FormGroup>

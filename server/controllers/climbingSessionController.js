@@ -49,7 +49,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         throw new Error('User not found')
     }
     // Make sure all the needed fields is there for the climbing session
-    if (!req.body.durationMinutes || !req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
+    if (!req.body.boulderingOrSportClimbing || !req.body.durationMinutes || !req.body.numberOfSends || !req.body.indoorOutdoor || !req.body.totalAttempts || !req.body.rating) {
         res.status(400)
         throw new Error('Please add the needed fields for the climbing session; Nothing was created')
     }
@@ -62,6 +62,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         }
         // climbing session object create
         const climbingSession = await ClimbingSession.create({
+            boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
             durationMinutes: req.body.durationMinutes,
             numberOfSends: req.body.numberOfSends,
             indoorOutdoor: req.body.indoorOutdoor,
@@ -107,6 +108,7 @@ const createClimbingSession = asyncHandler(async (req, res) => {
         // this will run if there is nothing for a send and just a climbing session
         // climbing session object create
         const climbingSession = await ClimbingSession.create({
+            boulderingOrSportClimbing: req.body.boulderingOrSportClimbing,
             durationMinutes: req.body.durationMinutes,
             numberOfSends: req.body.numberOfSends,
             indoorOutdoor: req.body.indoorOutdoor,

@@ -459,6 +459,7 @@ function ProjectForm() {
                     id="exampletotalAttempts"
                     name="totalAttempts"
                     placeholder="3"
+                    min='1'
                     type="number"
                     onChange={handleChange}
                     required
@@ -474,6 +475,7 @@ function ProjectForm() {
                   <Input
                     id="exampletotalSessions"
                     name="totalSessions"
+                    min='1'
                     placeholder="3"
                     type="number"
                     onChange={handleChange}

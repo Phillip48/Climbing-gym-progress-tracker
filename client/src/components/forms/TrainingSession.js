@@ -76,7 +76,7 @@ function TrainingSessionForm() {
                                     id="exampledurationMinutes"
                                     name="durationMinutes"
                                     placeholder="120 minutes"
-                                    min='0'
+                                    min='1'
                                     type="number"
                                     required
                                     value={formState.durationMinutes}
