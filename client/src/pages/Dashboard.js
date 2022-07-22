@@ -74,17 +74,20 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        // Check if theres an error from redux
-        if (isError) {
-            console.log(message)
-        }
-        // const token = JSON.parse(localStorage.getItem("user"));
-        // Check if theres a user and check if the user JWT is expired
-        if (!user) {
-            // Testing the localstorage to fix a problem
-            localStorage.removeItem('user');
-            navigate('/login')
-        }
+        // // Auth.loggedIn();
+        // // Check if theres an error from redux
+        // if (isError) {
+        //     localStorage.removeItem('user');
+        //     navigate('/login')
+        //     console.log(message)
+        // }
+        // // const token = JSON.parse(localStorage.getItem("user"));
+        // // Check if theres a user and check if the user JWT is expired
+        // if (!user) {
+        //     // Testing the localstorage to fix a problem
+        //     localStorage.removeItem('user');
+        //     navigate('/login')
+        // }
         // Not sure about this// doesnt work
         // if (isTokenExpired(token.token)) {
         //     navigate('/login')
@@ -103,9 +106,27 @@ function Dashboard() {
         }
     }, [user, navigate, isError, message, dispatch])
 
+    // Auth.loggedIn();
+    // Check if theres an error from redux
+    if (isError) {
+        localStorage.removeItem('user');
+        navigate('/login')
+        window.location.refresh()
+        console.log(message)
+    }
+    // const token = JSON.parse(localStorage.getItem("user"));
+    // Check if theres a user and check if the user JWT is expired
+    if (!user) {
+        // Testing the localstorage to fix a problem
+        window.location.refresh()
+        localStorage.removeItem('user');
+        navigate('/login')
+    }
+
     if (isLoading) {
         return <Spinner />
     }
+
     let sendsCount = 0;
     let climbingSessionsCount = 0;
     let trainingSessionsCount = 0;

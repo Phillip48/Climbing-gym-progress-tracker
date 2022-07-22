@@ -72,7 +72,7 @@ export const updateProject = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await projectService.updateSends(id, token)
+      return await projectService.updateProject(id, token)
     } catch (error) {
       const message =
         (error.response &&
