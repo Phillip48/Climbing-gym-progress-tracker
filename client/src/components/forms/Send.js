@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
 import { useDispatch } from 'react-redux'
-import { createSend } from '../../features/sends/sendsSlice'
+import { createSend } from '../../features/sends/SendsSlice'
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 

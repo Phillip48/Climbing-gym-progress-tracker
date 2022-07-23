@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import ReactModal from 'react-modal';
-import { deleteSend } from '../../features/sends/sendsSlice'
+import { deleteSend } from '../../features/sends/SendsSlice'
 import { GrUpdate } from 'react-icons/gr';
 import { AiFillDelete } from 'react-icons/ai';
 // import { Link } from 'react-router-dom'
 // import { updateSend } from '../../features/sends/sendsSlice'
 // import SendUpdatedForm from '../forms/Send'
-import { updateSend } from '../../features/sends/sendsSlice'
+import { updateSend } from '../../features/sends/SendsSlice'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
 
 function SendItem({ sends }) {
