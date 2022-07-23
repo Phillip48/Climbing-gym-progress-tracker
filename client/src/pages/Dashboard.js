@@ -12,15 +12,35 @@ import ProjectItem from '../components/items/ProjectItem'
 import TrainingItem from '../components/items/TrainingSessionItem'
 import ClimbingItem from '../components/items/ClimbingSessionItem'
 // import decode from 'jwt-decode';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 function Dashboard() {
+    // const formatDate = () => {
+    //     const date = new Date();
+    //     let year = date.getFullYear();
+    //     let month = date.getMonth() + 1;
+    //     let day = date.getDate();
+    //     if(month > 0 && month < 10){
+    //         month.toString()
+    //         month = '0' + month
+    //         // console.log('month', month)
+    //         parseInt(month)
+    //         // console.log('month', month)
+    //     }
+    //     let format = year + '/' + month + '/' + day;
+    //     return (format)
+    // }
+    // console.log(formatDate())
+    const [calenderValue, calenderOnChange] = useState(new Date());
+    console.log(calenderValue)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const { user } = useSelector((state) => state.auth)
     // const { isTokenExpired } = useSelector((state) => state.auth)
-    const [active, setActive] = useState("LogSend");
+    const [active, setActive] = useState("nothing");
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
@@ -35,7 +55,10 @@ function Dashboard() {
     )
     // ============================================= //
     const isActive = () => {
-        if (active === "LogSend") {
+
+        if (active === "nothing") {
+            return ('Get Logging!')
+        } else if (active === "LogSend") {
             if (sends.length > 0) {
                 return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
             } else {
@@ -74,7 +97,7 @@ function Dashboard() {
     }
 
     useEffect(() => {
-        
+
         // Auth.loggedIn();
         // Check if theres an error from redux
         if (isError) {
@@ -96,7 +119,7 @@ function Dashboard() {
         // }
         // console.log(token.token)
         // console.log(decode(token.token).exp)
- 
+
         // Get everything needed for the page
         dispatch(getSends())
         dispatch(getProjects())
@@ -107,24 +130,6 @@ function Dashboard() {
             dispatch(reset())
         }
     }, [user, navigate, isError, message, dispatch])
-    
-
-    // // Auth.loggedIn();
-    // // Check if theres an error from redux
-    // if (isError) {
-    //     localStorage.removeItem('user');
-    //     navigate('/login')
-    //     // location.refresh()
-    //     console.log(message)
-    // }
-    // // const token = JSON.parse(localStorage.getItem("user"));
-    // // Check if theres a user and check if the user JWT is expired
-    // if (!user) {
-    //     // Testing the localstorage to fix a problem
-    //     window.location.refresh()
-    //     localStorage.removeItem('user');
-    //     navigate('/login')
-    // }
 
     if (isLoading) {
         return <Spinner />
@@ -178,9 +183,11 @@ function Dashboard() {
                 </div>
             </section>
 
-            <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Previous Logs</h3>
-            <p style={{ textAlign: 'center' }}>Select one to see your older logs</p>
-
+            <div className='dash-holds-calender'>
+                <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Previous Logs</h3>
+                <p style={{ textAlign: 'center' }}>Select one to see your older logs or search by date!</p>
+                <Calendar onChange={calenderOnChange} value={calenderValue} />
+            </div>
             <section className='dash-mapping'>
                 <section className='dash-form-buttons'>
                     <div className='holds-different-form-buttons'>
@@ -194,7 +201,7 @@ function Dashboard() {
                 </section>
 
                 <section className="forms-rendered-user-selection">
-                    <h3 style={{ textAlign: 'center' }}>{isActiveTitle()}</h3>
+                    <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>{isActiveTitle()}</h3>
                     <div className='dash-holds-info'>
                         {isActive()}
                         {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
