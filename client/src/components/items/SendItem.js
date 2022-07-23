@@ -195,6 +195,8 @@ function SendItem({ sends }) {
     }
     // submit form
     const handleFormSubmit = async (event) => {
+        let sendId = sends.id
+        // console.log(sendId)
         event.preventDefault();
 
         const userData = {
@@ -203,6 +205,7 @@ function SendItem({ sends }) {
             createdAt,
             notes,
             sent,
+            sendId,
             totalAttempts,
             totalSessions,
             videoOrImg,
@@ -211,6 +214,7 @@ function SendItem({ sends }) {
         // console.log('Before dispatch', sends)
         // console.log('Before dispatch', userData)
         dispatch(updateSend(userData))
+        window.location.reload();
     };
 
     return (

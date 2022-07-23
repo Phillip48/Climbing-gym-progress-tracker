@@ -30,7 +30,7 @@ function ProjectForm() {
   });
   const { boulderingOrSportClimbing, indoorOutdoor, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade, createdAt, notes, sendProject, totalAttempts, totalSessions,
     videoOrImg, climbingSession } = formState
-  // console.log(formState)
+  console.log(formState)
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -329,6 +329,7 @@ function ProjectForm() {
     //     )
     // }
   }
+  
   return (
     <>
       <section className=''>

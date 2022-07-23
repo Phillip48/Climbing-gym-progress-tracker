@@ -35,7 +35,8 @@ const deleteSend = async (sendId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
+  // console.log(sendId)
+  // console.log(token)
   const response = await axios.delete(API_URL + 'sends/' + sendId, config)
 
   return response.data
@@ -48,8 +49,10 @@ const updateSend = async (sendId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
-  const response = await axios.put(API_URL + 'sends/' + sendId, config)
+  console.log(sendId)
+  let realSendId = sendId.sendId
+  console.log(realSendId)
+  const response = await axios.put(API_URL + 'sends/' + realSendId, sendId, config)
 
   return response.data
 }

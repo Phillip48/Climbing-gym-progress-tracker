@@ -159,6 +159,7 @@ const createSend = asyncHandler(async (req, res) => {
 // update a send
 const updateSend = asyncHandler(async (req, res) => {
     const send = await Send.findById(req.params.id)
+    // console.log(req.params.id)
     // Check for user
     if (!req.user) {
         res.status(401)
@@ -170,7 +171,7 @@ const updateSend = asyncHandler(async (req, res) => {
         throw new Error('User not authorized')
     }
     // If the send is being updated with a climbing session ID make sure it exists
-    if (req.body.climbingSession) {
+    if (req.body.climbingSession && !req.body.climbingSession === '') {
         const findID = await ClimbingSession.findOne({ _id: req.body.climbingSession });
         // and if the climbing session id is null meaning it doesnt exisit
         if (findID === null) {
