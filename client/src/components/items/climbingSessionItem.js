@@ -56,6 +56,16 @@ function ClimbingSessionItem({ climbingSessions }) {
     }
     // console.log('Before dispatch', userData)
     dispatch(updateClimbingSession(userData))
+    setFormState({
+      boulderingOrSportClimbing: climbingSessions.boulderingOrSportClimbing,
+      durationMinutes: climbingSessions.durationMinutes,
+      numberOfSends: climbingSessions.numberOfSends,
+      indoorOutdoor: climbingSessions.indoorOutdoor,
+      createdAt: climbingSessions.createdAt,
+      totalAttempts: climbingSessions.totalAttempts,
+      climbingNotes: climbingSessions.climbingNotes,
+      rating: climbingSessions.rating,
+    })
     window.location.reload();
   };
   return (

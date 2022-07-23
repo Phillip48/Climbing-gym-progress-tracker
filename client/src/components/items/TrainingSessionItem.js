@@ -86,6 +86,22 @@ function TrainingSessionItem({ trainingSessions }) {
     }
     // console.log('Before dispatch', userData)
     dispatch(updateTrainingSession(userData))
+    setFormState({
+      durationMinutes: trainingSessions.durationMinutes,
+      hangBoard: trainingSessions.hangBoard,
+      hangBoardNotes: trainingSessions.hangBoardNotes,
+      sprayBoard: trainingSessions.sprayBoard,
+      moonBoard: trainingSessions.moonBoard,
+      kelterBoard: trainingSessions.kelterBoard,
+      createdAt: trainingSessions.createdAt,
+      trainingBoardNotes: trainingSessions.trainingBoardNotes,
+      liftWeights: trainingSessions.liftWeights,
+      // weightSets: trainingSessions,
+      // weightReps: trainingSessions,
+      // weightLBS: trainingSessions,
+      rating: trainingSessions.rating,
+      trainingNotes: trainingSessions.trainingNotes,
+    })
     window.location.reload();
   };
   return (

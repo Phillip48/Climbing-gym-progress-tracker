@@ -68,6 +68,23 @@ function ProjectItem({ projects }) {
     }
     // console.log('Before dispatch', userData)
     dispatch(updateProject(userData))
+    setFormState({
+      actualGrade: projects.actualGrade,
+      boulderingActualGrade: projects.boulderingActualGrade,
+      boulderingOrSportClimbing: projects.boulderingOrSportClimbing,
+      boulderingFeltGrade: projects.boulderingFeltGrade,
+      sportClimbingActualGrade: projects.sportClimbingActualGrade,
+      sportClimbingFeltGrade: projects.sportClimbingFeltGrade,
+      feltGrade: projects.feltGrade,
+      notes: projects.notes,
+      indoorOutdoor: projects.indoorOutdoor,
+      createdAt: projects.createdAt,
+      sendProject: projects.sendProject,
+      totalAttempts: projects.totalAttempts,
+      totalSessions: projects.totalSessions,
+      videoOrImg: projects.videoOrImg,
+      climbingSession: projects.climbingSession,
+    })
     window.location.reload();
   };
 

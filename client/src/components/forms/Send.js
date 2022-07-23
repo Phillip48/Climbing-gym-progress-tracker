@@ -59,17 +59,23 @@ function SendForm() {
         // console.log('Before dispatch', userData)
         dispatch(createSend(userData))
 
-        // // Clear values after submit
-        // formState = {
-        //     actualGrade: '',
-        //     feltGrade: '',
-        //     notes: '',
-        //     sent: '',
-        //     totalAttempts: '',
-        //     totalSessions: '',
-        //     videoOrImg: '',
-        //     climbingSession: '',
-        // }
+        // Clear values after submit
+        setFormState({
+            boulderingActualGrade: '',
+            boulderingOrSportClimbing: '',
+            boulderingFeltGrade: '',
+            sportClimbingActualGrade: '',
+            sportClimbingFeltGrade: '',
+            notes: '',
+            sent: '',
+            createdAt: format,
+            totalAttempts: '',
+            indoorOutdoor: '',
+            totalSessions: '',
+            videoOrImg: '',
+            climbingSession: '',
+        })
+        window.location.reload();
         // console.log('After dispatch', userData)
     };
 
@@ -175,10 +181,10 @@ function SendForm() {
                     </Col>
                     <Col md={5} className="user-grades-inputs-col">
                         <FormGroup>
-                            <Label className="labels user-grades-inputs-col" for="feltGrade">
+                            <Label className="labels user-grades-inputs-col" for="sportClimbingFeltGrade">
                                 What did the send feel like?
                             </Label>
-                            <select className="signup-grade-option" id="examplesportClimbingFeltGradee" name="sportClimbingFeltGradee" value={formState.sportClimbingFeltGradee} onChange={handleChange} required>
+                            <select className="signup-grade-option" id="examplesportClimbingFeltGrade" name="sportClimbingFeltGrade" value={formState.sportClimbingFeltGrade} onChange={handleChange} required>
                                 <option onChange={handleChange} value=""></option>
                                 <option onChange={handleChange} value="5.6">5.6</option>
                                 <option onChange={handleChange} value="5.7">5.7</option>

@@ -45,6 +45,23 @@ function TrainingSessionForm() {
         }
         // console.log('Before dispatch', userData)
         dispatch(createTrainingSession(userData))
+        setFormState({
+            durationMinutes: '',
+            hangBoard: '',
+            hangBoardNotes: '',
+            sprayBoard: '',
+            moonBoard: '',
+            kelterBoard: '',
+            createdAt: '',
+            trainingBoardNotes: '',
+            liftWeights: '',
+            // weightSets: '',
+            // weightReps: '',
+            // weightLBS: '',
+            rating: '',
+            trainingNotes: '',
+        })
+        window.location.reload();
     };
     return (
         <>

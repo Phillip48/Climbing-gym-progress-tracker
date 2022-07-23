@@ -79,6 +79,7 @@ function Dashboard() {
         // Check if theres an error from redux
         if (isError) {
             localStorage.removeItem('user');
+            window.location.reload();
             navigate('/login')
             console.log(message)
         }

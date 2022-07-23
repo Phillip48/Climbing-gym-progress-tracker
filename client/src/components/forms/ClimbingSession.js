@@ -48,6 +48,18 @@ function ClimbingSessionForm() {
         }
         // console.log('Before dispatch', userData)
         dispatch(createClimbingSession(userData))
+        // clear
+        setFormState({
+            boulderingOrSportClimbing: '',
+            durationMinutes: '',
+            numberOfSends: '',
+            indoorOutdoor: '',
+            createdAt: '',
+            totalAttempts: '',
+            climbingNotes: '',
+            rating: '',
+        })
+        window.location.reload();
     };
 
     return (

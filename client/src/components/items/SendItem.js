@@ -214,6 +214,21 @@ function SendItem({ sends }) {
         // console.log('Before dispatch', sends)
         // console.log('Before dispatch', userData)
         dispatch(updateSend(userData))
+        setFormState({
+            boulderingActualGrade: sends.boulderingActualGrade,
+            boulderingOrSportClimbing: sends.boulderingOrSportClimbing,
+            boulderingFeltGrade: sends.boulderingFeltGrade,
+            sportClimbingActualGrade: sends.sportClimbingActualGrade,
+            sportClimbingFeltGrade: sends.sportClimbingFeltGrade,
+            notes: sends.notes,
+            sent: sends.sent,
+            createdAt: sends.createdAt,
+            totalAttempts: sends.totalAttempts,
+            indoorOutdoor: sends.indoorOutdoor,
+            totalSessions: sends.totalSessions,
+            videoOrImg: sends.videoOrImg,
+            climbingSession: sends.climbingSession,
+        })
         window.location.reload();
     };
 
