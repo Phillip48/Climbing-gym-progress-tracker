@@ -23,7 +23,7 @@ const getClimbingSessions = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
+  
   const response = await axios.get(API_URL + 'climbingsession', config)
 
   return response.data
@@ -49,8 +49,8 @@ const updateClimbingSession = async (climbingSessionId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
-  const response = await axios.put(API_URL + 'climbingsession/' + climbingSessionId, config)
+  let realId = climbingSessionId.sessionId
+  const response = await axios.put(API_URL + 'climbingsession/' + realId, climbingSessionId, config)
 
   return response.data
 }

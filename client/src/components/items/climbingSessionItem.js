@@ -38,6 +38,7 @@ function ClimbingSessionItem({ climbingSessions }) {
 
   // submit form
   const handleFormSubmit = async (event) => {
+    let sessionId = climbingSessions.id
     event.preventDefault();
 
     const userData = {
@@ -46,6 +47,7 @@ function ClimbingSessionItem({ climbingSessions }) {
       numberOfSends,
       indoorOutdoor,
       totalAttempts,
+      sessionId,
       climbingNotes,
       rating,
       createdAt,
@@ -54,6 +56,7 @@ function ClimbingSessionItem({ climbingSessions }) {
     }
     // console.log('Before dispatch', userData)
     dispatch(updateClimbingSession(userData))
+    window.location.reload();
   };
   return (
     <>

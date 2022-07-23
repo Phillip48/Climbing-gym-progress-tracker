@@ -51,8 +51,8 @@ const updateTrainingSession = async (trainingSessionId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-
-  const response = await axios.put(API_URL + 'trainingsession/' + trainingSessionId, config)
+  let realId = trainingSessionId.sessionId
+  const response = await axios.put(API_URL + 'trainingsession/' + realId, trainingSessionId, config)
 
   return response.data
 }

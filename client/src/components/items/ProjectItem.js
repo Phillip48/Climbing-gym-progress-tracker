@@ -51,6 +51,7 @@ function ProjectItem({ projects }) {
 
   // submit form
   const handleFormSubmit = async (event) => {
+    let projectId = projects.id
     event.preventDefault();
 
     const userData = {
@@ -58,6 +59,7 @@ function ProjectItem({ projects }) {
       notes,
       indoorOutdoor,
       createdAt,
+      projectId,
       sendProject,
       totalAttempts,
       totalSessions,
@@ -66,6 +68,7 @@ function ProjectItem({ projects }) {
     }
     // console.log('Before dispatch', userData)
     dispatch(updateProject(userData))
+    window.location.reload();
   };
 
   const ifBoulderingOrSportClimb = () => {

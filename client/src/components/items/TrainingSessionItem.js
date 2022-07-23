@@ -78,13 +78,15 @@ function TrainingSessionItem({ trainingSessions }) {
 
   // submit form
   const handleFormSubmit = async (event) => {
+    let sessionId = trainingSessions.id
     event.preventDefault();
 
     const userData = {
-      durationMinutes, createdAt, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes
+      durationMinutes, sessionId, createdAt, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes
     }
     // console.log('Before dispatch', userData)
     dispatch(updateTrainingSession(userData))
+    window.location.reload();
   };
   return (
     <>

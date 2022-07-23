@@ -48,8 +48,9 @@ const updateProject = async (projectId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
+  let projectIdReal = projectId.projectId
 
-  const response = await axios.put(API_URL + 'projects/' + projectId, config)
+  const response = await axios.put(API_URL + 'projects/' + projectIdReal, projectId, config)
 
   return response.data
 }

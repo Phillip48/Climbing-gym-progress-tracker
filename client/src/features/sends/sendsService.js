@@ -49,9 +49,9 @@ const updateSend = async (sendId, token) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  console.log(sendId)
+  // console.log(sendId)
   let realSendId = sendId.sendId
-  console.log(realSendId)
+  // console.log(realSendId)
   const response = await axios.put(API_URL + 'sends/' + realSendId, sendId, config)
 
   return response.data
