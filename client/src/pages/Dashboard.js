@@ -33,7 +33,24 @@ function Dashboard() {
     // }
     // console.log(formatDate())
     const [calenderValue, calenderOnChange] = useState(new Date());
-    console.log(calenderValue)
+    // console.log(calenderValue.getMonth() +1)
+    // console.log(calenderValue.getDate())
+    // console.log(calenderValue.getFullYear())
+    const formatMonth = () => {
+        let month = calenderValue.getMonth() + 1
+        // console.log(month)
+        if (month > 0 && month < 10) {
+            month.toString()
+            
+            return month = '0' + month
+            // console.log('month', month)
+            // parseInt(month)
+            // console.log('month', month)
+        }
+    }
+    // Use calenderFormat to search by date... Need a rdeux dispatch for this
+    let calenderFormat = calenderValue.getFullYear() + '/' + formatMonth() + '/' + calenderValue.getDate()
+    console.log(calenderFormat)
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
