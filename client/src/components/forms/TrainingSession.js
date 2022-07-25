@@ -5,6 +5,21 @@ import { createTrainingSession } from '../../features/trainingSessions/trainingS
 
 
 function TrainingSessionForm() {
+    const formatDate = () => {
+        const date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if (month > 0 && month < 10) {
+            month.toString()
+            month = '0' + month
+            // console.log('month', month)
+            parseInt(month)
+            // console.log('month', month)
+        }
+        let format = year + '-' + month + '-' + day;
+        return (format)
+    }
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
         durationMinutes: '',
@@ -13,7 +28,7 @@ function TrainingSessionForm() {
         sprayBoard: '',
         moonBoard: '',
         kelterBoard: '',
-        createdAt: '',
+        createdAt: formatDate(),
         trainingBoardNotes: '',
         liftWeights: '',
         // weightSets: '',
@@ -52,7 +67,7 @@ function TrainingSessionForm() {
             sprayBoard: '',
             moonBoard: '',
             kelterBoard: '',
-            createdAt: '',
+            createdAt: formatDate(),
             trainingBoardNotes: '',
             liftWeights: '',
             // weightSets: '',

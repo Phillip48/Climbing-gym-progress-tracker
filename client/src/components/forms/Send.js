@@ -6,11 +6,21 @@ import { createSend } from '../../features/sends/SendsSlice'
 // import "react-datepicker/dist/react-datepicker.css";
 
 function SendForm() {
-    const date = new Date();
-    let year = date.getFullYear();
-    let month = date.getMonth() + 1;
-    let day = date.getDate();
-    let format = year + '/' + month + '/' + day;
+    const formatDate = () => {
+        const date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if(month > 0 && month < 10){
+            month.toString()
+            month = '0' + month
+            // console.log('month', month)
+            parseInt(month)
+            // console.log('month', month)
+        }
+        let format = year + '-' + month + '-' + day;
+        return (format)
+    }
 
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
@@ -21,7 +31,7 @@ function SendForm() {
         sportClimbingFeltGrade: '',
         notes: '',
         sent: '',
-        createdAt: format,
+        createdAt: formatDate(),
         totalAttempts: '',
         indoorOutdoor: '',
         totalSessions: '',
@@ -68,7 +78,7 @@ function SendForm() {
             sportClimbingFeltGrade: '',
             notes: '',
             sent: '',
-            createdAt: format,
+            createdAt: formatDate(),
             totalAttempts: '',
             indoorOutdoor: '',
             totalSessions: '',

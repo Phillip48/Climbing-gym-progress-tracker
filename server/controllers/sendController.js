@@ -32,7 +32,7 @@ const getSingleSend = asyncHandler(async (req, res) => {
 })
 // Get a single send
 const getSendDate = asyncHandler(async (req, res) => {
-    Send.find({ actualGrade: req.body.actualGrade, createdAt: req.body.createdAt })
+    Send.find({createdAt: req.body.createdAt })
         .select('-__v')
         .then((send) =>
             !send

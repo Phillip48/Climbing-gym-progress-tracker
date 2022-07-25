@@ -47,6 +47,25 @@ export const getSends= createAsyncThunk(
   }
 )
 
+// Get user sends
+export const getSendByDate = createAsyncThunk(
+  'sends/getByDate',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await sendService.getSendByDate(token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 // Delete user sends
 export const deleteSend = createAsyncThunk(
   'sends/delete',
@@ -116,6 +135,20 @@ export const sendSlice = createSlice({
         state.sends = action.payload
       })
       .addCase(getSends.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      // 
+      .addCase(getSendByDate.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getSendByDate.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.sends = action.payload
+      })
+      .addCase(getSendByDate.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

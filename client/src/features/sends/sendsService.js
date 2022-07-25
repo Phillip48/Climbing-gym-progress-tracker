@@ -28,6 +28,20 @@ const getSends = async (token) => {
   return response.data
 }
 
+// Get user sends
+const getSendByDate = async (sendData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  console.log(sendData, token)
+
+  const response = await axios.get(API_URL + 'sends/find', config)
+
+  return response.data 
+}
+
 // Delete user send
 const deleteSend = async (sendId, token) => {
   const config = {
@@ -61,7 +75,8 @@ const sendService = {
   createSend,
   getSends,
   deleteSend,
-  updateSend
+  updateSend,
+  getSendByDate
 }
 
 export default sendService

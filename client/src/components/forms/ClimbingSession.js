@@ -4,14 +4,28 @@ import { useDispatch } from 'react-redux'
 import { createClimbingSession } from '../../features/climbingSessions/climbingSessionSlice'
 
 function ClimbingSessionForm() {
-
+    const formatDate = () => {
+        const date = new Date();
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        if (month > 0 && month < 10) {
+            month.toString()
+            month = '0' + month
+            // console.log('month', month)
+            parseInt(month)
+            // console.log('month', month)
+        }
+        let format = year + '-' + month + '-' + day;
+        return (format)
+    }
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
         boulderingOrSportClimbing: '',
         durationMinutes: '',
         numberOfSends: '',
         indoorOutdoor: '',
-        createdAt: '',
+        createdAt: formatDate(),
         totalAttempts: '',
         climbingNotes: '',
         rating: '',
@@ -54,7 +68,7 @@ function ClimbingSessionForm() {
             durationMinutes: '',
             numberOfSends: '',
             indoorOutdoor: '',
-            createdAt: '',
+            createdAt: formatDate(),
             totalAttempts: '',
             climbingNotes: '',
             rating: '',

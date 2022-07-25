@@ -4,11 +4,21 @@ import { useDispatch } from 'react-redux'
 import { createProject } from '../../features/climbingProjects/projectsSlice'
 
 function ProjectForm() {
-  const date = new Date();
-  let year = date.getFullYear();
-  let month = date.getMonth() + 1;
-  let day = date.getDate();
-  let format = year + '/' + month + '/' + day;
+  const formatDate = () => {
+    const date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    if (month > 0 && month < 10) {
+      month.toString()
+      month = '0' + month
+      // console.log('month', month)
+      parseInt(month)
+      // console.log('month', month)
+    }
+    let format = year + '-' + month + '-' + day;
+    return (format)
+  }
 
   const dispatch = useDispatch()
   const [formState, setFormState] = useState({
@@ -21,7 +31,7 @@ function ProjectForm() {
     feltGrade: '',
     notes: '',
     indoorOutdoor: '',
-    createdAt: format,
+    createdAt: formatDate(),
     sendProject: '',
     totalAttempts: '',
     totalSessions: '',
@@ -69,7 +79,7 @@ function ProjectForm() {
       feltGrade: '',
       notes: '',
       indoorOutdoor: '',
-      createdAt: format,
+      createdAt: formatDate(),
       sendProject: '',
       totalAttempts: '',
       totalSessions: '',

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
-import { getSends, reset } from '../features/sends/SendsSlice'
+import { getSendByDate, getSends, reset } from '../features/sends/SendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
 import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
 import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
@@ -28,20 +28,18 @@ function Dashboard() {
     //         parseInt(month)
     //         // console.log('month', month)
     //     }
-    //     let format = year + '/' + month + '/' + day;
+    //     let format = year + '-' + month + '-' + day;
     //     return (format)
     // }
     // console.log(formatDate())
     const [calenderValue, calenderOnChange] = useState(new Date());
-    // console.log(calenderValue.getMonth() +1)
-    // console.log(calenderValue.getDate())
-    // console.log(calenderValue.getFullYear())
+    const [active, setActive] = useState("nothing");
     const formatMonth = () => {
         let month = calenderValue.getMonth() + 1
         // console.log(month)
         if (month > 0 && month < 10) {
             month.toString()
-            
+
             return month = '0' + month
             // console.log('month', month)
             // parseInt(month)
@@ -49,15 +47,12 @@ function Dashboard() {
         }
     }
     // Use calenderFormat to search by date... Need a rdeux dispatch for this
-    let calenderFormat = calenderValue.getFullYear() + '/' + formatMonth() + '/' + calenderValue.getDate()
+    let calenderFormat = calenderValue.getFullYear() + '-' + formatMonth() + '-' + calenderValue.getDate()
     console.log(calenderFormat)
-
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const { user } = useSelector((state) => state.auth)
-    // const { isTokenExpired } = useSelector((state) => state.auth)
-    const [active, setActive] = useState("nothing");
     const { sends, isLoading, isError, message } = useSelector(
         (state) => state.sends
     )
@@ -71,6 +66,16 @@ function Dashboard() {
         (state) => state.trainingSessions
     )
     // ============================================= //
+    // const userToken = user.token
+    // const [findDate, setFindDate] = useState({
+    //     token: userToken,
+    //     date: calenderFormat,
+    //     test: 'test string'
+    // });
+    // const { date, token, test } = findDate
+    // const dateUserStorage = { date, token, test }
+    // console.log(dateUserStorage)
+
     const isActive = () => {
 
         if (active === "nothing") {
@@ -99,6 +104,12 @@ function Dashboard() {
             } else {
                 return ('You have not logged any Projects')
             }
+        } else if (active === "calender") {
+            if (sends.length > 0) {
+                return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
+            } else {
+                return ('You have not logged anything for that date')
+            }
         }
     }
     const isActiveTitle = () => {
@@ -112,10 +123,7 @@ function Dashboard() {
             return ('Previous Projects')
         }
     }
-
     useEffect(() => {
-
-        // Auth.loggedIn();
         // Check if theres an error from redux
         if (isError) {
             localStorage.removeItem('user');
@@ -123,21 +131,14 @@ function Dashboard() {
             navigate('/login')
             console.log(message)
         }
-        // const token = JSON.parse(localStorage.getItem("user"));
         // Check if theres a user and check if the user JWT is expired
         if (!user) {
             // Testing the localstorage to fix a problem
             localStorage.removeItem('user');
             navigate('/login')
         }
-        // Not sure about this// doesnt work
-        // if (isTokenExpired(token.token)) {
-        //     navigate('/login')
-        // }
-        // console.log(token.token)
-        // console.log(decode(token.token).exp)
 
-        // Get everything needed for the page
+        // dispatch(getSendByDate(dateUserStorage))
         dispatch(getSends())
         dispatch(getProjects())
         dispatch(getClimbingSessions())
@@ -174,6 +175,7 @@ function Dashboard() {
         });
         return (trainingSessionsCount)
     }
+
     return (
         <>
             <section className='dash-heading'>
@@ -203,7 +205,13 @@ function Dashboard() {
             <div className='dash-holds-calender'>
                 <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Previous Logs</h3>
                 <p style={{ textAlign: 'center' }}>Select one to see your older logs or search by date!</p>
-                <Calendar onChange={calenderOnChange} value={calenderValue} />
+                <Calendar
+                    // onClick={sendByDate()}
+                    // onClick={() => setActive("calender")}
+                    // onClick={() => dispatch(getSendByDate(dateUserStorage))}
+                    // onClick={() => dispatch(getSendByDate(dateUserStorage))}
+                    onChange={calenderOnChange} value={calenderValue} />
+                {/* <button onClick={() => dispatch(getSendByDate(dateUserStorage))}>Search</button> */}
             </div>
             <section className='dash-mapping'>
                 <section className='dash-form-buttons'>
