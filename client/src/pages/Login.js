@@ -95,6 +95,7 @@ const Login = () => {
                           name="password"
                           placeholder="Password"
                           type="password"
+                          autoComplete="on"
                           value={password}
                           onChange={handleChange}
                         />
