@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react';
+import Spinner from '../Spinner'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
-import { useDispatch } from 'react-redux'
 import { createProject } from '../../features/climbingProjects/projectsSlice'
 
 function ProjectForm() {
@@ -19,7 +20,9 @@ function ProjectForm() {
     let format = year + '-' + month + '-' + day;
     return (format)
   }
-
+  const { isLoading, isError, message } = useSelector(
+    (state) => state.projects
+  )
   const dispatch = useDispatch()
   const [formState, setFormState] = useState({
     actualGrade: '',
@@ -346,7 +349,16 @@ function ProjectForm() {
     //     )
     // }
   }
-  
+  useEffect(() => {
+    // Check if theres an error from redux
+    if (isError) {
+      console.log(message)
+    }
+  }, [isError, message])
+
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
       <section className=''>

@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react';
+import Spinner from '../Spinner'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
-import { useDispatch } from 'react-redux'
 import { createSend } from '../../features/sends/SendsSlice'
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
@@ -21,7 +22,9 @@ function SendForm() {
         let format = year + '-' + month + '-' + day;
         return (format)
     }
-
+    const { isLoading, isError, message } = useSelector(
+        (state) => state.sends
+    )
     const dispatch = useDispatch()
     const [formState, setFormState] = useState({
         boulderingActualGrade: '',
@@ -350,7 +353,16 @@ function SendForm() {
     // if (formState.bouldering && formState.sportClimbing === '0'){
     //     alert('Bouldering and Sport Climbing cannot both be no. Please indicate which one you did')
     // }
+    useEffect(() => {
+        // Check if theres an error from redux
+        if (isError) {
+            console.log(message)
+        }
+    }, [isError, message])
 
+    if (isLoading) {
+        return <Spinner />
+    }
     return (
         <>
             <section className=''>

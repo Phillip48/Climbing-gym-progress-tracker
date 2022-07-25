@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux'
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react';
+import Spinner from '../Spinner'
 import { deleteClimbingSession } from '../../features/climbingSessions/climbingSessionSlice'
 // import { Link } from 'react-router-dom'
 import { GrUpdate } from 'react-icons/gr';
@@ -11,7 +12,9 @@ import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
 function ClimbingSessionItem({ climbingSessions }) {
   const [modalIsOpen, SetModalIsOpen] = useState(false)
   const dispatch = useDispatch()
-
+  const { isLoading, isError, message } = useSelector(
+    (state) => state.climbingSessions
+  )
   const [formState, setFormState] = useState({
     boulderingOrSportClimbing: climbingSessions.boulderingOrSportClimbing,
     durationMinutes: climbingSessions.durationMinutes,
@@ -68,6 +71,17 @@ function ClimbingSessionItem({ climbingSessions }) {
     })
     window.location.reload();
   };
+  
+  useEffect(() => {
+    // Check if theres an error from redux
+    if (isError) {
+      console.log(message)
+    }
+  }, [isError, message])
+
+  if (isLoading) {
+    return <Spinner />
+  }
   return (
     <>
       <ReactModal

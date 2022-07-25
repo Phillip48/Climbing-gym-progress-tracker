@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react';
+import Spinner from '../Spinner'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
-import { useDispatch } from 'react-redux'
 import { createTrainingSession } from '../../features/trainingSessions/trainingSessionSlice'
 
 
 function TrainingSessionForm() {
+    const { isLoading, isError, message } = useSelector(
+        (state) => state.trainingSessions
+    )
     const formatDate = () => {
         const date = new Date();
         let year = date.getFullYear();
@@ -78,6 +82,16 @@ function TrainingSessionForm() {
         })
         window.location.reload();
     };
+    useEffect(() => {
+        // Check if theres an error from redux
+        if (isError) {
+            console.log(message)
+        }
+    }, [isError, message])
+
+    if (isLoading) {
+        return <Spinner />
+    }
     return (
         <>
             <section className=''>

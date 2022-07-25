@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
 import ReactModal from 'react-modal';
 import { deleteSend } from '../../features/sends/SendsSlice'
 import { GrUpdate } from 'react-icons/gr';
@@ -9,11 +9,15 @@ import { AiFillDelete } from 'react-icons/ai';
 // import SendUpdatedForm from '../forms/Send'
 import { updateSend } from '../../features/sends/SendsSlice'
 import { Label, Input, Row, Col, FormGroup } from 'reactstrap';
+import Spinner from '../Spinner'
+
 
 function SendItem({ sends }) {
-    
     const [modalIsOpen, SetModalIsOpen] = useState(false)
     const dispatch = useDispatch()
+    const { isLoading, isError, message } = useSelector(
+        (state) => state.sends
+    )
 
     const ifSent = () => {
         if (sends.sent) {
@@ -232,6 +236,16 @@ function SendItem({ sends }) {
         window.location.reload();
     };
 
+    useEffect(() => {
+        // Check if theres an error from redux
+        if (isError) {
+            console.log(message)
+        }
+    }, [isError, message])
+
+    if (isLoading) {
+        return <Spinner />
+    }
     return (
         <>
             <ReactModal

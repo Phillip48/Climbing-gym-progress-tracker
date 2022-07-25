@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
-import { getSendByDate, getSends, reset } from '../features/sends/SendsSlice'
+import { 
+    // getSendByDate, 
+    getSends, reset } from '../features/sends/SendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
 import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
 import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
@@ -16,24 +18,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 function Dashboard() {
-    // const formatDate = () => {
-    //     const date = new Date();
-    //     let year = date.getFullYear();
-    //     let month = date.getMonth() + 1;
-    //     let day = date.getDate();
-    //     if(month > 0 && month < 10){
-    //         month.toString()
-    //         month = '0' + month
-    //         // console.log('month', month)
-    //         parseInt(month)
-    //         // console.log('month', month)
-    //     }
-    //     let format = year + '-' + month + '-' + day;
-    //     return (format)
-    // }
-    // console.log(formatDate())
     const [calenderValue, calenderOnChange] = useState(new Date());
-    const [active, setActive] = useState("nothing");
+    const [active, setActive] = useState("LogSend");
     const formatMonth = () => {
         let month = calenderValue.getMonth() + 1
         // console.log(month)
@@ -78,9 +64,7 @@ function Dashboard() {
 
     const isActive = () => {
 
-        if (active === "nothing") {
-            return ('Get Logging!')
-        } else if (active === "LogSend") {
+        if (active === "LogSend") {
             if (sends.length > 0) {
                 return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
             } else {
