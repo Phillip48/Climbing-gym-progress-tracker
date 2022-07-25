@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Spinner from '../components/Spinner'
-import { 
-    // getSendByDate, 
-    getSends, reset } from '../features/sends/SendsSlice'
+import {
+    // getSendByDate,
+    getSends, reset
+} from '../features/sends/SendsSlice'
 import { getProjects } from '../features/climbingProjects/projectsSlice'
 import { getClimbingSessions } from '../features/climbingSessions/climbingSessionSlice'
 import { getTrainingSessions } from '../features/trainingSessions/trainingSessionSlice'
@@ -19,7 +20,7 @@ import 'react-calendar/dist/Calendar.css';
 
 function Dashboard() {
     const [calenderValue, calenderOnChange] = useState(new Date());
-    const [active, setActive] = useState("LogSend");
+    const [active, setActive] = useState("nothing");
     const formatMonth = () => {
         let month = calenderValue.getMonth() + 1
         // console.log(month)
@@ -34,12 +35,12 @@ function Dashboard() {
     }
     // Use calenderFormat to search by date... Need a rdeux dispatch for this
     let calenderFormat = calenderValue.getFullYear() + '-' + formatMonth() + '-' + calenderValue.getDate()
-    console.log(calenderFormat)
+    // console.log(calenderFormat)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { user } = useSelector((state) => state.auth)
-    const { sends, isLoading, isError, message } = useSelector(
+    const { user, isLoading, isError, message } = useSelector((state) => state.auth)
+    const { sends } = useSelector(
         (state) => state.sends
     )
     const { projects } = useSelector(
@@ -59,11 +60,17 @@ function Dashboard() {
     //     test: 'test string'
     // });
     // const { date, token, test } = findDate
-    // const dateUserStorage = { date, token, test }
+    // const dateUserStorage = {
+    //     token: user.token,
+    //     date: calenderFormat,
+    //     test: 'test string'
+    // }
     // console.log(dateUserStorage)
 
     const isActive = () => {
-
+        if (active === "nothing"){
+            return('Start logging')
+        }
         if (active === "LogSend") {
             if (sends.length > 0) {
                 return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
@@ -159,11 +166,10 @@ function Dashboard() {
         });
         return (trainingSessionsCount)
     }
-
     return (
         <>
             <section className='dash-heading'>
-                <h1>Welcome </h1>
+                <h1>Welcome</h1>
                 <p>Dashboard</p>
             </section>
 

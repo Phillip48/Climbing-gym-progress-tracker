@@ -58,6 +58,25 @@ function ProjectItem({ projects }) {
     let projectId = projects.id
     event.preventDefault();
 
+    if (formState.boulderingActualGrade === '' && formState.sportClimbingActualGrade === '') {
+      return alert('Please add an actual grade')
+    }
+    if (formState.boulderingFeltGrade === '' && formState.sportClimbingFeltGrade === '') {
+      return alert('Please add what the grade felt like')
+    }
+    if (formState.boulderingOrSportClimbing === '') {
+      return alert('Please add if it was a bouldering or sport climb')
+    }
+    if (formState.sendProject === '') {
+      return alert('Please add if it was sent')
+    }
+    if (formState.indoorOutdoor === '') {
+      return alert('Please add if it was an indoor or outdoor climb')
+    }
+    if (formState.totalAttempts === '' || formState.totalSessions === '') {
+      return alert('Please add the total attempts or sessions')
+    }
+
     const userData = {
       boulderingOrSportClimbing, boulderingActualGrade, boulderingFeltGrade, sportClimbingActualGrade, sportClimbingFeltGrade,
       notes,

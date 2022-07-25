@@ -85,6 +85,28 @@ function TrainingSessionItem({ trainingSessions }) {
     let sessionId = trainingSessions.id
     event.preventDefault();
 
+    if (formState.durationMinutes === '') {
+      return alert('Please add how long the session was')
+    }
+    if (formState.hangBoard === '') {
+      return alert('Please add if you trained with the hangboard')
+    }
+    if (formState.sprayBoard === '') {
+      return alert('Please add if you trained with the sprayBoard')
+    }
+    if (formState.moonBoard === '') {
+      return alert('Please add if you trained with the moonBoard')
+    }
+    if (formState.kelterBoard === '') {
+      return alert('Please add if you trained with the kelterBoard')
+    }
+    if (formState.liftWeights === '') {
+      return alert('Please add if you lifted weights')
+    }
+    if (formState.rating === '') {
+      return alert('Please add a rating')
+    }
+
     const userData = {
       durationMinutes, sessionId, createdAt, hangBoard, hangBoardNotes, sprayBoard, moonBoard, kelterBoard, trainingBoardNotes, liftWeights, rating, trainingNotes
     }

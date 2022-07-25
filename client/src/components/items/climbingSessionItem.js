@@ -44,6 +44,19 @@ function ClimbingSessionItem({ climbingSessions }) {
     let sessionId = climbingSessions.id
     event.preventDefault();
 
+    if (formState.boulderingOrSportClimbing === '') {
+      return alert('Please add if it was a bouldering or sport climb')
+    }
+    if (formState.durationMinutes === '') {
+      return alert('Please add how long the session was')
+    }
+    if (formState.indoorOutdoor === '') {
+      return alert('Please add if it was an indoor or outdoor climb')
+    }
+    if (formState.rating === '') {
+      return alert('Please add a rating')
+    }
+
     const userData = {
       boulderingOrSportClimbing,
       durationMinutes,
