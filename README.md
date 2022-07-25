@@ -15,7 +15,6 @@
 - [Climbing-gym-progress-tracker](#climbing-gym-progress-tracker)
   - [Table of contents](#table-of-contents)
   - [The Project](#the-project)
-  - [The development process](#the-development-process)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Questions](#questions)
@@ -26,6 +25,15 @@
 Create a Full Stack Web Application with the following features:
 
 - [x] Use a Node and Express web server  
+- [x] Use React
+- [x] Use Redux  
+- [x] Use Mongoose with MongoDb
+- [x] Routes for retrieving and adding new data
+- [x] Polished front end/UI
+- [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
+- [x] Folder structure that meets the MVC paradigm
+- [x] Incorporate encryption for passwords (BCrypt)
+- [x] Incorporate user authentication (JWT)
 
 <!-- - [x] Use a Node and Express web server
 - [x] Backed by a MySQL database with a Sequelize ORM
@@ -40,28 +48,9 @@ Create a Full Stack Web Application with the following features:
 - [x] Meet good-quality coding standards (indentation, scoping, naming, etc.)
 - [x] Deployed using Heroku (with data) -->
 
-## The development process
-
-In order to accomplish the challenge, the following steps were done:
-
-1. Type here...  
-
-<!-- 1. Brain storming to define the project main concept.
-2. External datasets research.
-3. Define the purpose, and concept of the application.
-4. Define the team members roles.
-5. Define MVPs (Minimum Viable Products) and due dates.
-6. Create sketches.
-7. Define the routes, requests and responses structure.
-8. Front end and back end coding.
-9. Integrate full stack application.
-10. Final review and proper documentation. -->
-
 ## Installation
 
-The project was uploaded to [GitHub](https://github.com/) at the following repository: Type here....
-
-You can access the deployed application with the Heroku link: N/A
+You can access the deployed application with the Heroku link: (Not uplodaded yet)
 
 To install the project follow these steps:
 
@@ -80,9 +69,7 @@ To install the project follow these steps:
 
 **User Story**
 
-As the user I want to ...  
-
-The Application In All It's Glorious Purpose...
+As the user I want to ... track my climbing progress with a web app. This should allow me to create, read, upload and delete climbing sessions, training sessions, projects and sends.
 
 **Screenshots of Application:**  
 
