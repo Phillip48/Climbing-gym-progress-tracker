@@ -180,7 +180,7 @@ function TrainingSessionItem({ trainingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="exampledurationMinutes">
-                  How long was the session?
+                  How long was the session?*
                 </Label>
                 <Input
                   id="exampledurationMinutes"
@@ -197,7 +197,7 @@ function TrainingSessionItem({ trainingSessions }) {
             <Col md={12} className="user-grades-inputs-col">
               <FormGroup >
                 <Label className="labels user-grades-inputs-col" for="examplehangBoard">
-                  Did you hangboard?
+                  Did you hangboard?*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -247,7 +247,7 @@ function TrainingSessionItem({ trainingSessions }) {
               <Col md={6} className="user-grades-inputs-col">
                 <FormGroup >
                   <Label className="labels user-grades-inputs-col" for="examplekelterBoard">
-                    Did you kelterboard?
+                    Did you kelterboard?*
                   </Label>
                   <div className='div-padding-verysmall'></div>
                   <div className='form-inputs-center'>
@@ -281,7 +281,7 @@ function TrainingSessionItem({ trainingSessions }) {
               <Col md={6} className="user-grades-inputs-col">
                 <FormGroup >
                   <Label className="labels user-grades-inputs-col" for="examplemoonBoard">
-                    Did you moonboard?
+                    Did you moonboard?*
                   </Label>
                   <div className='div-padding-verysmall'></div>
                   <div className='form-inputs-center'>
@@ -316,7 +316,7 @@ function TrainingSessionItem({ trainingSessions }) {
             <Col md={12} className="user-grades-inputs-col">
               <FormGroup >
                 <Label className="labels user-grades-inputs-col" for="examplesprayBoard">
-                  Did you sprayboard?
+                  Did you sprayboard?*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -365,7 +365,7 @@ function TrainingSessionItem({ trainingSessions }) {
             <Col md={12} className="user-grades-inputs-col">
               <FormGroup >
                 <Label className="labels user-grades-inputs-col" for="exampleliftWeights">
-                  Did you lift weights?
+                  Did you lift weights?*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -399,7 +399,7 @@ function TrainingSessionItem({ trainingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="rating">
-                  Rating 1-10
+                  Rating 1-10*
                 </Label>
                 <Input
                   id="examplerating"

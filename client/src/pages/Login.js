@@ -73,7 +73,7 @@ const Login = () => {
                     <Col md={12}>
                       <FormGroup >
                         <Label className="labels" for="exampleEmail">
-                          Email
+                          Email*
                         </Label>
                         <Input
                           id="exampleEmail"
@@ -88,7 +88,7 @@ const Login = () => {
                     <Col md={12}>
                       <FormGroup>
                         <Label className="labels" for="examplePassword">
-                          Password
+                          Password*
                         </Label>
                         <Input
                           id="examplePassword"

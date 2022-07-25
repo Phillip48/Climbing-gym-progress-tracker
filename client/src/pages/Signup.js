@@ -61,6 +61,28 @@ const Signup = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    if (formState.password === '') {
+      return alert('Please add a password')
+    }
+    if (formState.email === '') {
+      return alert('Please add a email')
+    }
+    if (formState.userName === '') {
+      return alert('Please add a username')
+    }
+    if (formState.firstName === '') {
+      return alert('Please add a first name')
+    }
+    if (formState.lastName === '') {
+      return alert('Please add a last name')
+    }
+    if (formState.maxBoulderingGrade === '') {
+      return alert('Please add a max bouldering grade')
+    }
+    if (formState.maxTopRopingGrade === '') {
+      return alert('Please add a max top roping grade')
+    }
+
     if (formState.password !== formState.password2) {
       alert('Passwords do not match')
       // console.log('Passwords do not match')
@@ -100,7 +122,7 @@ const Signup = () => {
                   <Col md={6}>
                     <FormGroup>
                       <Label className="labels" for="firstName">
-                        First Name
+                        First Name*
                       </Label>
                       <Input
                         id="firstName"
@@ -117,7 +139,7 @@ const Signup = () => {
                   <Col md={6}>
                     <FormGroup>
                       <Label className="labels" for="lastName">
-                        Last Name
+                        Last Name*
                       </Label>
                       <Input
                         id="lastName"
@@ -135,7 +157,7 @@ const Signup = () => {
                 <Col md={12}>
                   <FormGroup >
                     <Label className="labels" for="exampleuserName">
-                      UserName
+                      UserName*
                     </Label>
                     <Input
                       id="exampleUserName"
@@ -151,7 +173,7 @@ const Signup = () => {
                 <Col md={12}>
                   <FormGroup >
                     <Label className="labels" for="exampleEmail">
-                      Email
+                      Email*
                     </Label>
                     <Input
                       id="exampleEmail"
@@ -168,13 +190,14 @@ const Signup = () => {
                 <Col md={12}>
                   <FormGroup>
                     <Label className="labels" for="examplePassword">
-                      Password
+                      Password*
                     </Label>
                     <Input
                       id="examplePassword"
                       name="password"
                       placeholder="******"
                       type="password"
+                      autoComplete="on"
                       required
                       value={formState.password}
                       onChange={handleChange}
@@ -184,13 +207,14 @@ const Signup = () => {
                 <Col md={12}>
                   <FormGroup>
                     <Label className="labels" for="examplePassword">
-                      Confrim Password
+                      Confrim Password*
                     </Label>
                     <Input
                       id="examplePassword2"
                       name="password2"
                       placeholder="******"
                       type="password"
+                      autoComplete="on"
                       required
                       value={formState.password2}
                       onChange={handleChange}
@@ -201,7 +225,7 @@ const Signup = () => {
                 <Col md={12}>
                   <FormGroup >
                     <Label className="labels" for="phoneNumber">
-                      Phone Number
+                      Phone Number*
                     </Label>
                     <Input
                       id="examplephoneNumber"
@@ -219,7 +243,7 @@ const Signup = () => {
                   <Col md={5}>
                     <FormGroup>
                       <Label className="labels" for="maxBoulderingGrade">
-                        Max Bouldering Grade:
+                        Max Bouldering Grade:*
                       </Label>
                       <select className="signup-grade-option" id="examplemaxBoulderingGrade" name="maxBoulderingGrade" value={formState.maxBoulderingGrade} onChange={handleChange} required>
                         <option onChange={handleChange} value=""></option>
@@ -245,7 +269,7 @@ const Signup = () => {
                   <Col md={5}>
                     <FormGroup>
                       <Label className="labels" for="maxTopRopingGrade">
-                        Max Top Roping Grade:
+                        Max Top Roping Grade:*
                       </Label>
                       <select className="signup-grade-option" id="examplemaxTopRopingGrade" name="maxTopRopingGrade" value={formState.maxTopRopingGrade} onChange={handleChange} required>
                         <option onChange={handleChange} value=""></option>

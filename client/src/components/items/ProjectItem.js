@@ -118,7 +118,7 @@ function ProjectItem({ projects }) {
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
               <Label className="labels user-grades-inputs-col" for="boulderingActualGrade">
-                What was the bouldering grade??
+                What was the bouldering grade?*
               </Label>
               <select className="signup-grade-option" id="exampleboulderingActualGrade" name="boulderingActualGrade" value={formState.boulderingActualGrade} onChange={handleChange} required>
                 <option onChange={handleChange} value=""></option>
@@ -144,7 +144,7 @@ function ProjectItem({ projects }) {
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
               <Label className="labels user-grades-inputs-col" for="boulderingFeltGrade">
-                What did the send feel like?
+                What did the send feel like?*
               </Label>
               <select className="signup-grade-option" id="exampleboulderingFeltGrade" name="boulderingFeltGrade" value={formState.boulderingFeltGrade} onChange={handleChange} required>
                 <option onChange={handleChange} value=""></option>
@@ -175,7 +175,7 @@ function ProjectItem({ projects }) {
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
               <Label className="labels user-grades-inputs-col" for="sportClimbingActualGrade">
-                What was the sport climbing grade??
+                What was the sport climbing grade?*
               </Label>
               <select className="signup-grade-option" id="examplesportClimbingActualGrade" name="sportClimbingActualGrade" value={formState.sportClimbingActualGrade} onChange={handleChange} required>
                 <option onChange={handleChange} value=""></option>
@@ -214,7 +214,7 @@ function ProjectItem({ projects }) {
           <Col md={5} className="user-grades-inputs-col">
             <FormGroup>
               <Label className="labels user-grades-inputs-col" for="sportClimbingFeltGrade">
-                What did the send feel like?
+                What did the send feel like?*
               </Label>
               <select className="signup-grade-option" id="examplesportClimbingFeltGrade" name="sportClimbingFeltGrade" value={formState.sportClimbingFeltGrade} onChange={handleChange} required>
                 <option onChange={handleChange} value=""></option>
@@ -306,7 +306,7 @@ function ProjectItem({ projects }) {
               <Col md={6}>
                 <FormGroup>
                   <Label className="labels user-grades-inputs-col" for="indoorOutdoor">
-                    Was it an indoor or outdoor climb?
+                    Was it an indoor or outdoor climb?*
                   </Label>
                   <div className='div-padding-verysmall'></div>
                   <div className='form-inputs-center'>
@@ -340,7 +340,7 @@ function ProjectItem({ projects }) {
               <Col md={6}>
                 <FormGroup>
                   <Label className="labels user-grades-inputs-col" for="boulderingOrSportClimbing">
-                    Did you sport climb or boulder?
+                    Did you sport climb or boulder?*
                   </Label>
                   <div className='div-padding-verysmall'></div>
                   <div className='form-inputs-center'>
@@ -376,7 +376,7 @@ function ProjectItem({ projects }) {
             <Col md={12} className="user-grades-inputs-col">
               <FormGroup >
                 <Label className="labels user-grades-inputs-col" for="examplesendProject">
-                  Was it sent?
+                  Was it sent?*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -411,7 +411,7 @@ function ProjectItem({ projects }) {
               <Col md={5}>
                 <FormGroup>
                   <Label className="labels" for="totalAttempts">
-                    How many attempts did it take?
+                    How many attempts did it take?*
                   </Label>
                   <Input
                     id="exampletotalAttempts"
@@ -427,7 +427,7 @@ function ProjectItem({ projects }) {
               <Col md={5}>
                 <FormGroup>
                   <Label className="labels" for="totalSessions">
-                    How many sessions did it take?
+                    How many sessions did it take?*
                   </Label>
                   <Input
                     id="exampletotalSessions"

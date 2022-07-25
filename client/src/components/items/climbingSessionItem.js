@@ -135,7 +135,7 @@ function ClimbingSessionItem({ climbingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="exampledurationMinutes">
-                  How long was the session?
+                  How long was the session?*
                 </Label>
                 <Input
                   id="exampledurationMinutes"
@@ -188,7 +188,7 @@ function ClimbingSessionItem({ climbingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="indoorOutdoor">
-                  Indoor or Outdoor
+                  Indoor or Outdoor*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -222,7 +222,7 @@ function ClimbingSessionItem({ climbingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="boulderingOrSportClimbing">
-                  Did you sport climb or boulder?
+                  Did you sport climb or boulder?*
                 </Label>
                 <div className='div-padding-verysmall'></div>
                 <div className='form-inputs-center'>
@@ -270,7 +270,7 @@ function ClimbingSessionItem({ climbingSessions }) {
             <Col md={12}>
               <FormGroup>
                 <Label className="labels user-grades-inputs-col" for="rating">
-                  Rating 1-10
+                  Rating 1-10*
                 </Label>
                 <Input
                   id="examplerating"
