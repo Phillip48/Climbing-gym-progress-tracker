@@ -67,9 +67,27 @@ function Dashboard() {
     // }
     // console.log(dateUserStorage)
 
+    // const [search, setSearch] = useState(calenderFormat);
+
+    const searchByDate = () => {
+        const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
+        const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
+
+        const getClimbingSessions = climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />);
+        const filteredClimbingSessions = getClimbingSessions.filter(climbingSessions => { return (climbingSessions.props.climbingSessions.createdAt.includes(calenderFormat)) });
+
+        const getTrainingSessions = trainingSessions.map((trainingSessions) => <TrainingItem key={trainingSessions.id} trainingSessions={trainingSessions} />);
+        const filteredTrainingSessions = getTrainingSessions.filter(trainingSessions => { return (trainingSessions.props.trainingSessions.createdAt.includes(calenderFormat)) });
+
+        const getProjects = projects.map((projects) => <ProjectItem key={projects.id} projects={projects} />);
+        const filteredProjects = getProjects.filter(projects => { return (projects.props.projects.createdAt.includes(calenderFormat)) });
+
+        return ({ filteredSends, filteredClimbingSessions, filteredTrainingSessions, filteredProjects })
+    }
+
     const isActive = () => {
-        if (active === "nothing"){
-            return('Start logging')
+        if (active === "nothing") {
+            return ('Start logging')
         }
         if (active === "LogSend") {
             if (sends.length > 0) {
@@ -95,14 +113,27 @@ function Dashboard() {
             } else {
                 return ('You have not logged any Projects')
             }
-        } else if (active === "calender") {
-            if (sends.length > 0) {
-                return (sends.map((sends) => <SendItem key={sends.id} sends={sends} />))
-            } else {
-                return ('You have not logged anything for that date')
-            }
+        } else if (active === "searchByDate") {
+            let filters = searchByDate();
+            console.log(filters.filteredSends)
+            // console.log(filters.filteredClimbingSessions)
+            // return filters.filteredSends
+            // if (filters.filteredSends <= 0 ){
+            //     return('No Sends by this date')
+            // }
+            // if (filters.filteredProjects <= 0 ) {
+            //     return ('No Projects by this date')
+            // }
+            //  if (filters.filteredClimbingSessions <= 0){
+            //     return('No Climbing Sessions by this date')
+            // }
+            // if (filters.filteredTrainingSessions <= 0) {
+            //     return ('No Training Sessions by this date')
+            // }
+            // return (filters.filteredSends)
         }
     }
+
     const isActiveTitle = () => {
         if (active === "LogSend") {
             return ('Previous Sends')
@@ -196,12 +227,10 @@ function Dashboard() {
                 <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>Previous Logs</h3>
                 <p style={{ textAlign: 'center' }}>Select one to see your older logs or search by date!</p>
                 <Calendar
-                    // onClick={sendByDate()}
-                    // onClick={() => setActive("calender")}
-                    // onClick={() => dispatch(getSendByDate(dateUserStorage))}
-                    // onClick={() => dispatch(getSendByDate(dateUserStorage))}
                     onChange={calenderOnChange} value={calenderValue} />
-                {/* <button onClick={() => dispatch(getSendByDate(dateUserStorage))}>Search</button> */}
+                <div className='holds-different-form-buttons'>
+                    <button onClick={() => setActive("searchByDate")} className='different-form-buttons'>Find By Date</button>
+                </div>
             </div>
             <section className='dash-mapping'>
                 <section className='dash-form-buttons'>
