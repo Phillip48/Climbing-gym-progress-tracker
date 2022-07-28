@@ -69,21 +69,29 @@ function Dashboard() {
 
     // const [search, setSearch] = useState(calenderFormat);
 
-    const searchByDate = () => {
+    const searchByDateSends = () => {
+        const filteredArray = [];
+
         const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
         const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
-
-        const getClimbingSessions = climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />);
-        const filteredClimbingSessions = getClimbingSessions.filter(climbingSessions => { return (climbingSessions.props.climbingSessions.createdAt.includes(calenderFormat)) });
+        filteredArray.push(filteredSends)
 
         const getTrainingSessions = trainingSessions.map((trainingSessions) => <TrainingItem key={trainingSessions.id} trainingSessions={trainingSessions} />);
         const filteredTrainingSessions = getTrainingSessions.filter(trainingSessions => { return (trainingSessions.props.trainingSessions.createdAt.includes(calenderFormat)) });
+        filteredArray.push(filteredTrainingSessions)
 
         const getProjects = projects.map((projects) => <ProjectItem key={projects.id} projects={projects} />);
         const filteredProjects = getProjects.filter(projects => { return (projects.props.projects.createdAt.includes(calenderFormat)) });
+        filteredArray.push(filteredProjects)
 
-        return ({ filteredSends, filteredClimbingSessions, filteredTrainingSessions, filteredProjects })
+        const getClimbingSessions = climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />);
+        const filteredClimbingSessions = getClimbingSessions.filter(climbingSessions => { return (climbingSessions.props.climbingSessions.createdAt.includes(calenderFormat)) });
+        filteredArray.push(filteredClimbingSessions)
+        console.log(filteredArray)
+        // filteredArray.map()
+        return (filteredArray)
     }
+
 
     const isActive = () => {
         if (active === "nothing") {
@@ -114,23 +122,11 @@ function Dashboard() {
                 return ('You have not logged any Projects')
             }
         } else if (active === "searchByDate") {
-            let filters = searchByDate();
-            console.log(filters.filteredSends)
-            // console.log(filters.filteredClimbingSessions)
-            // return filters.filteredSends
-            // if (filters.filteredSends <= 0 ){
-            //     return('No Sends by this date')
-            // }
-            // if (filters.filteredProjects <= 0 ) {
-            //     return ('No Projects by this date')
-            // }
-            //  if (filters.filteredClimbingSessions <= 0){
-            //     return('No Climbing Sessions by this date')
-            // }
-            // if (filters.filteredTrainingSessions <= 0) {
-            //     return ('No Training Sessions by this date')
-            // }
-            // return (filters.filteredSends)
+            // const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
+            // const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
+
+            // return filteredSends
+            searchByDateSends()
         }
     }
 
@@ -248,6 +244,7 @@ function Dashboard() {
                     <h3 style={{ textAlign: 'center', marginTop: '2rem' }}>{isActiveTitle()}</h3>
                     <div className='dash-holds-info'>
                         {isActive()}
+                        {/* {active === 'searchByDate' ? searchByDateSends() && searchByDateProjects() && searchByDateProjects() && searchByDateCSessions() && searchByDateTSessions() : 'no sends'} */}
                         {/* {sends.map(() => <SendItem key={sends._id} sends={sends} />)} */}
                     </div>
                 </section>
