@@ -53,44 +53,29 @@ function Dashboard() {
         (state) => state.trainingSessions
     )
     // ============================================= //
-    // const userToken = user.token
-    // const [findDate, setFindDate] = useState({
-    //     token: userToken,
-    //     date: calenderFormat,
-    //     test: 'test string'
-    // });
-    // const { date, token, test } = findDate
-    // const dateUserStorage = {
-    //     token: user.token,
-    //     date: calenderFormat,
-    //     test: 'test string'
+
+    // const searchByDateSends = () => {
+    //     const filteredArray = [];
+
+    //     const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
+    //     const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
+    //     filteredArray.push(filteredSends)
+
+    //     const getTrainingSessions = trainingSessions.map((trainingSessions) => <TrainingItem key={trainingSessions.id} trainingSessions={trainingSessions} />);
+    //     const filteredTrainingSessions = getTrainingSessions.filter(trainingSessions => { return (trainingSessions.props.trainingSessions.createdAt.includes(calenderFormat)) });
+    //     filteredArray.push(filteredTrainingSessions)
+
+    //     const getProjects = projects.map((projects) => <ProjectItem key={projects.id} projects={projects} />);
+    //     const filteredProjects = getProjects.filter(projects => { return (projects.props.projects.createdAt.includes(calenderFormat)) });
+    //     filteredArray.push(filteredProjects)
+
+    //     const getClimbingSessions = climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />);
+    //     const filteredClimbingSessions = getClimbingSessions.filter(climbingSessions => { return (climbingSessions.props.climbingSessions.createdAt.includes(calenderFormat)) });
+    //     filteredArray.push(filteredClimbingSessions)
+    //     console.log(filteredArray)
+    //     // filteredArray.map()
+    //     return (filteredArray)
     // }
-    // console.log(dateUserStorage)
-
-    // const [search, setSearch] = useState(calenderFormat);
-
-    const searchByDateSends = () => {
-        const filteredArray = [];
-
-        const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
-        const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
-        filteredArray.push(filteredSends)
-
-        const getTrainingSessions = trainingSessions.map((trainingSessions) => <TrainingItem key={trainingSessions.id} trainingSessions={trainingSessions} />);
-        const filteredTrainingSessions = getTrainingSessions.filter(trainingSessions => { return (trainingSessions.props.trainingSessions.createdAt.includes(calenderFormat)) });
-        filteredArray.push(filteredTrainingSessions)
-
-        const getProjects = projects.map((projects) => <ProjectItem key={projects.id} projects={projects} />);
-        const filteredProjects = getProjects.filter(projects => { return (projects.props.projects.createdAt.includes(calenderFormat)) });
-        filteredArray.push(filteredProjects)
-
-        const getClimbingSessions = climbingSessions.map((climbingSessions) => <ClimbingItem key={climbingSessions.id} climbingSessions={climbingSessions} />);
-        const filteredClimbingSessions = getClimbingSessions.filter(climbingSessions => { return (climbingSessions.props.climbingSessions.createdAt.includes(calenderFormat)) });
-        filteredArray.push(filteredClimbingSessions)
-        console.log(filteredArray)
-        // filteredArray.map()
-        return (filteredArray)
-    }
 
 
     const isActive = () => {
@@ -122,11 +107,11 @@ function Dashboard() {
                 return ('You have not logged any Projects')
             }
         } else if (active === "searchByDate") {
-            // const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
-            // const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
+            const getSends = sends.map((sends) => <SendItem key={sends.id} sends={sends} />);
+            const filteredSends = getSends.filter(sends => { return (sends.props.sends.createdAt.includes(calenderFormat)) });
 
-            // return filteredSends
-            searchByDateSends()
+            return filteredSends
+            // searchByDateSends()
         }
     }
 
@@ -225,7 +210,7 @@ function Dashboard() {
                 <Calendar
                     onChange={calenderOnChange} value={calenderValue} />
                 <div className='holds-different-form-buttons'>
-                    <button onClick={() => setActive("searchByDate")} className='different-form-buttons'>Find By Date</button>
+                    <button onClick={() => setActive("searchByDate")} className='different-form-buttons'>Find Sends By Date</button>
                 </div>
             </div>
             <section className='dash-mapping'>
